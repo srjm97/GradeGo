@@ -22,7 +22,7 @@ const Home = (props) => {
       <div className="home-hero">
         <div className="home-container01">
           <div className="home-card">
-            <h1 className="home-text HeadingOne">Soft Design System.</h1>
+            <h1 className="home-text HeadingOne">GradeGo</h1>
             <h1 className="home-text01 HeadingOne">Choose the best</h1>
             <span className="home-text02 Lead">
               <span>

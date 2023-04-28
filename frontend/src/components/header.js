@@ -18,7 +18,7 @@ const Header = (props) => {
             <Link to="/" className="header-navlink1 Large">
               Home
             </Link>
-            <Link to="/profile" className="header-navlink2 Large">
+            <Link to="/contact" className="header-navlink2 Large">
               Contact Us
             </Link>
           </div>
@@ -59,7 +59,7 @@ const Header = (props) => {
             <Link to="/" className="header-navlink5 Large">
               Home
             </Link>
-            <Link to="/profile" className="header-navlink6 Large">
+            <Link to="/contact" className="header-navlink6 Large">
               Contact Us
             </Link>
           </div>

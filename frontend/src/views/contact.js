@@ -8,14 +8,14 @@ import NextButton from '../components/next-button'
 import BlogCard from '../components/blog-card'
 import PrimaryBlueButton from '../components/primary-blue-button'
 import Footer from '../components/footer'
-import './profile.css'
+import './contact.css'
 
 const Profile = (props) => {
   return (
     <div className="profile-container">
       <Helmet>
-        <title>Profile - Soft UI Pro</title>
-        <meta property="og:title" content="Profile - Soft UI Pro" />
+        <title>GradeGo</title>
+        <meta property="og:title" content="GradeGo" />
       </Helmet>
       <HeaderFull></HeaderFull>
       <div className="profile-profile">

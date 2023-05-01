@@ -12,10 +12,7 @@ const Header = (props) => {
       <nav className="header-nav">
         <div className="header-container">
           <Link to="/" className="header-navlink Large">
-            <div class="logo" id="one">Gr</div>
-            <div class="logo" id="two">a</div>
-            <div class="logo" id="three">de</div>
-            <div class="logo" id="four">Go</div>
+            GradeGo
           </Link>
           <div className="header-menu">
             <Link to="/" className="header-navlink1 Large">

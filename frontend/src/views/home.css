@@ -46,7 +46,7 @@
 }
 .home-text01 {
   color: var(--dl-color-secondary-700);
-  text-align: center;
+  text-align: left;
   margin-bottom: var(--dl-space-space-unitandahalfunit);
 }
 .home-text02 {

@@ -70,14 +70,9 @@ const Home = (props) => {
       <section className="home-container05">
         <div className="home-container06">
           <h1 className="home-text05 HeadingOne">
-            <span className="home-text06">From nothing to something</span>
+            <span className="home-text06">Transform Your Learning Experience: Monitor, Improve, Excel with GradeGo!</span>
           </h1>
-          <span className="home-text07">
-            <span className="home-text08">
-              The highest status people in human history are those that asked
-              for nothing and gave everything
-            </span>
-          </span>
+          
         </div>
         <div className="home-container07">
           <div className="home-container08">

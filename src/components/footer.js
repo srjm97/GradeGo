@@ -18,7 +18,7 @@ const Footer = (props) => {
             <span className="footer-text03 Large">Login</span>
             <span className="footer-text04 Large">Features</span>
             <span className="footer-text04 Large">Contact Us</span>
-            <span className="footer-text05 Large">Developers</span>
+            <span className="footer-text05 Large">About Us</span>
           </div>
         </div>
       </div>

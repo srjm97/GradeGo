@@ -82,13 +82,11 @@ const Home = (props) => {
               className="home-image05"
             />
             <span className="home-text09 Small">
-              <span className="home-text10">
-                &quot;Over the span of the satellite record, Arctic sea ice has
-                been declining significantly, while sea ice in the Antarctichas
-                increased very slightly&quot;
+            <span class="home-text10">
+                With the app's monitoring feature, students can effortlessly keep track of their grades, assignments,
+                and overall performance in real-time, providing them with a clear picture of their academic progress.
               </span>
-              <br></br>
-              <span className="home-text12">-NOAA</span>
+              <br />
             </span>
             <div className="home-container09">
               <img
@@ -107,46 +105,42 @@ const Home = (props) => {
             <div className="home-container11">
               <h3 className="HeadingTwo">
                 <span className="home-text14">
-                  So what does the new record for the lowest level of winter ice
-                  actually mean
+                So what is the need for a Student Progress Tracker application ?
                 </span>
               </h3>
-              <p className="home-text15">
-                <br></br>
-                <span className="home-text16">
-                  The Arctic Ocean freezes every winter and much of the sea-ice
-                  then thaws every summer, and that process will continue
-                  whatever happens with climate change. Even if the Arctic
-                  continues to be one of the fastest-warming regions of the
-                  world, it will always be plunged into bitterly cold polar dark
-                  every winter. And year-by-year, for all kinds of natural
-                  reasons, there’s huge variety of the state of the ice.
+              <p class="home-text15">
+                <br />
+                <span class="home-text16">
+                  In today's dynamic educational landscape, the demand for personalized, data-driven, and efficient
+                  monitoring of student academic progress is more critical than ever. Students face various challenges,
+                  such as managing their time, staying organized, setting academic goals, and engaging parents in their
+                  learning journey. This is where a Student Progress Tracker app comes in.
+                  <br />
+                  <span></span>
+                  <br />
+                  <span class="home-text19">
+                    Firstly, personalized learning is a key aspect of modern education. Every student has unique
+                    learning needs and progresses at their own pace. A Student Progress Tracker app can provide
+                    personalized insights and feedback on a student's performance, helping them identify their strengths
+                    and weaknesses, set goals, and optimize their learning approach accordingly.
+                    <br />
+                    <br />
+                    Secondly, effective time and task management are essential for student success. Keeping track of
+                    assignments, exams, and deadlines can be overwhelming. A Student Progress Tracker app can help
+                    students stay organized by providing a centralized platform for managing their tasks, deadlines, and
+                    assignments, leading to improved time management skills and better academic performance.
+                  </span>
+                  <br />
+                  <span></span>
+                  <br />
+                  <span class="home-text22">
+                    Thirdly, progress monitoring is crucial for students, parents, and educators. A Student Progress
+                    Tracker app can provide real-time updates on grades, attendance, and other performance metrics,
+                    allowing stakeholders to monitor progress, identify areas for improvement, and intervene early if
+                    needed. This enables timely support and intervention to enhance student success.
+                  </span>
                 </span>
-                <br></br>
-                <span></span>
-                <br></br>
-                <span className="home-text19">
-                  For a start, it does not automatically follow that a record
-                  amount of ice will melt this summer. More important for
-                  determining the size of the annual thaw is the state of the
-                  weather as the midnight sun approaches and temperatures rise.
-                  But over the more than 30 years of satellite records,
-                  scientists have observed a clear pattern of decline,
-                  decade-by-decade.
-                </span>
-                <br></br>
-                <span></span>
-                <br></br>
-                <span className="home-text22">
-                  The Arctic Ocean freezes every winter and much of the sea-ice
-                  then thaws every summer, and that process will continue
-                  whatever happens with climate change. Even if the Arctic
-                  continues to be one of the fastest-warming regions of the
-                  world, it will always be plunged into bitterly cold polar dark
-                  every winter. And year-by-year, for all kinds of natural
-                  reasons, there’s huge variety of the state of the ice.
-                </span>
-                <br></br>
+                <br />
               </p>
             </div>
           </div>
@@ -156,112 +150,30 @@ const Home = (props) => {
         <div className="home-container12">
           <div className="home-container13">
             <div className="home-container14">
-              <h2 className="home-text23 HeadingOne">Work with us</h2>
+              <h2 className="home-text23 HeadingOne">Excel with us</h2>
               <p className="home-text24 Lead">
                 <span className="home-text25">
+                  <br />
                   Whatever your qualification is - we got you!
                 </span>
               </p>
               <p className="home-text26 Body">
                 <span className="home-text27">
-                  &quot;Take up one idea. Make that one idea your life - think
-                  of it, dream of it, live on that idea. Let the brain, muscles,
-                  nerves, every part of your body, be full of that idea, and
-                  just leave every other idea alone. This is the way to success.
-                  A single rose can be my garden... a single friend, my
-                  world.&quot;
+                "Education is the foundation upon which we build our future. It is the key that unlocks the door to
+                  endless possibilities, empowers individuals to reach their full potential, and transforms communities
+                  and societies for the better. With the right tools and resources, students can thrive in their
+                  learning journey, parents can be engaged partners, and educators can effectively guide and inspire. A
+                  student progress tracker, like the one we've built, is not just a technological solution, but a
+                  catalyst for positive change in the lives of students, families, and educators. It's a tool that
+                  empowers students to take ownership of their learning, helps parents stay informed and involved, and
+                  enables educators to tailor instruction to meet the unique needs of each learner. Our mission is to
+                  make education more accessible, personalized, and impactful, and our student progress tracker is a
+                  step towards that vision, paving the way for a brighter future where every student can thrive and
+                  succeed."
                 </span>
               </p>
-              <p className="home-text28">Mark Jojansen</p>
-              <p className="home-text29 Small">Project manager, Atlassian</p>
-              <div className="home-container15">
-                <img
-                  alt="image"
-                  src="/playground_assets/team-4-200h.jpg"
-                  className="home-image08"
-                />
-                <div className="home-container16"></div>
-                <img
-                  alt="image"
-                  src="/playground_assets/team-3-200h.jpg"
-                  className="home-image09"
-                />
-                <div className="home-container17"></div>
-                <img
-                  alt="image"
-                  src="/playground_assets/team-2-200h.jpg"
-                  className="home-image10"
-                />
-              </div>
             </div>
           </div>
-          <div className="home-logos">
-            <div className="home-container18">
-              <div className="home-container19">
-                <div className="home-container20">
-                  <img
-                    alt="image"
-                    src="/playground_assets/logo-asana.svg"
-                    className="home-image11"
-                  />
-                </div>
-                <div className="home-container21">
-                  <img
-                    alt="image"
-                    src="/playground_assets/logo-slack.svg"
-                    className="home-image12"
-                  />
-                </div>
-                <div className="home-container22">
-                  <img
-                    alt="image"
-                    src="/playground_assets/logo-google-drive.svg"
-                    className="home-image13"
-                  />
-                </div>
-              </div>
-              <div className="home-container23">
-                <div className="home-container24">
-                  <img
-                    alt="image"
-                    src="/playground_assets/logo-shopify.svg"
-                    className="home-image14"
-                  />
-                </div>
-                <div className="home-container25">
-                  <img
-                    alt="image"
-                    src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/logos/small-logos/logo-apple.svg"
-                    className="home-image15"
-                  />
-                </div>
-                <div className="home-container26">
-                  <img
-                    alt="image"
-                    src="/playground_assets/logo-invision.svg"
-                    className="home-image16"
-                  />
-                </div>
-              </div>
-              <div className="home-container27">
-                <div className="home-container28">
-                  <img
-                    alt="image"
-                    src="/playground_assets/logo-attlasian.svg"
-                    className="home-image17"
-                  />
-                </div>
-                <div className="home-container29">
-                  <img
-                    alt="image"
-                    src="/playground_assets/logo-weave.svg"
-                    className="home-image18"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="home-container30"></div>
         </div>
         <img
           alt="image"

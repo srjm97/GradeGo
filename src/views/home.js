@@ -225,7 +225,7 @@ const Home = (props) => {
                 <span>Website visitors</span>
                 <span></span>
               </span>
-              <OutlineBlackButton button="get started"></OutlineBlackButton>
+              <PrimaryPinkButton button="View more"></PrimaryPinkButton>
             </div>
           </div>
           <div className="home-container37">
@@ -267,7 +267,7 @@ const Home = (props) => {
                 <span>Website visitors</span>
                 <span></span>
               </span>
-              <OutlineBlackButton button="get started"></OutlineBlackButton>
+              <PrimaryPinkButton button="See more"></PrimaryPinkButton>
             </div>
           </div>
         </div>

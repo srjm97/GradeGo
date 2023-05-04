@@ -7,7 +7,7 @@ import './list-item.css'
 const ListItem = (props) => {
   return (
     <div className="list-item-container">
-      <h5 className="list-item-text HeadingThree">{props.new_prop}</h5>
+      <h5 className="list-item-text HeadingThree">{props.title}</h5>
       <span>{props.description}</span>
     </div>
   )

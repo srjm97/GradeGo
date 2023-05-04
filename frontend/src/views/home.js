@@ -26,7 +26,7 @@ const Home = (props) => {
             <h1 className="home-text01 HeadingOne">Empower Your Learning Journey</h1>
             <span className="home-text02 Lead">
               <span>
-              Effortlessly Monitor, Measure, and Maximize Your Academic Success with Our Student Progress Tracker App!
+                Effortlessly Monitor, Measure, and Maximize Your Academic Success with Our Student Progress Tracker App!
               </span>
             </span>
             <div className="home-container02">
@@ -50,7 +50,7 @@ const Home = (props) => {
           new_prop="Real-time monitoring"
           image_src="/playground_assets/cube1.svg"
         ></FeatureCard>
-        <FeatureCard 
+        <FeatureCard
           image_src="/playground_assets/person1.svg"
           text="Gain valuable insights into your strengths and weaknesses."
           new_prop="Personalised insights"
@@ -72,7 +72,7 @@ const Home = (props) => {
           <h1 className="home-text05 HeadingOne">
             <span className="home-text06">Transform Your Learning Experience: Monitor, Improve, Excel with GradeGo!</span>
           </h1>
-          
+
         </div>
         <div className="home-container07">
           <div className="home-container08">
@@ -82,7 +82,7 @@ const Home = (props) => {
               className="home-image05"
             />
             <span className="home-text09 Small">
-            <span class="home-text10">
+              <span class="home-text10">
                 With the app's monitoring feature, students can effortlessly keep track of their grades, assignments,
                 and overall performance in real-time, providing them with a clear picture of their academic progress.
               </span>
@@ -105,7 +105,7 @@ const Home = (props) => {
             <div className="home-container11">
               <h3 className="HeadingTwo">
                 <span className="home-text14">
-                So what is the need for a Student Progress Tracker application ?
+                  So what is the need for a Student Progress Tracker application ?
                 </span>
               </h3>
               <p class="home-text15">
@@ -159,7 +159,7 @@ const Home = (props) => {
               </p>
               <p className="home-text26 Body">
                 <span className="home-text27">
-                "Education is the foundation upon which we build our future. It is the key that unlocks the door to
+                  "Education is the foundation upon which we build our future. It is the key that unlocks the door to
                   endless possibilities, empowers individuals to reach their full potential, and transforms communities
                   and societies for the better. With the right tools and resources, students can thrive in their
                   learning journey, parents can be engaged partners, and educators can effectively guide and inspire. A
@@ -200,16 +200,11 @@ const Home = (props) => {
           </div>
           <a ></a>
           <h2 className="home-text30 HeadingTwo">
-            <span className="home-text31">Beware The Components</span>
+            <span className="home-text31">Features Of Our Software</span>
           </h2>
-          <h3 className="home-text32 HeadingTwo">
-            <span className="home-text33">How To Handle Them</span>
-            <br></br>
-          </h3>
           <span className="home-text34">
             <span className="home-text35">
-              We’re constantly trying to express ourselves and actualize our
-              dreams. Don&apos;t stop.
+              These are the features that sets us apart from our competitors
             </span>
           </span>
         </div>
@@ -229,31 +224,36 @@ const Home = (props) => {
             </div>
           </div>
           <div className="home-container37">
-            <ListItem></ListItem>
             <ListItem
-              title="2. Performance Analyze"
-              description="Unify data from Facebook, Instagram, Twitter, LinkedIn, and Youtube to gain rich insights from easy-to-use reports."
+              title="1. Student Management"
+              description="Enables tracking and management of student-related information such as academic performance and personal details.">
+
+            </ListItem>
+            <ListItem
+              title="2. Faculty Management"
+              description="Enables management of faculty-related activities such as faculty profile and performance evaluation."
             ></ListItem>
             <ListItem
-              title="3. Social Conversions"
-              description="Track actions taken on your website that originated from social, and understand the impact on your bottom line."
+              title="3. Course Management"
+              description="Provides the ability to manage courses offered, add new courses, edit existing ones and assign faculties to courses."
             ></ListItem>
+
           </div>
         </div>
         <div className="home-divider"></div>
         <div className="home-container38">
           <div className="home-container39">
             <ListItem
-              title="1. Always in Sync"
-              description="No matter where you are, Trello stays in sync across all of your devices."
+              title="4. Examination Management"
+              description="Allows the faculty the entire examination process including question paper setting, evaluation, and course outcome calculations."
             ></ListItem>
             <ListItem
-              title="2. Work With Any Team"
-              description="Unify data from Facebook, Instagram, Twitter, LinkedIn, and Youtube to gain rich insights from easy-to-use reports."
+              title="5. Attendance Management"
+              description="Enables tracking and management of attendance records for students and faculty."
             ></ListItem>
             <ListItem
-              title="3. A Productivity Platform"
-              description="Integrate the apps your team already uses directly into your workflow."
+              title="6. Feedback Management"
+              description="Enables students to provide feedback about the course and faculty and also allows faculty to view and respond to the feedback."
             ></ListItem>
           </div>
           <div className="home-container40">

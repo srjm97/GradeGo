@@ -701,6 +701,7 @@
   justify-content: center;
 }
 .home-icon2 {
+  visibility: hidden;
   fill: var(--dl-color-gray-900);
   width: 30px;
   height: 30px;

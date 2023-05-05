@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
+
+
+
+/* div {
+  font-family: "Merriweather", serif;
+  font-size: 2rem;
+}
+
+p,
+a {
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 2rem;
+  color: #eee;
+}*/
+
+ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0rem;
+  list-style-type: none;
+  font-size: 2rem;
+}
+
+ul li {
+  padding: 1rem;
+}
+
+.fab {
+  font-size: 5rem;
+}
+
+/* transition for social icon hover animation */
+.fa-facebook,
+.fa-instagram,
+.fa-github,
+.fa-twitter {
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+/* social media icons hover color */
+.fa-facebook:hover,
+.fa-facebook:focus {
+  color: #4a6ac0;
+  transform: scale(1.1);
+}
+
+.fa-twitter:hover,
+.fa-twitter:focus {
+  color: #03A9F5;
+  transform: scale(1.1);
+}
+
+.fa-instagram:hover,
+.fa-instagram:focus {
+  color: #EC1C51;
+  transform: scale(1.1);
+}
+
+.fa-github:hover,
+.fa-github:focus {
+  color: #7833af;
+  transform: scale(1.1);
+}

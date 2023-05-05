@@ -209,20 +209,6 @@ const Home = (props) => {
           </span>
         </div>
         <div className="home-container33">
-          <div className="home-container34">
-            <div className="home-container35"></div>
-            <div className="home-container36">
-              <svg viewBox="0 0 987.4285714285713 1024" className="home-icon2">
-                <path d="M438.857 508.571l312 312c-79.429 80.571-190.286 130.286-312 130.286-242.286 0-438.857-196.571-438.857-438.857s196.571-438.857 438.857-438.857v435.429zM545.714 512h441.714c0 121.714-49.714 232.571-130.286 312zM950.857 438.857h-438.857v-438.857c242.286 0 438.857 196.571 438.857 438.857z"></path>
-              </svg>
-              <h1 className="home-text36 HeadingOne">Search and Discover!</h1>
-              <span className="home-text37">
-                <span>Website visitors</span>
-                <span></span>
-              </span>
-              <PrimaryPinkButton button="View more"></PrimaryPinkButton>
-            </div>
-          </div>
           <div className="home-container37">
             <ListItem
               title="1. Student Management"

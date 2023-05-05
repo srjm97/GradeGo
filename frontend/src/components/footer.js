@@ -1,5 +1,5 @@
 import React from 'react'
-
+import SocialMedia from './social-media'
 import './footer.css'
 
 const Footer = (props) => {
@@ -13,7 +13,7 @@ const Footer = (props) => {
           <span>Copyright © {year}.</span>
         </div>
         <div className="social-media-container">
-          
+          <SocialMedia/>
         </div>
         <div className="footer-container2">
           <div className="footer-container3">

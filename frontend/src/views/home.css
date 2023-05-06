@@ -740,7 +740,6 @@
   flex: 0 0 auto;
   width: 100%;
   display: flex;
-  margin-top: var(--dl-space-space-tripleunit);
   align-items: center;
   flex-direction: row;
   justify-content: center;
@@ -748,7 +747,7 @@
 .home-container39 {
   display: flex;
   align-items: flex-start;
-  margin-right: var(--dl-space-space-fourunits);
+  margin-left: var(--dl-space-space-fourunits);
   flex-direction: column;
 }
 .home-container40 {

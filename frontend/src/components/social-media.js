@@ -11,16 +11,16 @@ const SocialMedia = () => {
     return (
         <div className="social-media-container">
             <ul>
-                <li><a href="https://www.facebook.com/martydevelopment/">
+                <li><a href="https://www.facebook.com" target='_blank'>
                 <FontAwesomeIcon icon={faFacebook} />
                 </a></li>
-                <li><a href="https://www.instagram.com/marty.development/">
+                <li><a href="https://www.instagram.com" target='_blank'>
                 <FontAwesomeIcon icon={faInstagram} />
                 </a></li>
-                <li><a href="https://github.com/MartyDevelopment">
+                <li><a href="https://twitter.com" target='_blank'>
                 <FontAwesomeIcon icon={faTwitter} />
                 </a></li>
-                <li><a href="https://github.com/MartyDevelopment">
+                <li><a href="https://github.com" target='_blank'>
                 <FontAwesomeIcon icon={faGithub} />
                 </a></li>
             </ul>

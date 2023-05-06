@@ -22,7 +22,7 @@
   flex-direction: column;
 }
 .footer-text {
-  font-size: 26px;
+  font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: var(--dl-space-space-halfunit);
 }

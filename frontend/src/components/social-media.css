@@ -1,26 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
 
 
-
-/* div {
-  font-family: "Merriweather", serif;
-  font-size: 2rem;
-}
-
-p,
-a {
-  text-align: center;
-  margin-top: 5%;
-  margin-bottom: 2rem;
-  color: #eee;
-}*/
-
 ul {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   margin: 0rem;
+  margin-right: 4rem;
   list-style-type: none;
   font-size: 2rem;
 }

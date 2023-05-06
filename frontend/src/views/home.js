@@ -26,14 +26,11 @@ const Home = (props) => {
             <h1 className="home-text01 HeadingOne">Empower Your Learning Journey</h1>
             <span className="home-text02 Lead">
               <span>
-                Effortlessly Monitor, Measure, and Maximize Your Academic Success with Our Student Progress Tracker App!
+                Effortlessly Monitor, Measure, and Maximize Your Academic Success with GradeGo!
               </span>
             </span>
             <div className="home-container02">
-              <div className="home-container03">
-                <a href='/contact'><PrimaryPinkButton button="contact us"></PrimaryPinkButton></a>
-              </div>
-              <OutlineGrayButton button="read more"></OutlineGrayButton>
+              <OutlineGrayButton button="know more"></OutlineGrayButton>
             </div>
           </div>
         </div>
@@ -67,7 +64,7 @@ const Home = (props) => {
           image_src="/playground_assets/credit%20card1.svg"
         ></FeatureCard>
       </section>
-      <section className="home-container05">
+      {/* <section className="home-container05">
         <div className="home-container06">
           <h1 className="home-text05 HeadingOne">
             <span className="home-text06">Transform Your Learning Experience: Monitor, Improve, Excel with GradeGo!</span>
@@ -145,8 +142,8 @@ const Home = (props) => {
             </div>
           </div>
         </div>
-      </section>
-      <section className="home-testimonials">
+      </section> */}
+      {/* <section className="home-testimonials">
         <div className="home-container12">
           <div className="home-container13">
             <div className="home-container14">
@@ -190,8 +187,8 @@ const Home = (props) => {
           src="/playground_assets/top.svg"
           className="home-top-wave-image"
         />
-      </section>
-      <section className="home-contaier">
+      </section> */}
+      {/* <section className="home-contaier">
         <div className="home-container31">
           <div className="home-container32">
             <svg viewBox="0 0 1024 1024" className="home-icon">
@@ -199,7 +196,7 @@ const Home = (props) => {
             </svg>
           </div>
           <h2 className="home-text30 HeadingTwo">
-            <span className="home-text31">Features Of Our Software</span>
+            <span className="home-text31">Why GradeGo ?</span>
           </h2>
           <span className="home-text34">
             <span className="home-text35">
@@ -240,7 +237,7 @@ const Home = (props) => {
             ></ListItem>
           </div>
         </div>
-      </section>
+      </section> */}
       <Footer></Footer>
     </div>
   )

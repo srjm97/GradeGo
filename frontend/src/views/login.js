@@ -35,7 +35,7 @@ function Login() {
                         <h2 class="title">STUDENT LOGIN</h2>
                         <div class="input-field">
                             <FontAwesomeIcon icon={faUser} className="fontawesome"/>
-                            <input type="text" placeholder="Username" />
+                            <input type="text" placeholder="Username" pattern="[A-Za-z0-9]*" />
                         </div>
                         <div class="input-field">
                             <FontAwesomeIcon icon={faLock} className="fontawesome"/>
@@ -48,8 +48,8 @@ function Login() {
                     <form action="" class="sign-up-form">
                         <h2 class="title">FACULTY LOGIN</h2>
                         <div class="input-field">
-                        <FontAwesomeIcon icon={faUser} className='fontawesome'/>
-                            <input type="text" placeholder="Username" />
+                        <FontAwesomeIcon icon={faUser} className='fontawesome' />
+                            <input type="text" placeholder="Username" pattern="[A-Za-z0-9]*"/>
                         </div>
                         <div class="input-field">
                         <FontAwesomeIcon icon={faLock} className='fontawesome'/>

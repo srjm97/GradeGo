@@ -1,5 +1,4 @@
 .overall {
-    
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     display: flex;
@@ -7,6 +6,7 @@
     justify-content: center;
     min-height: 100vh;
     background: #e2e5de;
+    /* overflow: hidden; */
 }
 
 .fontawesome{
@@ -93,6 +93,7 @@ form.sign-up-form {
     border-radius: 50px;
     display: flex;
     align-items: center;
+    /* transition: all 0.3s ease; */
 }
 
 .input-field i {
@@ -100,6 +101,8 @@ form.sign-up-form {
     text-align: center;
     color: #666;
     font-size: 18px;
+    /* transform: translateX(-10px);
+    color: #df4adf; */
 }
 
 .input-field input {
@@ -128,6 +131,8 @@ form.sign-up-form {
 
 .btn:hover {
     background: #c03cc0;
+    transform: translateY(-3px);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.3);
 }
 
 .social-text {
@@ -170,6 +175,8 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-around;
+
+    /* perspective: 100px; */
 }
 
 .panel {
@@ -182,10 +189,20 @@ a {
     padding: 0 10px;
     text-align: center;
     z-index: 6;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition: transform 0.5s ease;
+    -webkit-backface-visibility: hidden;
 }
 
 .left-panel {
+    transform-origin: left center;
+
     pointer-events: none;
+}
+
+.right-panel {
+    transform-origin: right center;
 }
 
 .content {
@@ -307,4 +324,28 @@ a {
     form {
         width: 90%;
     }
+}
+
+@media (min-width: 768px) {
+    .panels-container:hover .panel:not(.active) {
+        transform: translateX(calc(-100% / 20));
+        -webkit-transform: translateX(calc(-100% / 20));
+        -moz-transform: translateX(calc(-100% / 20));
+        -ms-transform: translateX(calc(-100% / 20));
+        -o-transform: translateX(calc(-100% / 20));
+}
+    .panels-container:hover .right-panel.active {
+        transform: translateX(calc(-100% / 20));
+        -webkit-transform: translateX(calc(-100% / 20));
+        -moz-transform: translateX(calc(-100% / 20));
+        -ms-transform: translateX(calc(-100% / 20));
+        -o-transform: translateX(calc(-100% / 20));
+}
+    .panels-container:hover .left-panel.active {
+        transform: translateX(calc(100% /20));
+        -webkit-transform: translateX(calc(100% /20));
+        -moz-transform: translateX(calc(100% /20));
+        -ms-transform: translateX(calc(100% /20));
+        -o-transform: translateX(calc(100% /20));
+}
 }

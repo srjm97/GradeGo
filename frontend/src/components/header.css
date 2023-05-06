@@ -6,7 +6,7 @@
   bottom: auto;
   display: flex;
   z-index: 3;
-  position: fixed;
+  /* position: fixed; */
   max-width: 1320px;
   padding-left: var(--dl-space-space-unitandahalfunit);
   padding-right: var(--dl-space-space-unitandahalfunit);

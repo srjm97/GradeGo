@@ -24,10 +24,12 @@ const Header = (props) => {
           </div>
           <div className="header-container1">
             <div className="header-container2">
-              <PrimaryPinkButton
-                button="Login"
-                className=""
-              ></PrimaryPinkButton>
+              <Link to="/login" >
+                    <PrimaryPinkButton
+                          button="Login"
+                          className=""
+                    ></PrimaryPinkButton>
+              </Link>
             </div>
             <div data-role="BurgerMenu" className="header-burger-menu">
               <svg viewBox="0 0 1024 1024" className="header-icon">

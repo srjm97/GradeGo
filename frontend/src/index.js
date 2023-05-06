@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './style.css'
 import Profile from './views/contact'
 import Home from './views/home'
+import Login from './views/login'
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <div>
         <Route component={Profile} exact path="/contact" />
         <Route component={Home} exact path="/" />
+        <Route component={Login} exact path="/login" />
       </div>
     </Router>
   )

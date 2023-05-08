@@ -13,7 +13,7 @@ mongoose.connect(db,{
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 //app.use(express.static("public"));
-app.set("view engine", "ejs");
+//app.set("view engine", "ejs");
 
 // function to convert the csv into database
 const { csvData } = require("./utils/mysheetapi");

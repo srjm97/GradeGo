@@ -25,7 +25,6 @@ const SideNavBar = () => {
 			text: "Profile",
 			icon: "icons/user.svg",
 		},
-		
 	];
 	return (
 		<div

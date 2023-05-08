@@ -8,7 +8,6 @@ function Attendance()
             <SideNavBar/>
             <h1 >Hello to attendance</h1>
         </div>
-        
     );
 }
 

@@ -1,37 +1,12 @@
 import React, { useState } from "react";
-<<<<<<< Updated upstream
 
 import './SideNavBar.css';
-=======
-import "./SideNavBar.css";
->>>>>>> Stashed changes
 
 const SideNavBar = () => {
 	const [isExpanded, setExpendState] = useState(false);
 	const menuItems = [
 		{
 			text: "Dashboard",
-<<<<<<< Updated upstream
-			icon: "playground_assets/dashboard.svg",
-		},
-		{
-			text: "Marks",
-			icon: "playgrounds_assets/dashboard.svg",
-		},
-		// {
-		// 	text: "Attendance",
-		// 	icon: "playground_assets/message.svg",
-		// },
-		// {
-		// 	text: "Courses",
-		// 	icon: "playground_assets/pie-chart.svg",
-		// },
-		// {
-		// 	text: "Profile",
-		// 	icon: "playground_assets/user.svg",
-		// },
-
-=======
 			icon: "icons/grid.svg",
 		},
 		{
@@ -51,7 +26,6 @@ const SideNavBar = () => {
 			icon: "icons/user.svg",
 		},
 		
->>>>>>> Stashed changes
 	];
 	return (
 		<div

@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import './login.css'
-import faculty from './faculty.png'
-import student from './student.svg'
 import Header from '../components/header'
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -69,7 +67,7 @@ function Login() {
                                 <p>Click here to continue to student login</p>
                                 <button class="btn" id="sign-in-btn" onClick={handleSignInClick}>Student</button>
                             </div>
-                            <img src={student} alt="" class="image left" />
+                            <img src='/playground_assets/student.svg' alt="" class="image left" />
                         </div>
                         <div class="panel right-panel">
                             <div class="content">
@@ -77,12 +75,11 @@ function Login() {
                                 <p>Click here to continue to faculty login</p>
                                 <button class="btn" id="sign-up-btn" onClick={handleSignUpClick}>Faculty</button>
                             </div>
-                            <img src={faculty} alt="" class="image right" />
+                            <img src='/playground_assets/faculty.png' alt="" class="image right" />
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
     );

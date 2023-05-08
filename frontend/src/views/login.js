@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom'
 function Login() {
     const [isSignUpMode, setIsSignUpMode] = useState(false);
     const [isSignUpMode2, setIsSignUpMode2] = useState(false);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     const handleSignUpClick = () => {
         setIsSignUpMode(true);
@@ -25,6 +27,23 @@ function Login() {
         setIsSignUpMode2(false);
     };
 
+    async function validateUser(event){
+        // event.preventDefault();
+        const response = await fetch("http://localhost:1337/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            password,
+          }),
+        });
+    
+        const data = await response.json();
+        console.log(data);
+    }
+
     return (
         <div className="parent-div">
             <div className="header-div">
@@ -34,25 +53,25 @@ function Login() {
 
                 <div className={`container ${isSignUpMode ? "sign-up-mode" : ""} ${isSignUpMode2 ? "sign-up-mode2" : ""}`}>
                     <div class="signin-signup">
-                        <form method='GET' action="/login" class="sign-in-form ">
+                        <form onSubmit={validateUser} class="sign-in-form ">
                             <h2 class="title">STUDENT LOGIN</h2>
                             <div class="input-field">
                                 <FontAwesomeIcon icon={faUser} className="fontawesome" />
-                                <input type="text" placeholder="Username" pattern="[A-Za-z0-9]+" />
+                                <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Username" pattern="[A-Za-z0-9]+" />
                             </div>
                             <div class="input-field">
                                 <FontAwesomeIcon icon={faLock} className="fontawesome" />
                                 
-                                    <input type="password" placeholder="Password" />
+                                    <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
                                 
                             </div>
-                            <Link to='/dashboard'>
+                            {/* <Link to='/dashboard'> */}
                                     <input type="submit" value="Login" class="btn" />
-                            </Link>
+                            {/* </Link> */}
                             
                             <p class="social-text">Forgot Password ?</p>
                         </form>
-                        <form method='GET' action="/login" class="sign-up-form">
+                        <form  class="sign-up-form">
                             <h2 class="title">FACULTY LOGIN</h2>
                             <div class="input-field">
                                 <FontAwesomeIcon icon={faUser} className='fontawesome' />

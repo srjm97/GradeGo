@@ -1,29 +1,20 @@
-var express = require("express");
-require('dotenv').config({ path: './.env' });
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-const cors = require('cors');
-var mongo = require('./connect/mongoose')
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+const express = require('express')
+const app = express()
+const cors = require('cors')
+//middlewares
+app.use(cors())
+app.use(express.json())
 
-var app = express();
+//routes
+app.get('/', (req, res) => {
+    res.send('Hello World')
+})
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(cors());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-global.appRoot = path.resolve(__dirname);
-app.use(express.static(path.join(__dirname, "public")));
-//app.use('/public', express.static(process.env.root + "/public"));
+app.post('/login', (req, res) => {
+    console.log(req.body)
+    res.json({status:'ok'})
+})
+app.listen(1337, ()=>{
+    console.log('Server running in http://localhost:1337')
 
-
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-//listener 
-app.listen(5000, () =>
-  console.log("server listening at http://localhost:5000/")
-);
-module.exports = app;
+})

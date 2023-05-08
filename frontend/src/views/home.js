@@ -39,7 +39,7 @@ const Home = (props) => {
         alt="image"
         src="/playground_assets/curved6-1500w.jpg"
         loading="eager"
-        className="home-image04 button list"
+        className="home-image04 list"
       />
       <section className="home-features">
         <FeatureCard

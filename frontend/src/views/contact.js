@@ -94,10 +94,10 @@ const Contact = (props) => {
                     <path d="M512 490q44 0 75-31t31-75-31-75-75-31-75 31-31 75 31 75 75 31zM512 86q124 0 211 87t87 211q0 62-31 142t-75 150-87 131-73 97l-32 34q-12-14-32-37t-72-92-91-134-71-147-32-144q0-124 87-211t211-87z"></path>
                   </svg>
                   <span className="profile-text28 Small">
-                  <a href="https://www.google.com/maps/place/College+of+Engineering+Trivandrum+(CET)/@8.5458513,76.9037658,17z/data=!3m1!4b1!4m6!3m5!1s0x3b05bec79541c519:0x98324eb5aafb3778!8m2!3d8.5458513!4d76.9063407!16zL20vMDVtcTdz" target="_blank"><span class="profile-text28 Small">
-                    College of Engineering, Trivandrum
-                  </span>
-                  </a>
+                    <a href="https://www.google.com/maps/place/College+of+Engineering+Trivandrum+(CET)/@8.5458513,76.9037658,17z/data=!3m1!4b1!4m6!3m5!1s0x3b05bec79541c519:0x98324eb5aafb3778!8m2!3d8.5458513!4d76.9063407!16zL20vMDVtcTdz" target="_blank"><span class="profile-text28 Small">
+                      College of Engineering, Trivandrum
+                    </span>
+                    </a>
                   </span>
                 </div>
               </div>

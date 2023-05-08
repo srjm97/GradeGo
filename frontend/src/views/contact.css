@@ -223,6 +223,15 @@
   display: flex;
   flex-direction: column;
 }
+/* form {
+  display: flex;
+  align-items: left;
+  justify-content: center;
+  flex-direction: column;
+  width: 40%;
+  min-width: 238px;
+  padding: 0 10px;
+} */
 .profile-text21 {
   color: var(--dl-color-secondary-500);
   margin-top: var(--dl-space-space-unit);

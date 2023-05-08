@@ -35,7 +35,7 @@ function Login() {
 
                 <div className={`container ${isSignUpMode ? "sign-up-mode" : ""} ${isSignUpMode2 ? "sign-up-mode2" : ""}`}>
                     <div class="signin-signup">
-                        <form action="" class="sign-in-form ">
+                        <form method='GET' action="/login" class="sign-in-form ">
                             <h2 class="title">STUDENT LOGIN</h2>
                             <div class="input-field">
                                 <FontAwesomeIcon icon={faUser} className="fontawesome" />
@@ -48,7 +48,7 @@ function Login() {
                             <input type="submit" value="Login" class="btn" />
                             <p class="social-text">Forgot Password ?</p>
                         </form>
-                        <form action="" class="sign-up-form">
+                        <form method='GET' action="/login" class="sign-up-form">
                             <h2 class="title">FACULTY LOGIN</h2>
                             <div class="input-field">
                                 <FontAwesomeIcon icon={faUser} className='fontawesome' />

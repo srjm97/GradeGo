@@ -63,7 +63,7 @@
     z-index: 5;
 }
 
-form{
+.signin-signup form{
     display: flex;
     align-items: center;
     justify-content: center;

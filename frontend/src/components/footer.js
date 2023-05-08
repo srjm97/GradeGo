@@ -28,6 +28,10 @@ const Footer = (props) => {
                 Contact Us
               </Link></span>
             <span className="footer-text05 Large">About Us</span>
+            {/* Temporary Link to Dashboard */}
+            <span className="footer-text05">
+              <Link to="/dashboard">Dashboard</Link>
+            </span>
           </div>
         </div>
       </div>

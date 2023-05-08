@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import SocialMedia from './social-media'
 import './footer.css'
 
@@ -18,9 +19,14 @@ const Footer = (props) => {
         <div className="footer-container2">
           <div className="footer-container3">
             <span className="footer-text02 Large">Quick Links</span>
-            <span className="footer-text03 Large">Login</span>
+            <span className="footer-text03 Large">
+              <Link to="/login">Login</Link>
+            </span>
             <span className="footer-text04 Large">Features</span>
-            <span className="footer-text04 Large">Contact Us</span>
+            <span className="footer-text04 Large">
+              <Link to="/contact">
+                Contact Us
+              </Link></span>
             <span className="footer-text05 Large">About Us</span>
           </div>
         </div>

@@ -15,7 +15,10 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+global.appRoot = path.resolve(__dirname);
 app.use(express.static(path.join(__dirname, "public")));
+//app.use('/public', express.static(process.env.root + "/public"));
+
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);

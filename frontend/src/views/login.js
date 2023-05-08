@@ -3,6 +3,7 @@ import './login.css'
 import Header from '../components/header'
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from 'react-router-dom'
 
 function Login() {
     const [isSignUpMode, setIsSignUpMode] = useState(false);
@@ -41,9 +42,14 @@ function Login() {
                             </div>
                             <div class="input-field">
                                 <FontAwesomeIcon icon={faLock} className="fontawesome" />
-                                <input type="password" placeholder="Password" />
+                                
+                                    <input type="password" placeholder="Password" />
+                                
                             </div>
-                            <input type="submit" value="Login" class="btn" />
+                            <Link to='/dashboard'>
+                                    <input type="submit" value="Login" class="btn" />
+                            </Link>
+                            
                             <p class="social-text">Forgot Password ?</p>
                         </form>
                         <form method='GET' action="/login" class="sign-up-form">

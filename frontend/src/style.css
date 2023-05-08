@@ -41,6 +41,12 @@
   --dl-size-size-triplequarterunit: 0.75rem;
   --dl-space-space-unitandahalfunit: 1.5rem;
   --dl-space-space-triplequarterunit: 0.75rem;
+  
+	--primary: #0091ff;
+	--dark: #061b28;
+	--gray: #756388;
+	--light: #ffffff;
+
 }
 .teleport-show {
   display: flex !important;

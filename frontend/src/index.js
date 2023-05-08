@@ -6,7 +6,7 @@ import './style.css'
 import Profile from './views/contact'
 import Home from './views/home'
 import Login from './views/login'
-
+import Dashboard from './views/dashboard'
 const App = () => {
   return (
     <Router>
@@ -14,6 +14,7 @@ const App = () => {
         <Route component={Profile} exact path="/contact" />
         <Route component={Home} exact path="/" />
         <Route component={Login} exact path="/login" />
+        <Route component={Dashboard} exact path="/dashboard"/>
       </div>
     </Router>
   )

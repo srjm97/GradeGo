@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+<<<<<<< Updated upstream
 
 import './SideNavBar.css';
+=======
+import "./SideNavBar.css";
+>>>>>>> Stashed changes
 
 const SideNavBar = () => {
 	const [isExpanded, setExpendState] = useState(false);
 	const menuItems = [
 		{
 			text: "Dashboard",
+<<<<<<< Updated upstream
 			icon: "playground_assets/dashboard.svg",
 		},
 		{
@@ -26,6 +31,27 @@ const SideNavBar = () => {
 		// 	icon: "playground_assets/user.svg",
 		// },
 
+=======
+			icon: "icons/grid.svg",
+		},
+		{
+			text: "Marks",
+			icon: "icons/user.svg",
+		},
+		{
+			text: "Attendance",
+			icon: "icons/message.svg",
+		},
+		{
+			text: "Courses",
+			icon: "icons/pie-chart.svg",
+		},
+		{
+			text: "Profile",
+			icon: "icons/user.svg",
+		},
+		
+>>>>>>> Stashed changes
 	];
 	return (
 		<div
@@ -39,7 +65,7 @@ const SideNavBar = () => {
 				<div className="nav-heading">
 					{isExpanded && (
 						<div className="nav-brand">
-							<img src="playground_assets/Logo.svg" alt="" srcset="" />
+							<img src="icons/Logo.svg" alt="" srcset="" />
 							<h2>GradeGo</h2>
 						</div>
 					)}
@@ -71,7 +97,7 @@ const SideNavBar = () => {
 					<div className="nav-details">
 						<img
 							className="nav-footer-avatar"
-							src="playground_assets/admin-avatar.svg"
+							src="icons/admin-avatar.svg"
 							alt=""
 							srcset=""
 						/>
@@ -81,7 +107,7 @@ const SideNavBar = () => {
 						</div>
 					</div>
 				)}
-				<img className="logout-icon" src="playground_assets/logout.svg" alt="" srcset="" />
+				<img className="logout-icon" src="icons/logout.svg" alt="" srcset="" />
 			</div>
 		</div>
 	);

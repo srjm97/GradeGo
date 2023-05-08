@@ -7,6 +7,7 @@ import Profile from './views/contact'
 import Home from './views/home'
 import Login from './views/login'
 import Dashboard from './views/dashboard'
+import Attendance from './views/attendance'
 const App = () => {
   return (
     <Router>
@@ -15,6 +16,7 @@ const App = () => {
         <Route component={Home} exact path="/" />
         <Route component={Login} exact path="/login" />
         <Route component={Dashboard} exact path="/dashboard"/>
+        <Route component={Attendance} exact path="/attendance"/>
       </div>
     </Router>
   )

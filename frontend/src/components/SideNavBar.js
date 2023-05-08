@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import './SideNavBar.css';
 
 const SideNavBar = () => {
@@ -6,24 +7,24 @@ const SideNavBar = () => {
 	const menuItems = [
 		{
 			text: "Dashboard",
-			icon: "playground_assets/grid.svg",
+			icon: "playground_assets/dashboard.svg",
 		},
 		{
 			text: "Marks",
-			icon: "playgrounds_assets/user.svg",
+			icon: "playgrounds_assets/dashboard.svg",
 		},
-		{
-			text: "Attendance",
-			icon: "playground_assets/message.svg",
-		},
-		{
-			text: "Courses",
-			icon: "playground_assets/pie-chart.svg",
-		},
-		{
-			text: "Profile",
-			icon: "playground_assets/user.svg",
-		},
+		// {
+		// 	text: "Attendance",
+		// 	icon: "playground_assets/message.svg",
+		// },
+		// {
+		// 	text: "Courses",
+		// 	icon: "playground_assets/pie-chart.svg",
+		// },
+		// {
+		// 	text: "Profile",
+		// 	icon: "playground_assets/user.svg",
+		// },
 
 	];
 	return (

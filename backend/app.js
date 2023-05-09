@@ -2,7 +2,6 @@ const express = require('express')
 const mongoose = require("mongoose");
 const db = 'mongodb+srv://StudentTracker:EBJempYE3pbx4xSQ@cluster0.i8kgzaf.mongodb.net/node_system'
 const Login = require("./models/Login");
-const jwt = require('jsonwebtoken');
 
 mongoose.connect(db,{
     useNewurlParser: true,
@@ -31,21 +30,17 @@ app.post('/login', async (req, res) => {
     console.log(userpass)
     if(userpass){
       if (userpass.password == password){
-        const token = jwt.sign({
-          username:userpass.username,
-          password:userpass.password,  
-        }, 'secret123')
         console.log('valid user')
-        return res.json({status:'ok', user:token})
+        return res.json({status:'ok', user:true})
       }
       else {
         console.log('invalid password')
-        return res.json({status:'error', user:'false'})
+        return res.json({status:'error', user:false})
       }
     }
     else {
       console.log('invalid username')
-      return res.json({status:'error', user:'false'})
+      return res.json({status:'error', user:false})
     }
 })
 app.listen(1337, ()=>{

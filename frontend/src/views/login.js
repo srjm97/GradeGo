@@ -28,7 +28,7 @@ function Login() {
     };
 
     async function validateUser(event){
-        // event.preventDefault();
+        event.preventDefault();
         const response = await fetch("http://localhost:1337/login", {
           method: "POST",
           headers: {
@@ -41,6 +41,13 @@ function Login() {
         });
     
         const data = await response.json();
+        if(data.user){
+            alert('Login Successful')
+            window.location.href = '/dashboard'
+        }
+        else{
+            alert('Check credential')
+        }
         console.log(data);
     }
 

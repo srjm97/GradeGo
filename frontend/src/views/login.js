@@ -46,7 +46,12 @@ function Login() {
             window.location.href = '/dashboard'
         }
         else{
-            alert('Check credential')
+            if(data.error){
+                alert('Invalid Password')
+            }
+            else{
+                alert('Invalid Username')
+            }
         }
         console.log(data);
     }

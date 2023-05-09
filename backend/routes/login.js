@@ -16,16 +16,16 @@ router.post('/login', async (req, res) => {
 
       if (passwordMatches){
         console.log('valid user')
-        return res.json({status:'ok', user:true})
+        return res.json({status:'ok', user:true, error:false})
       }
       else {
         console.log('invalid password')
-        return res.json({status:'error', user:false})
+        return res.json({status:'error', user:false, error:true})
       }
     }
     else {
       console.log('invalid username')
-      return res.json({status:'error', user:false})
+      return res.json({status:'error', user:false, error:false})
     }
 })
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './login.css'
 import Header from '../components/header'
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
@@ -10,6 +10,11 @@ function Login() {
     const [isSignUpMode2, setIsSignUpMode2] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [errMsg, setErrMsg] = useState(false);
+
+    useEffect(() => {
+        setErrMsg(false);
+    }, [username, password])
 
     const handleSignUpClick = () => {
         setIsSignUpMode(true);
@@ -27,30 +32,30 @@ function Login() {
         setIsSignUpMode2(false);
     };
 
-    async function validateUser(event){
+    async function validateUser(event) {
         event.preventDefault();
         const response = await fetch("http://localhost:1337/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username,
-            password,
-          }),
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username,
+                password,
+            }),
         });
-    
+
         const data = await response.json();
-        if(data.user){
-            alert('Login Successful')
+        if (data.user) {
+
             window.location.href = '/dashboard'
         }
-        else{
-            if(data.error){
-                alert('Invalid Password')
+        else {
+            if (data.error) {
+                setErrMsg(true)
             }
-            else{
-                alert('Invalid Username')
+            else {
+                setErrMsg(true)
             }
         }
         console.log(data);
@@ -61,6 +66,7 @@ function Login() {
             <div className="header-div">
                 <Header />
             </div>
+            <p className={errMsg ? "errmsg" : "offscreen"}>Invalid username or password</p>
             <div className="overall">
 
                 <div className={`container ${isSignUpMode ? "sign-up-mode" : ""} ${isSignUpMode2 ? "sign-up-mode2" : ""}`}>
@@ -73,14 +79,14 @@ function Login() {
                             </div>
                             <div class="input-field">
                                 <FontAwesomeIcon icon={faLock} className="fontawesome" />
-                                
-                                    <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
-                                
+
+                                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
+
                             </div>
                             {/* <Link to='/dashboard'> */}
-                                    <input type="submit" value="Login" class="btn" />
+                            <input type="submit" value="Login" class="btn" />
                             {/* </Link> */}
-                            
+
                             <p class="social-text">Forgot Password ?</p>
                         </form>
                     </div>

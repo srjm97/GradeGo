@@ -414,3 +414,16 @@ a {
         -o-transform: translateX(calc(100% /20));
 }
 }
+
+.offscreen{
+    visibility: hidden;
+}
+
+.errmsg{
+    color: red;
+    font-weight: bold;
+    position: relative; 
+    left: 42%;
+    top: 75vh;
+    z-index: 9;
+}

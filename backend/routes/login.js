@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Login = require("../models/Login");
+const bcrypt = require('bcrypt')
 
 router.post('/login', async (req, res) => {
     console.log(req.body)
@@ -10,7 +11,10 @@ router.post('/login', async (req, res) => {
     const userpass = await Login.findOne({ username: username }, { password: 1 });
     console.log(userpass)
     if(userpass){
-      if (userpass.password == password){
+      const passwordMatches = bcrypt.compareSync(password, userpass.password);
+      console.log(passwordMatches);
+
+      if (passwordMatches){
         console.log('valid user')
         return res.json({status:'ok', user:true})
       }

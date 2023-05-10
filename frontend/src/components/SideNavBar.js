@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Link } from "react-router-dom"
 import './SideNavBar.css';
 
 const SideNavBar = () => {
@@ -18,7 +18,7 @@ const SideNavBar = () => {
 			icon: "icons/message.svg",
 		},
 		{
-			text: "Courses",
+			text: "Time Table",
 			icon: "icons/pie-chart.svg",
 		},
 		{
@@ -60,7 +60,11 @@ const SideNavBar = () => {
 							href="#"
 						>
 							<img className="menu-item-icon" src={icon} alt="" srcset="" />
-							{isExpanded && <p>{text}</p>}
+							{isExpanded &&
+								<Link to="/timetable" className="header-navlink2 Large">
+									<p>{text}</p>
+								</Link>
+							}
 						</a>
 					))}
 				</div>

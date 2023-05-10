@@ -3,7 +3,7 @@ import React from "react";
 import './dashboard.css'
 import HorizontalNavBar from '../components/horizontalnavbar'
 
-function Dashboard() {
+function FacDashboard() {
     return (
         <div>
             <HorizontalNavBar />
@@ -12,4 +12,4 @@ function Dashboard() {
     );
 }
 
-export default Dashboard;
+export default FacDashboard;

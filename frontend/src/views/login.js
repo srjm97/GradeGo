@@ -47,9 +47,13 @@ function Login() {
 
         const data = await response.json();
         console.log(data);
-        if (data.user) {
-
-            window.location.href = '/dashboard'
+        if (data.status === 'ok') {
+            if (data.user === 'student'){
+                window.location.href = '/dashboard'
+            }
+            else if(data.user === 'faculty'){
+                window.location.href = '/facdashboard'
+            }
         }
         else {
             if (data.error) {
@@ -76,7 +80,7 @@ function Login() {
                             <h2 class="title">LOGIN</h2>
                             <div class="input-field">
                                 <FontAwesomeIcon icon={faUser} className="fontawesome" />
-                                <input value={ktu_id} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Username" pattern="[A-Za-z0-9]+" />
+                                <input value={ktu_id} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Username" pattern="[A-Za-z0-9-]+" />
                             </div>
                             <div class="input-field">
                                 <FontAwesomeIcon icon={faLock} className="fontawesome" />

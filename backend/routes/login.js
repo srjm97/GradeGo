@@ -20,11 +20,12 @@ router.post("/login", async (req, res) => {
       console.log("valid user");
       //check whether the person is a teacher or a student
       // check whether the person is in the student table
-      const isStudent = Student.findOne({ _id: ktu_id });
+      const isStudent = await Student.findOne({ _id: ktu_id });
+      console.log(isStudent)
       if (isStudent) {
         return res.json({ status: "ok", user: "student" });
       } else {
-        const isFaculty = Fauclty.findOne({ id: ktu_id });
+        const isFaculty = Faculty.findOne({ id: ktu_id });
         if (isFaculty) {
           return res.json({ status: "ok", user: "faculty" });
         }

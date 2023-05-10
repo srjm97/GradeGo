@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const TimeTableSchema = new mongoose.Schema({
+  //day is the _id in the db
   _id: {
     type: String,
     required: true,
-
   },
   periods: [
     {

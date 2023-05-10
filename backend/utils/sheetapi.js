@@ -28,23 +28,25 @@ async function csvData() {
     })
     .on("end", async function () {
       for (i = 0; i < l.length; ++i) {
-        const username = l[i][0];
+        const ktu_id = l[i][0];
         const pass = l[i][1];
         // encrypt the password before pushing it into db
         const password = bcrypt.hashSync(pass, saltRounds);
-        const us = await Login.findOne({ username: username }, { _id: 1 });
+        const us = await Login.findOne({ _id: ktu_id});
+        console.log(us)
         if (us) {
           console.log("user already present");
         } else {
-          const newLogin = new Login({ username, password });
-          newLogin
-            .save()
-            .then(() => {
-              console.log("successfully added user");
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+          // const newLogin = new Login({ ktu_id, password });
+          // newLogin
+          //   .save()
+          //   .then(() => {
+          //     console.log("successfully added user");
+          //   })
+          //   .catch((err) => {
+          //     console.log(err);
+          //   });
+          const out = await Login.create({_id:ktu_id, password:password});
         }
       }
       console.log("finished");

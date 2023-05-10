@@ -1,13 +1,7 @@
 const mongoose = require("mongoose");
 
-const StudentSchema = new mongoose.Schema({
-  //   student_ktu_id is the _id in db
-  //   basic details
+const FacultySchema = new mongoose.Schema({
   _id: {
-    type: String,
-    required: true,
-  },
-  admno: {
     type: String,
     required: true,
   },
@@ -25,7 +19,6 @@ const StudentSchema = new mongoose.Schema({
       required: true,
     },
   },
-  // academic details
   email: {
     type: String,
     required: true,
@@ -46,34 +39,22 @@ const StudentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  programme: {
-    type: String,
-    required: true,
-  },
-  admission_type: {
-    type: String,
-    required: true,
-  },
-  scheme: {
-    type: String,
-    required: true,
-  },
   department: {
     type: String,
     required: true,
   },
-  batch: {
-    type: Number,
-    required: true,
+  staff_type: {
+    type: String,
+    required:true,
   },
-  date_of_admission: {
-    type: Date,
-    required: true,
-  },
-  semester: {
-    type: Number,
-    required: true,
-  },
+  roles: [
+    {
+      role_name: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 
-module.exports = new mongoose.model("Student", StudentSchema);
+module.exports = new mongoose.model("Faculty", FacultySchema);

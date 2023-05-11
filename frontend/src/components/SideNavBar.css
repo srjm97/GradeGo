@@ -5,7 +5,7 @@
 	width: 300px;
 	height: 100vh;
 	position: relative;
-	color: var(--light);
+	color: white;
 
 	transition: 0.4s;
 }
@@ -30,7 +30,7 @@
 
 .nav-brand {
 	display: flex;
-	color: var(--light);
+	color:white;
 }
 .nav-brand img {
 	width: 40px;
@@ -47,7 +47,7 @@
 .hamburger span {
 	display: block;
 	margin-top: 5px;
-	background-color: var(--light);
+	background-color: white;
 	border-radius: 15px;
 	height: 5px;
 	width: 35px;
@@ -97,7 +97,7 @@
 .menu-item {
 	height: 57px;
 	display: flex;
-	color: var(--light);
+	color: white;
 	text-decoration: none;
 	text-transform: uppercase;
 	margin: auto 20px;
@@ -139,7 +139,7 @@
 
 .nav-footer-user-position {
 	margin-top: -15px;
-	color: var(--gray);
+	color: white;
 }
 .logout-icon {
 	width: 30px;

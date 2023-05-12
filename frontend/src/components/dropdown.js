@@ -3,19 +3,21 @@ import './dropdown.css';
 
 const Dropdown = () => {
   const [_id, setId] = useState('');
+  const [periodnum,setPeriodNum] = useState(1);
   const [subjectInputs, setSubjectInputs] = useState([
-    {  index:'',coursecode: '', abbreviation: '' },
-    {  index:'',coursecode: '', abbreviation: '' },
-    { index:'',coursecode: '', abbreviation: '' },
-    { index:'',coursecode: '', abbreviation: '' },
-    { index:'',coursecode: '', abbreviation: '' },
-    { index:'',coursecode: '', abbreviation: '' },
-    { index:'',coursecode: '', abbreviation: '' },
+    
   ]);
 
   const handleOptionChange = (event) => {
     setId(event.target.value);
   };
+
+  const addSubject = (event) => {
+      
+      setSubjectInputs([...subjectInputs,{index:periodnum,coursecode: '', abbreviation: ''}]);
+      setPeriodNum(periodnum+1);
+      
+  }
 
   const handleSubjectInputChange = (index, event, key) => {
     const newSubjectInputs = [...subjectInputs];
@@ -67,7 +69,7 @@ const Dropdown = () => {
           <input
             className="input-box"
             type="text"
-            placeholder="Enter Period Number"
+            
             value={subject.index}
             onChange={(event) =>
               handleSubjectInputChange(index, event, 'index')
@@ -93,7 +95,7 @@ const Dropdown = () => {
           />
         </div>
       ))}
-
+      <button onClick={addSubject}>Add Subject</button>
       <button onClick={handleSubmit}>Submit</button>
     </div>
   );

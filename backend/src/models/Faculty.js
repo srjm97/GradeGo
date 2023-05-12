@@ -6,15 +6,15 @@ const FacultySchema = new mongoose.Schema({
     required: true,
   },
   name: {
-    first_name: {
+    firstName: {
       type: String,
       required: true,
     },
-    middle_name: {
+    middleName: {
       type: String,
       required: false,
     },
-    last_name: {
+    lastName: {
       type: String,
       required: true,
     },
@@ -27,7 +27,7 @@ const FacultySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  phone_number: {
+  phoneNumber: {
     type: String,
     required: true,
   },
@@ -43,13 +43,13 @@ const FacultySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  staff_type: {
+  staffType: {
     type: String,
     required:true,
   },
   roles: [
     {
-      role_name: {
+      roleName: {
         type: String,
         required: true,
       },

@@ -8,24 +8,24 @@ const bcrypt = require('bcrypt');
 router.post('/login', async (req, res) => {
   console.log(req.body);
   // check in db if he is a valid user if he is then redirect to dashboard
-  const { ktu_id, password } = req.body;
-  console.log(ktu_id, password);
-  const pass = await Login.findOne({ _id: ktu_id });
+  const { ktuId, password } = req.body;
+  console.log(ktuId, password);
+  const pass = await Login.findOne({ _id: ktuId });
   console.log(pass);
   if (pass) {
     const passwordMatches = bcrypt.compareSync(password, pass.password);
     console.log(passwordMatches);
 
     if (passwordMatches) {
-      console.log("valid user");
+      console.log('valid user');
       //check whether the person is a teacher or a student
       // check whether the person is in the student table
-      const isStudent = await Student.findOne({ _id: ktu_id });
-      console.log(isStudent)
+      const isStudent = await Student.findOne({ _id: ktuId });
+      console.log(isStudent);
       if (isStudent) {
         return res.json({ status: 'ok', user: 'student' });
       } else {
-        const isFaculty = Faculty.findOne({ id: ktu_id });
+        const isFaculty = Faculty.findOne({ id: ktuId });
         if (isFaculty) {
           return res.json({ status: 'ok', user: 'faculty' });
         }

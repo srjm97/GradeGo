@@ -1,5 +1,4 @@
 const express = require('express');
-const Login = require('./models/Login');
 const mongoose = require('./connect/mongoose');
 
 const app = express();

@@ -8,11 +8,11 @@ const TimeTableSchema = new mongoose.Schema({
   },
   periods: [
     {
-      period_no: {
+      periodNo: {
         type: Number,
         required: true,
       },
-      course_code: {
+      courseCode: {
         type: String,
         required: true,
       },

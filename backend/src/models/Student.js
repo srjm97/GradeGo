@@ -12,15 +12,15 @@ const StudentSchema = new mongoose.Schema({
     required: true,
   },
   name: {
-    first_name: {
+    firstName: {
       type: String,
       required: true,
     },
-    middle_name: {
+    middleName: {
       type: String,
       required: false,
     },
-    last_name: {
+    lastName: {
       type: String,
       required: true,
     },
@@ -34,7 +34,7 @@ const StudentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  phone_number: {
+  phoneNumber: {
     type: String,
     required: true,
   },
@@ -50,7 +50,7 @@ const StudentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  admission_type: {
+  admissionType: {
     type: String,
     required: true,
   },
@@ -66,7 +66,7 @@ const StudentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  date_of_admission: {
+  dateOfAdmission: {
     type: Date,
     required: true,
   },

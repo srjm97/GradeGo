@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const StudentSchema = new mongoose.Schema({
   //   student_ktu_id is the _id in db
@@ -76,4 +76,4 @@ const StudentSchema = new mongoose.Schema({
   },
 });
 
-module.exports = new mongoose.model("Student", StudentSchema);
+module.exports = new mongoose.model('Student', StudentSchema);

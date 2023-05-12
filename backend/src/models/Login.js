@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const LoginSchema = new mongoose.Schema({
   _id: {
@@ -11,4 +11,4 @@ const LoginSchema = new mongoose.Schema({
   },
 });
 
-module.exports = new mongoose.model("Login", LoginSchema);
+module.exports = new mongoose.model('Login', LoginSchema);

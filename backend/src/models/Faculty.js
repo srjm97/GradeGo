@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const FacultySchema = new mongoose.Schema({
   _id: {
@@ -57,4 +57,4 @@ const FacultySchema = new mongoose.Schema({
   ],
 });
 
-module.exports = new mongoose.model("Faculty", FacultySchema);
+module.exports = new mongoose.model('Faculty', FacultySchema);

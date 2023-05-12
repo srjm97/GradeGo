@@ -1,15 +1,25 @@
 import React, { useState } from 'react';
-import './dropdown.css'
+import './dropdown.css';
+
 const Dropdown = () => {
   const [_id, setId] = useState('');
-  const [subjectInputs, setSubjectInputs] = useState(['', '', '', '', '', '', '']);
+  const [subjectInputs, setSubjectInputs] = useState([
+    {  index:'',coursecode: '', abbreviation: '' },
+    {  index:'',coursecode: '', abbreviation: '' },
+    { index:'',coursecode: '', abbreviation: '' },
+    { index:'',coursecode: '', abbreviation: '' },
+    { index:'',coursecode: '', abbreviation: '' },
+    { index:'',coursecode: '', abbreviation: '' },
+    { index:'',coursecode: '', abbreviation: '' },
+  ]);
 
   const handleOptionChange = (event) => {
     setId(event.target.value);
   };
-  const handleSubjectInputChange = (index, event) => {
+
+  const handleSubjectInputChange = (index, event, key) => {
     const newSubjectInputs = [...subjectInputs];
-    newSubjectInputs[index] = event.target.value;
+    newSubjectInputs[index][key] = event.target.value;
     setSubjectInputs(newSubjectInputs);
   };
 
@@ -18,7 +28,7 @@ const Dropdown = () => {
       _id,
       periods: subjectInputs,
     };
-    console.log("Hello");
+    console.log('Hello');
     console.log(data);
 
     try {
@@ -53,13 +63,35 @@ const Dropdown = () => {
 
       <h4>Enter Subjects:</h4>
       {subjectInputs.map((subject, index) => (
-        <input className='input-box'
-          key={index}
-          type="text"
-          placeholder='Enter subject'
-          value={subject}
-          onChange={(event) => handleSubjectInputChange(index, event)}
-        />
+        <div key={index}>
+          <input
+            className="input-box"
+            type="text"
+            placeholder="Enter Period Number"
+            value={subject.index}
+            onChange={(event) =>
+              handleSubjectInputChange(index, event, 'index')
+            }
+          />
+          <input
+            className="input-box"
+            type="text"
+            placeholder="Enter Course Code"
+            value={subject.coursecode}
+            onChange={(event) =>
+              handleSubjectInputChange(index, event, 'coursecode')
+            }
+          />
+          <input
+            className="input-box"
+            type="text"
+            placeholder="Enter Abbreviation"
+            value={subject.abbreviation}
+            onChange={(event) =>
+              handleSubjectInputChange(index, event, 'abbreviation')
+            }
+          />
+        </div>
       ))}
 
       <button onClick={handleSubmit}>Submit</button>
@@ -68,10 +100,3 @@ const Dropdown = () => {
 };
 
 export default Dropdown;
-
-
-
-
-
-
-

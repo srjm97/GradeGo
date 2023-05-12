@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import './dropdown.css'
 const Dropdown = () => {
-  const [selectedOption, setSelectedOption] = useState('');
+  const [_id, setId] = useState('');
   const [subjectInputs, setSubjectInputs] = useState(['', '', '', '', '', '', '']);
 
   const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
+    setId(event.target.value);
   };
-
   const handleSubjectInputChange = (index, event) => {
     const newSubjectInputs = [...subjectInputs];
     newSubjectInputs[index] = event.target.value;
@@ -16,14 +15,14 @@ const Dropdown = () => {
 
   const handleSubmit = async () => {
     const data = {
-      selectedOption,
-      subjects: subjectInputs,
+      _id,
+      periods: subjectInputs,
     };
     console.log("Hello");
     console.log(data);
 
     try {
-      const response = await fetch('https://your-server-url.com/endpoint', {
+      const response = await fetch('http://localhost:1337/facdashboard', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,7 +40,7 @@ const Dropdown = () => {
   return (
     <div className="dropdown">
       <label htmlFor="dropdown">Select an option:</label>
-      <select id="dropdown" value={selectedOption} onChange={handleOptionChange}>
+      <select id="dropdown" value={_id} onChange={handleOptionChange}>
         <option value="">-- Select --</option>
         <option value="Monday">Monday</option>
         <option value="Tuesday">Tuesday</option>
@@ -50,7 +49,7 @@ const Dropdown = () => {
         <option value="Friday">Friday</option>
         <option value="Saturday">Saturday</option>
       </select>
-      <p>Selected option: {selectedOption}</p>
+      <p>Selected option: {_id}</p>
 
       <h4>Enter Subjects:</h4>
       {subjectInputs.map((subject, index) => (

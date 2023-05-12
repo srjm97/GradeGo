@@ -14,11 +14,6 @@ app.use(require('./routes/users'));
 app.use(require('./routes/index'));
 app.use(require('./routes/staffAdvisor'));
 
-app.post('/facdashboard',(req,res)=>{
-  console.log(req.body);
-  const {_id,periods} = req.body;
-  console.log(_id,periods);
-});
 
 
 app.listen(1337, () => {

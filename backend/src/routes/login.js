@@ -10,7 +10,7 @@ router.post('/login', async (req, res) => {
   // check in db if he is a valid user if he is then redirect to dashboard
   const { ktuId, password } = req.body;
   console.log(ktuId, password);
-  const pass = await Login.findOne({ _id: ktuId });
+  const pass = await Login.findOne({ _id: ktuId }, {password:1});
   console.log(pass);
   if (pass) {
     const passwordMatches = bcrypt.compareSync(password, pass.password);

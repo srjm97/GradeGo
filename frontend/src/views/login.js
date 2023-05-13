@@ -8,13 +8,13 @@ import { Link } from 'react-router-dom'
 function Login() {
     const [isSignUpMode, setIsSignUpMode] = useState(false);
     const [isSignUpMode2, setIsSignUpMode2] = useState(false);
-    const [ktu_id, setUsername] = useState("");
+    const [ktuId, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errMsg, setErrMsg] = useState(false);
 
     useEffect(() => {
         setErrMsg(false);
-    }, [ktu_id, password])
+    }, [ktuId, password])
 
     const handleSignUpClick = () => {
         setIsSignUpMode(true);
@@ -40,7 +40,7 @@ function Login() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                ktu_id,
+                ktuId,
                 password,
             }),
         });
@@ -80,7 +80,7 @@ function Login() {
                             <h2 class="title">LOGIN</h2>
                             <div class="input-field">
                                 <FontAwesomeIcon icon={faUser} className="fontawesome" />
-                                <input value={ktu_id} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Username" pattern="[A-Za-z0-9-]+" />
+                                <input value={ktuId} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Username" pattern="[A-Za-z0-9-]+" />
                             </div>
                             <div class="input-field">
                                 <FontAwesomeIcon icon={faLock} className="fontawesome" />

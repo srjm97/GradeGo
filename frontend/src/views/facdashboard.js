@@ -1,5 +1,5 @@
 import React from "react";
-import './dashboard.css'
+import './facdashboard.css'
 import Dropdown from "../components/dropdown";
 
 function FacDashboard() {

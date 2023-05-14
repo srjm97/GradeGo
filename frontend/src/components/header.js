@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
 import PropTypes from 'prop-types'
-
 import PrimaryPinkButton from './primary-pink-button'
 import './header.css'
 
@@ -24,7 +22,7 @@ const Header = (props) => {
           </div>
           <div className="header-container1">
             <div className="header-container2">
-              <Link to="/login" >
+              <Link to="../pages/LoginPage.js" >
                     <PrimaryPinkButton
                           button="Login"
                           className=""

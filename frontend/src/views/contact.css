@@ -316,7 +316,7 @@
   flex-direction: column;
   background-size: cover;
   justify-content: center;
-  background-image: url("../../public/playground_assets/curved5-1400w.jpg");
+  background-image: url("/playground_assets/curved5-1400w.jpg");
   border-top-right-radius: var(--dl-radius-radius-radius1);
   border-bottom-right-radius: var(--dl-radius-radius-radius1);
 }

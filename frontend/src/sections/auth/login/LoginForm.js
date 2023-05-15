@@ -11,7 +11,7 @@ import Iconify from '../../../components/iconify';
 
 export default function LoginForm() {
 
-  const [ktu_id, setUsername] = useState("");
+  const [ktuId, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState(false);
   const validateUser = async (event) => {
@@ -22,7 +22,7 @@ export default function LoginForm() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        ktu_id,
+        ktuId,
         password,
       }),
     });
@@ -54,10 +54,11 @@ export default function LoginForm() {
   return (
     <>
       <Stack spacing={3}>
-        <TextField name="email" onChange={(e) => setUsername(e.target.value)} label="Ktu Id" />
+        <TextField value={ktuId} name="email" onChange={(e) => setUsername(e.target.value)} label="Ktu Id" />
 
         <TextField
           name="password"
+          value={password}
           label="Password"
           onChange={(e) => setPassword(e.target.value)}
           type={showPassword ? 'text' : 'password'}

@@ -1,8 +1,16 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const TimeTableSchema = new mongoose.Schema({
-  //day is the _id in the db
+  //semester is the _id in the db
   _id: {
+    type: Number,
+    required: true,
+  },
+  batch:{
+    type: Number, 
+    required: true,
+  },
+  day: {
     type: String,
     required: true,
   },
@@ -24,4 +32,4 @@ const TimeTableSchema = new mongoose.Schema({
   ],
 });
 
-module.exports = new mongoose.model('TimeTable', TimeTableSchema);
+module.exports = new mongoose.model("TimeTable", TimeTableSchema);

@@ -54,7 +54,7 @@ export default function LoginForm() {
   return (
     <>
       <Stack spacing={3}>
-        <TextField value={ktuId} name="email" onChange={(e) => setUsername(e.target.value)} label="Ktu Id" />
+        <TextField value={ktuId} name="email" onChange={(e) => setUsername(e.target.value)} label="Username" />
 
         <TextField
           name="password"
@@ -73,18 +73,11 @@ export default function LoginForm() {
           }}
         />
       </Stack>
-      
-          
-      
-          
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
-        <Checkbox name="remember" label="Remember me" />
-        
         <Link variant="subtitle2" underline="hover">
           Forgot password?
         </Link>
       </Stack>
-
       <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={validateUser}>
         Login
       </LoadingButton>

@@ -71,7 +71,7 @@ export default function LoginPage() {
         <Container maxWidth="sm">
           <StyledContent>
             <Typography variant="h4" gutterBottom>
-              Login to GradeGo
+              GradeGo Login
             </Typography>
 
             {/* <Typography variant="body2" sx={{ mb: 5 }}>
@@ -94,11 +94,7 @@ export default function LoginPage() {
               </Stack> */}
 
             <Divider sx={{ my: 3 }}>
-              {/* <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                OR
-              </Typography> */}
             </Divider>
-
             <LoginForm />
           </StyledContent>
         </Container>

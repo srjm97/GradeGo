@@ -4,9 +4,9 @@ const TimeTable = require('../models/TimeTable');
 
 // on getting the get request return the time table given the semester and batch
 router.get('/facdashboard/TimeTable', async (req, res) => {
-  //const { semester, batch } = req.body;
-  const semester = 6;
-  const batch = 1;
+  const { semester, batch } = req.body;
+  // const semester = 6;
+  // const batch = 1;
   const display = await TimeTable.findOne({ _id: semester, batch: batch });
   console.log(display);
   return res.json(display);
@@ -14,7 +14,48 @@ router.get('/facdashboard/TimeTable', async (req, res) => {
 
 // to add a new time table or update existing
 router.post('/facdashboard/TimeTable', async (req, res) => {
-  const { semester, batch, days } = req.body;
+  // const { semester, batch, days } = req.body;
+  const semester = 1;
+  const batch = 2;
+  const days = [
+    {day:'Monday',
+      periods:[{
+        _id:1,
+        courseCode:'',
+        abbreviation:'CCW'
+      },
+      {
+        _id:2,
+        courseCode:'',
+        abbreviation:'AAD'
+      },
+      {
+        _id:3,
+        courseCode:'',
+        abbreviation:'CD'
+      },
+      {
+        _id:4,
+        courseCode:'',
+        abbreviation:'PP'
+      },
+      {
+        _id:5,
+        courseCode:'',
+        abbreviation:'CGIP'
+      },
+      {
+        _id:6,
+        courseCode:'',
+        abbreviation:'Minor'
+      },
+      {
+        _id:7,
+        courseCode:'',
+        abbreviation:'Minor'
+      }]
+    }];
+
   console.log(semester, batch, days);
   // check if the day is already present if present the update else add new
   const present = await TimeTable.findOne({ _id: semester, batch: batch });

@@ -4,13 +4,14 @@ const Login = require('../models/Login');
 const Student = require('../models/Student');
 const Faculty = require('../models/Faculty');
 const bcrypt = require('bcrypt');
+const StaffAdvisor = require('../models/StaffAdvisor');
 
 router.post('/login', async (req, res) => {
   console.log(req.body);
   // check in db if he is a valid user if he is then redirect to dashboard
   const { ktuId, password } = req.body;
   console.log(ktuId, password);
-  const pass = await Login.findOne({ _id: ktuId }, {password:1});
+  const pass = await Login.findOne({ _id: ktuId }, { password: 1 });
   console.log(pass);
   if (pass) {
     const passwordMatches = bcrypt.compareSync(password, pass.password);
@@ -26,17 +27,24 @@ router.post('/login', async (req, res) => {
         return res.json({ status: 'ok', user: 'student' });
       } else {
         const isFaculty = Faculty.findOne({ id: ktuId });
+        const isStaffAdvisor = Faculty.findOne({ id: ktuId, roles:[{roleName:'Staff Advisor'}]});
         if (isFaculty) {
-          return res.json({ status: 'ok', user: 'faculty' });
+          if (isStaffAdvisor) {
+            const staffDetails = await StaffAdvisor.findOne({ id: ktuId});
+            return res.json({ status: 'ok', user: 'faculty', details: staffDetails});  
+          }
+          else {
+            return res.json({ status: 'ok', user: 'faculty' });
+          }
         }
       }
     } else {
       console.log('invalid password');
-      return res.json({ status: 'error', user: 'invalid'});
+      return res.json({ status: 'error', user: 'invalid' });
     }
   } else {
     console.log('invalid username');
-    return res.json({ status: 'error', user: 'invalid'});
+    return res.json({ status: 'error', user: 'invalid' });
   }
 });
 

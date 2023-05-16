@@ -27,19 +27,22 @@ router.post('/login', async (req, res) => {
       if (isStudent) {
         return res.json({ status: 'ok', user: 'student' });
       } else {
-        const isFaculty = await Faculty.findOne({ id: ktuId });
+        const isFaculty = await Faculty.findOne({_id: ktuId });
         
 
-        const isStaffAdvisor = Faculty.findOne({ id: ktuId, roles: [{ roleName: 'Staff Advisor' }] });
+        const isStaffAdvisor = Faculty.findOne({_id: ktuId, roles: [{ roleName: 'Staff Advisor' }] });
         if (isFaculty) {
           if (isStaffAdvisor) {
-            const staffDetails = await StaffAdvisor.findOne({ id: ktuId });
+            const staffDetails = await StaffAdvisor.findOne({_id: ktuId });
             const courseDetails = await CodeToName.findOne({_id:staffDetails.semester});
             return res.json({ status: 'ok', user: 'faculty', details: staffDetails,course: courseDetails });
           }
           else {
             return res.json({ status: 'ok', user: 'faculty' });
           }
+        }
+        else{
+          console.log('error');
         }
       }
     } else {

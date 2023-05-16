@@ -5,6 +5,7 @@ const Student = require('../models/Student');
 const Faculty = require('../models/Faculty');
 const bcrypt = require('bcrypt');
 const StaffAdvisor = require('../models/StaffAdvisor');
+const CodeToName = require('../models/CodeToName');
 
 router.post('/login', async (req, res) => {
   console.log(req.body);
@@ -26,12 +27,15 @@ router.post('/login', async (req, res) => {
       if (isStudent) {
         return res.json({ status: 'ok', user: 'student' });
       } else {
-        const isFaculty = Faculty.findOne({ id: ktuId });
-        const isStaffAdvisor = Faculty.findOne({ id: ktuId, roles:[{roleName:'Staff Advisor'}]});
+        const isFaculty = await Faculty.findOne({ id: ktuId });
+        
+
+        const isStaffAdvisor = Faculty.findOne({ id: ktuId, roles: [{ roleName: 'Staff Advisor' }] });
         if (isFaculty) {
           if (isStaffAdvisor) {
-            const staffDetails = await StaffAdvisor.findOne({ id: ktuId});
-            return res.json({ status: 'ok', user: 'faculty', details: staffDetails});  
+            const staffDetails = await StaffAdvisor.findOne({ id: ktuId });
+            const courseDetails = await CodeToName.findOne({_id:staffDetails.semester});
+            return res.json({ status: 'ok', user: 'faculty', details: staffDetails,course: courseDetails });
           }
           else {
             return res.json({ status: 'ok', user: 'faculty' });

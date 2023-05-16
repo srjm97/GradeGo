@@ -34,7 +34,9 @@ router.post('/login', async (req, res) => {
         if (isFaculty) {
           if (isStaffAdvisor) {
             const staffDetails = await StaffAdvisor.findOne({_id: ktuId });
-            const courseDetails = await CodeToName.findOne({_id:staffDetails.semester});
+            console.log(staffDetails);
+            const courseDetails = await CodeToName.findOne({_id:staffDetails.semesterHandled});
+            console.log(courseDetails);
             return res.json({ status: 'ok', user: 'faculty', details: staffDetails,course: courseDetails });
           }
           else {

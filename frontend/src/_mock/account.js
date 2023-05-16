@@ -1,8 +1,6 @@
-// ----------------------------------------------------------------------
-
 const account = {
-  displayName: 'Jaydon Frankie',
-  email: 'demo@minimals.cc',
+  displayName: 'Sooraj Mathew',
+  email: 'tve20cs109@cet.ac.in',
   photoURL: '/assets/images/avatars/avatar_default.jpg',
 };
 

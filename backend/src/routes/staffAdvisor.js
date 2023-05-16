@@ -84,7 +84,7 @@ router.post('/facdashboard/TimeTable', async (req, res) => {
       batch: batch,
       days: days,
     });
-    console.log(addnewTimeTable);
+    console.log(addNewTimeTable);
   }
 });
 

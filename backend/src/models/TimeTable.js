@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const TimeTableSchema = new mongoose.Schema({
   //semester is the _id in the db
@@ -32,4 +32,4 @@ const TimeTableSchema = new mongoose.Schema({
   ],
 });
 
-module.exports = new mongoose.model("TimeTable", TimeTableSchema);
+module.exports = new mongoose.model('TimeTable', TimeTableSchema);

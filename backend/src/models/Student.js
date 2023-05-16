@@ -70,10 +70,38 @@ const StudentSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  semester: {
+  currentSemester: {
     type: Number,
     required: true,
   },
+  scholarshipDetails:[
+    {
+      nameOfScholarship:{
+        type: String,
+        required: true,
+      },
+      amountReceived:{
+        type: Number,
+        required: true,
+      },
+      startDate:{
+        type: Date,
+        required: true,
+      },
+      endDate:{
+        type: Date,
+        required: true,
+      },
+      scholarshipProvider:{
+        type: String,
+        required: true,
+      },
+      remarks:{
+        type: String,
+        required: false,
+      }
+    }
+  ]
 });
 
 module.exports = new mongoose.model('Student', StudentSchema);

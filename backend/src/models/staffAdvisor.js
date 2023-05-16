@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const StaffAdvisorSchema = new mongoose.Schema({
   // _id represents the faculty ktu id
@@ -16,4 +16,4 @@ const StaffAdvisorSchema = new mongoose.Schema({
   },
 });
 
-module.exports = new mongoose.model("StaffAdvisor", StaffAdvisorSchema);
+module.exports = new mongoose.model('StaffAdvisor', StaffAdvisorSchema);

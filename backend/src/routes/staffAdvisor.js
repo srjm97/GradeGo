@@ -1,27 +1,19 @@
-var express = require("express");
+var express = require('express');
 var router = express.Router();
-const TimeTable = require("../models/TimeTable");
-const e = require("express");
+const TimeTable = require('../models/TimeTable');
 
 // on getting the get request return the time table given the semester and batch
-router.get("/facdashboard/TimeTable", async (req, res) => {
-  const { semester, batch } = req.body;
+router.get('/facdashboard/TimeTable', async (req, res) => {
+  //const { semester, batch } = req.body;
+  const semester = 6;
+  const batch = 1;
   const display = await TimeTable.findOne({ _id: semester, batch: batch });
   console.log(display);
   return res.json(display);
 });
 
-router.get("/facdashboard/Timetable", async (req, res) => {
-  const { semester, batch } = req.body;
-  const timetable = await TimeTable.findOne({ _id: semester, batch: batch });
-  if (timetable) {
-    // return the json of the contents in the document
-    console.log(timetable);
-  }
-});
-
 // to add a new time table or update existing
-router.post("/facdashboard/TimeTable", async (req, res) => {
+router.post('/facdashboard/TimeTable', async (req, res) => {
   const { semester, batch, days } = req.body;
   console.log(semester, batch, days);
   // check if the day is already present if present the update else add new

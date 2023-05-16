@@ -3,14 +3,23 @@ var router = express.Router();
 const TimeTable = require('../models/TimeTable');
 const e = require('express');
 
-//display time table
-
+// on getting the get request return the time table given the semester and batch
 router.get('/facdashboard/TimeTable', async(req, res)=>{
-  const {semester, batch} = req.body
+  const {semester, batch} = req.body;
+  const display = await TimeTable.findOne({_id:semester, batch:batch});
+  console.log(display);
+  return res.json(display);
 });
 
 
-
+router.get('/facdashboard/Timetable', async (req, res)=>{
+  const {semester, batch} = req.body;
+  const isPresent = await TimeTable.findOne({_id:semester, batch:batch});
+  if (isPresent){
+    // return the json of the contents in the document
+    console.log(isPresent)
+  }
+});
 
 // to add a new time table or update existing
 router.post('/facdashboard/TimeTable', async (req, res) => {

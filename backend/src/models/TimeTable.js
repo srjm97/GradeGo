@@ -1,4 +1,4 @@
-const mongoose = require('mongoos');
+const mongoose = require('mongoose');
 
 const TimeTableSchema = new mongoose.Schema({
   //semester is the _id in the db

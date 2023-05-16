@@ -15,44 +15,45 @@ router.get('/facdashboard/TimeTable', async (req, res) => {
 // to add a new time table or update existing
 router.post('/facdashboard/TimeTable', async (req, res) => {
   // const { semester, batch, days } = req.body;
-  const semester = 1;
+  const semester = 4;
   const batch = 2;
   const days = [
-    {day:'Monday',
-      periods:[{
-        _id:1,
-        courseCode:'',
-        abbreviation:'CCW'
+    {
+      _id: 'Monday',
+      periods: [{
+        _id: 1,
+        courseCode: '',
+        abbreviation: 'CCW'
       },
       {
-        _id:2,
-        courseCode:'',
-        abbreviation:'AAD'
+        _id: 2,
+        courseCode: '',
+        abbreviation: 'AAD'
       },
       {
-        _id:3,
-        courseCode:'',
-        abbreviation:'CD'
+        _id: 3,
+        courseCode: '',
+        abbreviation: 'CD'
       },
       {
-        _id:4,
-        courseCode:'',
-        abbreviation:'PP'
+        _id: 4,
+        courseCode: '',
+        abbreviation: 'PP'
       },
       {
-        _id:5,
-        courseCode:'',
-        abbreviation:'CGIP'
+        _id: 5,
+        courseCode: '',
+        abbreviation: 'CGIP'
       },
       {
-        _id:6,
-        courseCode:'',
-        abbreviation:'Minor'
+        _id: 6,
+        courseCode: '',
+        abbreviation: 'Minor'
       },
       {
-        _id:7,
-        courseCode:'',
-        abbreviation:'Minor'
+        _id: 7,
+        courseCode: '',
+        abbreviation: 'Minor'
       }]
     }];
 
@@ -67,7 +68,8 @@ router.post('/facdashboard/TimeTable', async (req, res) => {
           { _id: semester, batch: batch },
           {
             $set: {
-              [`days.${i}.day`]: days[i].day,
+              //days is passed as _id (days._id)
+              [`days.${i}._id`]: days[i]._id,
               [`days.${i}.periods.${j}._id`]: days[i].periods[j].index,
               [`days.${i}.periods.${j}.courseCode`]:
                 days[i].periods[j].coursecode,

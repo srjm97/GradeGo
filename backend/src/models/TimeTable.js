@@ -11,7 +11,7 @@ const TimeTableSchema = new mongoose.Schema({
     required: true,
   },
   days: [{
-    day: {
+    _id: {
       type: String,
       required: true,
     },

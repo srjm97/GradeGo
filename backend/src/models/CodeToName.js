@@ -6,14 +6,20 @@ const CodeToNameSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  courseCode: {
-    type: String,
-    required: true,
-  },
-  courseName: {
-    type: String,
-    required: true,
-  },
+  courses: [
+    {
+      courseCode: {
+        type: String,
+        required: true,
+      },
+      courseName: {
+        type: String,
+        required: true,
+      },
+    },
+
+  ]
+
 });
 
 module.exports = new mongoose.model('CodeToName', CodeToNameSchema);

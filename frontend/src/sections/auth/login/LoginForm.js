@@ -31,10 +31,10 @@ export default function LoginForm() {
     console.log(data);
     if (data.status === 'ok') {
       if (data.user === 'student') {
-        window.location.href = '/dashboard'
+        window.location.href = '/studdashboard'
       }
       else if (data.user === 'faculty') {
-        window.location.href = '/facdashboard'
+        window.location.href = '/dashboard'
       }
     }
     else {

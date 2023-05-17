@@ -17,39 +17,39 @@ const InternalMarkSchema = new mongoose.Schema({
         {
           nameOfExam: {
             type: String,
-            required: true,
+            required: false,
           },
           dateOfExam: {
             type: Date,
-            required: true,
+            required: false,
           },
           marksScored: {
             type: Number,
-            required: true,
+            required: false,
           },
           maxMarks: {
             type: Number,
-            required: true,
+            required: false,
           },
           coMapping: [
             {
               coNo: {
                 type: String,
-                required: true,
+                required: false,
               },
               qns: [
                 {
                   qno: {
                     type: Number,
-                    required: true,
+                    required: false,
                   },
                   marksScored: {
                     type: Number,
-                    required: true,
+                    required: false,
                   },
                   maxMarks: {
                     type: Number,
-                    required: true,
+                    required: false,
                   },
                 },
               ],
@@ -65,41 +65,41 @@ const InternalMarkSchema = new mongoose.Schema({
         {
           nameOfAssignment: {
             type: String,
-            required: true,
+            required: false,
           },
           marksScored: {
             type: Number,
-            required: true,
+            required: false,
           },
           maxMarks: {
             type: Number,
-            required: true,
+            required: false,
           },
         },
       ],
       assignmentExamMarks: {
         type: Number,
-        required: true,
+        required: false,
       },
       attendance: [
         {
           date: {
             type: Date,
-            required: true,
+            required: false,
           },
           hour: {
             type: Number,
-            required: true,
+            required: false,
           },
           isPresent: {
             type: Boolean,
-            required: true,
+            required: false,
           },
         },
       ],
       attendancePercentage: {
         type: Number,
-        required: true,
+        required: false,
       },
       attendanceMarks: {
         type: Number,

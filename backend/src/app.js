@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(require('./routes/login'));
 app.use(require('./routes/index'));
 app.use(require('./routes/staffAdvisor'));
+app.use(require('./routes/tutor'));
 
 
 

@@ -14,8 +14,8 @@ router.get('/facdashboard/TimeTable', async (req, res) => {
 });
 
 router.get('/facdashboard/data', async (req, res) => {
-  // const {semester} = req.body;
-  const semester = 6;
+  const {semester} = req.body;
+  // const semester = 6;
   const courseDetails = await CodeToName.findOne({_id:semester});
   console.log(courseDetails);
   return res.json(courseDetails);

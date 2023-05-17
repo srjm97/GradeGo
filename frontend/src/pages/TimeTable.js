@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Button, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Select, Typography, TextField } from '@mui/material';
-
+import { LoginForm } from '../sections/auth/login/index';
 
 const Timetable = () => {
-    const [data, setData] = useState(null);
-
-    useEffect(() => {
+    const [data, setData] = useState({
+        status: '',
+        user: '',
+        details: {},
+        course: {},
+      });
+    
+      useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await fetch('localhost:1337/login'); // Replace '/api/data' with your actual API endpoint
-                if (response.ok) {
-                    const jsonData = await response.json();
-                    setData(jsonData);
-                } else {
-                    console.error('Error fetching data:', response.status);
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
+          try {
+            const response = await fetch('http://localhost:1337/facdashboard/data'); // Replace with your backend URL
+            const responseData = await response.json();
+            alert(responseData.courses[0].courseCode);
+            setData(responseData);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
         };
-
+    
         fetchData();
-    }, []);
-
-
-
+      }, []);
     const saveTimetable = async () => {
         try {
             const response = await fetch('/api/save-timetable', {
@@ -112,7 +111,7 @@ const Timetable = () => {
                     {periods.map((period) => (
                         <div key={period}>
                             <Typography variant="subtitle1">Period {period}:</Typography>
-                            <TextField
+                            {/* <TextField
                                 variant="outlined"
                                 value={getPeriodValue(selectedDay, period)}
                                 onChange={(event) => handlePeriodChange(selectedDay, period, event.target.value)}
@@ -121,7 +120,18 @@ const Timetable = () => {
                                         padding: '8px 12px', // Adjust the padding to change the height
                                     },
                                 }}
-                            />
+                            /> */}
+
+                            <Select value={getPeriodValue(selectedDay, period)} onChange={(event) => handlePeriodChange(selectedDay, period, event.target.value)} displayEmpty>
+                                <MenuItem value=''>--Select Subject--</MenuItem>
+                                {
+                                    data.courses.map((c)=>(
+                                        <MenuItem key={c.courseName} value={c.courseName}>
+                                            {c.courseName}
+                                        </MenuItem>
+                                    ))
+                                }
+                            </Select>
                         </div>
                     ))}
                 </div>

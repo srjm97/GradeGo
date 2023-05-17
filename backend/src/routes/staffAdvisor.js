@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const TimeTable = require('../models/TimeTable');
+const CodeToName = require('../models/CodeToName');
 
 // on getting the get request return the time table given the semester and batch
 router.get('/facdashboard/TimeTable', async (req, res) => {
@@ -10,6 +11,14 @@ router.get('/facdashboard/TimeTable', async (req, res) => {
   const display = await TimeTable.findOne({ _id: semester, batch: batch });
   console.log(display);
   return res.json(display);
+});
+
+router.get('/facdashboard/data', async (req, res) => {
+  // const {semester} = req.body;
+  const semester = 6;
+  const courseDetails = await CodeToName.findOne({_id:semester});
+  console.log(courseDetails);
+  return res.json(courseDetails);
 });
 
 // to add a new time table or update existing

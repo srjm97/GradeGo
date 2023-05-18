@@ -1,14 +1,20 @@
-import { useState } from 'react';
+import { useState,useContext,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {DataContext} from '../../../DataContext';
+// @mui
 import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import Iconify from '../../../components/iconify';
 
-export default function LoginForm() {
 
+// ----------------------------------------------------------------------
+
+export default function LoginForm() {
+  const { hellodata, setHelloData } = useContext(DataContext);
   const [ktuId, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState(false);
+  let data={};
   const validateUser = async (event) => {
     event.preventDefault();
     const response = await fetch("http://localhost:1337/login", {
@@ -22,30 +28,37 @@ export default function LoginForm() {
       }),
     });
 
-    const data = await response.json();
-    console.log(data);
-    if (data.status === 'ok') {
-      if (data.user === 'student') {
-        window.location.href = '/studdashboard'
-      }
-      else if (data.user === 'faculty') {
-        window.location.href = '/dashboard'
-      }
-    }
-    else {
+    data = await response.json();
+    
+    setHelloData(data);
+    if(data.status!='ok') {
       setErrMsg(true);
-      alert("Incorrect username or password")
+      alert("Incorrect username or password");
     }
-    console.log(data);
+    
   }
+    
   const navigate = useNavigate();
+  useEffect(() => {
+    
+    if (hellodata.status === 'ok') {
+      if (hellodata.user === 'student') {
+        window.location.href = '/studdashboard';
+      } else if (hellodata.user === 'faculty') {
+        navigate('/dashboard', { replace: true });
+      }
+    } 
+  }, [hellodata]);
+
+  
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleClick = () => {
-    navigate('/dashboard', { replace: true });
-  };
-
+  // const handleClick = () => {
+  //   navigate('/dashboard', { replace: true });
+  // };
+  
+  
   return (
     <>
       <Stack spacing={3}>
@@ -78,4 +91,5 @@ export default function LoginForm() {
       </LoadingButton>
     </>
   );
+  
 }

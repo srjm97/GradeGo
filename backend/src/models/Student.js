@@ -1,3 +1,8 @@
+/*
+Model Name:  Student
+Usage: to store all the student details, including personal, login and scholarship details.
+Author: Rishin R
+*/
 const mongoose = require('mongoose');
 
 const StudentSchema = new mongoose.Schema({

@@ -1,3 +1,8 @@
+/*
+Model Name: TimeTable
+Usage: Stores the timetable details of each semester and batch, this shall be only performed by the staff advisor. Here the days is set as an array so the time table set for each day can be pushed and popped as necessary.
+Author: Rishin R
+*/
 const mongoose = require('mongoose');
 
 const TimeTableSchema = new mongoose.Schema({

@@ -1,3 +1,8 @@
+/*
+Model Name: InternalMark
+Usage: This model is used to store the internal marks of the theory papers, this includes internal exams, assignments, and attendance. All the above discussed factors can be added or removed as required. Daily attendance can be updated and this can then be used to find the attendance percentage and the corresponding marks for it. coMapping is performed for each internal exam this data can be used to map the qns against the co marks obtained by each student, which can then be used to find the co attainment of the entire class.
+Author: Harikrishnan V
+*/
 //Internal marks of only theory subjects . practical marks have to be completed
 const mongoose = require('mongoose');
 

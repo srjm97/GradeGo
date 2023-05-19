@@ -1,3 +1,8 @@
+/*
+model Name: Courses
+Usage: To store the entire details of all courses, courseOutcomes are created as an array so they are configurable at any point of time. Previous year question papers can be added into the array of question papers against the course.  
+Author: Harikrishnan V
+*/
 const mongoose = require('mongoose');
 
 const CourseSchema = new mongoose.Schema({

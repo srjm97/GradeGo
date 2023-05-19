@@ -1,3 +1,8 @@
+/*
+Model Name:  StaffAdvisor
+Usage: To store details regarding the semester's and batch's handled by each staff advisor, this enables the staff advisor to set the time table and courses for the batch she handles.
+Author: Rishin R
+*/
 const mongoose = require('mongoose');
 
 const StaffAdvisorSchema = new mongoose.Schema({

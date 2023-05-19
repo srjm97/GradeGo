@@ -1,3 +1,8 @@
+/*
+Model Name:  StudentCourses
+Usage: The courses taken by a student in a particular semester is mapped in this model. here courses enrolled is set as an array so that values can be pushed into it.
+Author: Harikrishnan V
+*/
 const mongoose = require("mongoose");
 
 const studentCourseSchema = new mongoose.Schema({

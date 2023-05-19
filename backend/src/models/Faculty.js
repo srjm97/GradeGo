@@ -1,3 +1,8 @@
+/*
+Model Name: Faculty
+Usage: To store the faculty details, including their positions which is set as an array so that it can be pushed and popped as necessary. The positions data is then used to represent the roles hold by the faculty. 
+Author: Rishin R
+*/
 const mongoose = require('mongoose');
 
 const FacultySchema = new mongoose.Schema({

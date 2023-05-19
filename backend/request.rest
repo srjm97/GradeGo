@@ -1,0 +1,15 @@
+GET http://localhost:1337/facdashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoia3R1LWYzNzUiLCJpYXQiOjE2ODQ0Nzg0NTV9.sCfSd8dclt9lc5U7WC1CObWkbK9U7nmSUIijuR9yhc8
+                
+
+
+###
+
+POST http://localhost:1337/login
+content-Type : application/json
+ 
+ {
+    "ktuId": "ktu-f375",
+    "password": "f375"
+ }
+

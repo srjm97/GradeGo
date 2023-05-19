@@ -30,7 +30,14 @@ export default function LoginForm() {
 
     data = await response.json();
     
-    setHelloData(data);
+    setHelloData(data); 
+    if (data.status === 'ok') {
+      if (data.user === 'student') {
+        window.location.href = '/studdashboard';
+      } else if (data.user === 'faculty') {
+        navigate('/dashboard', { replace: true });
+      }
+    } 
     if(data.status!='ok') {
       setErrMsg(true);
       alert("Incorrect username or password");
@@ -39,16 +46,7 @@ export default function LoginForm() {
   }
     
   const navigate = useNavigate();
-  useEffect(() => {
-    
-    if (hellodata.status === 'ok') {
-      if (hellodata.user === 'student') {
-        window.location.href = '/studdashboard';
-      } else if (hellodata.user === 'faculty') {
-        navigate('/dashboard', { replace: true });
-      }
-    } 
-  }, [hellodata]);
+
 
   
 

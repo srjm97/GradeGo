@@ -1,18 +1,25 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState,useEffect } from 'react';
 
 export const DataContext = createContext();
 
-export const DataProvider = ({ children }) => {
-    const [hellodata, setHelloData] = useState({
-        status: '',
-        user: '',
-        details: {},
-        course: {}
+export const DataProvider = (props) => {
+    const [hellodata, setHelloData] = useState(() => {
+        const storedData = localStorage.getItem('hellodata');
+        return storedData ? JSON.parse(storedData) : {
+            status: '',
+            user: '',
+            details: {},
+            course: {}
+        };
     });
+
+    useEffect(() => {
+        localStorage.setItem('hellodata', JSON.stringify(hellodata));
+    }, [hellodata]);
 
     return (
         <DataContext.Provider value={{ hellodata, setHelloData }}>
-            {children}
+            {props.children}
         </DataContext.Provider>
     );
 };

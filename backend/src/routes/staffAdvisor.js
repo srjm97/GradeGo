@@ -5,7 +5,7 @@ const TimeTable = require('../models/TimeTable');
 const Courses = require('../models/Courses');
 
 // returns the time table on request from the staffadvisor dashboard for display
-router.get('/facdashboard/TimeTable', async (req, res) => {
+router.post('/facdashboard/DisplayTimeTable', async (req, res) => {
   const { semester, batch } = req.body;
   // const semester = 6;
   // const batch = 1;

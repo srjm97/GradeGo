@@ -33,7 +33,7 @@ export default function LoginForm() {
     setHelloData(data); 
     if (data.status === 'ok') {
       if (data.user === 'student') {
-        window.location.href = '/studdashboard';
+        navigate('/studdashboard', { replace: true });
       } else if (data.user === 'faculty') {
         navigate('/dashboard', { replace: true });
       }

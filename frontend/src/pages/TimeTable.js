@@ -79,7 +79,7 @@ const Timetable = () => {
 
             if (response.ok) {
                 console.log('Timetable saved successfully');
-                
+
                 // Do something on success
             } else {
                 console.error('Error saving timetable:', response.status);
@@ -104,7 +104,7 @@ const Timetable = () => {
             {
                 viewTimeTableSet && (
                     <div>
-                        <TableContainer component={Paper}> 
+                        <TableContainer component={Paper}>
                             <Table>
                                 <TableHead>
                                     <TableRow>
@@ -146,14 +146,11 @@ const Timetable = () => {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Day</TableCell>
-                                <TableCell>Period 1</TableCell>
-                                <TableCell>Period 2</TableCell>
-                                <TableCell>Period 3</TableCell>
-                                <TableCell>Period 4</TableCell>
-                                <TableCell>Period 5</TableCell>
-                                <TableCell>Period 6</TableCell>
-                                <TableCell>Period 7</TableCell>
+                                <TableCell >Day</TableCell>
+                                {timetableData.days.length > 0 &&
+                                    timetableData.days[0].periods.map((period) => (
+                                        <TableCell >Period {period._id}</TableCell>
+                                    ))}
                             </TableRow>
                         </TableHead>
                         <TableBody>

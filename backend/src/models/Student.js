@@ -33,73 +33,73 @@ const StudentSchema = new mongoose.Schema({
   // academic details
   email: {
     type: String,
-    required: true,
+    required: false,
   },
   password: {
     type: String,
-    required: true,
+    required: false,
   },
   phoneNumber: {
     type: String,
-    required: true,
+    required: false,
   },
   dob: {
     type: Date,
-    required: true,
+    required: false,
   },
   gender: {
     type: String,
-    required: true,
+    required: false,
   },
   programme: {
     type: String,
-    required: true,
+    required: false,
   },
   admissionType: {
     type: String,
-    required: true,
+    required: false,
   },
   scheme: {
     type: String,
-    required: true,
+    required: false,
   },
   department: {
     type: String,
-    required: true,
+    required: false,
   },
   batch: {
     type: Number,
-    required: true,
+    required: false,
   },
   dateOfAdmission: {
     type: Date,
-    required: true,
+    required: false,
   },
   currentSemester: {
     type: Number,
-    required: true,
+    required: false,
   },
   scholarshipDetails:[
     {
       nameOfScholarship:{
         type: String,
-        required: true,
+        required: false,
       },
       amountReceived:{
         type: Number,
-        required: true,
+        required: false,
       },
       startDate:{
         type: Date,
-        required: true,
+        required: false,
       },
       endDate:{
         type: Date,
-        required: true,
+        required: false,
       },
       scholarshipProvider:{
         type: String,
-        required: true,
+        required: false,
       },
       remarks:{
         type: String,
@@ -110,3 +110,7 @@ const StudentSchema = new mongoose.Schema({
 });
 
 module.exports = new mongoose.model('Student', StudentSchema);
+
+/*
+db.students.insertOne({_id:'tve20cs001', admno:'2001', name:{firstName:Rahul, last_Name:'Geeth'}, semester:6, batch:1});
+*/

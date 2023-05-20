@@ -2,13 +2,27 @@ var express = require('express');
 var router = express.Router();
 const InternalMark = require('../models/InternalMark');
 const FacultyCourses = require('../models/FacultyCourses');
+const StudentCourses = require('../models/StudentCourses');
+const Students = require('../models/Student');
 
-// return student attendance details
+// return all students of the given semester, course and 
 router.get('/tutor/attendance', async(req, res) => {
-  const {_id, courseCode} = req.body;
-  //returns the attendance field only from the internal marks
-  const studentAttendance = await InternalMark.findOne({_id:_id, 'courseAssessmentTheory.courseCode':courseCode}, {attendance:1});
-  return res.json(studentAttendance);
+  const {semester, batch, courseCode} = req.body;
+  // const semester = 6;
+  // const batch = 1;
+  // const courseCode = 'CST310';
+  // returns the list of student id's in the given semester and batch
+  const students = await Students.find({semester:semester, batch:batch}, {_id:1});
+  // console.log(students);
+  let studentsList = [];
+  for(let i = 0; i < students.length; ++i) {
+    const studentId = await StudentCourses.find({_id:students[i]._id, 'coursesEnrolled.semesterCourses.courseCode':courseCode}, {_id:1});
+    if (studentId) {
+      studentsList.push(studentId);
+    }
+  }
+  // console.log(studentsList);
+  return res.json(studentsList);
 });
 
 // returns the faculty course and semester details

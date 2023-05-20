@@ -6,22 +6,28 @@ Author: Harikrishnan V
 const mongoose = require('mongoose');
 
 const studentCourseSchema = new mongoose.Schema({
+  // here _id represents the student ktu id
   _id: {
     type: String,
     required: true,
   },
-  coursesEnrolled: [
+  coursesEnrolled:[
     {
-      semester: {
+      semester:{
         type: String,
-        required: true,
+        required:true,
       },
-      courseCode: {
-        type: String,
-        required: true,
-      }
-    },
-  ],
+      semesterCourses:[{
+        courseCode:{
+          type:String, 
+          required:false
+        }
+      }]
+    }
+  ]
 });
 
 module.exports = new mongoose.model('studentCourse', studentCourseSchema);
+/*
+db.studentCourses.insertOne({_id:'tve20cs000', coursesEnrolled:{semester:6, semesterCourses:[{courseCode:'CST301'}, {courseCode:'CST302'}, {courseCode:'CST303'}, {courseCode:'CST304'}]}})
+*/

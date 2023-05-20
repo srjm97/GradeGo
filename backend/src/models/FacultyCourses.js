@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const FacultyCoursesSchema = new mongoose.schema({
+const FacultyCoursesSchema = new mongoose.Schema({
   _id: {
     type: String,
     required: true,
   },
-  CoursesHandled:[{
+  coursesHandled:[{
     semester:{
       type:Number,
       required: true,
@@ -22,3 +22,7 @@ const FacultyCoursesSchema = new mongoose.schema({
 });
 
 module.exports = new mongoose.model('facultyCourse', FacultyCoursesSchema);
+
+/*
+db.facultycourses.insertOne({_id:'ktu-f375', coursesHandled:[{semester:6, batch:2, courseCode:'CST302'}, {semester:6, batch:1, courseCode:'CST302'}]})
+*/

@@ -14,51 +14,55 @@ const CourseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  category: {
+  courseAbbreviation: {
     type: String,
     required: true,
+  },
+  category: {
+    type: String,
+    required: false,
   },
   lecture: {
     type: Number,
-    required: true,
+    required: false,
   },
   tutorial: {
     type: Number,
-    required: true,
+    required: false,
   },
   practical: {
     type: Number,
-    required: true,
+    required: false,
   },
   credits: {
     type: Number,
-    required: true,
+    required: false,
   },
   yearOfIntroduction: {
     type: Date,
-    required: true,
+    required: false,
   },
   courseDescription: {
     type: String,
-    required: true,
+    required: false,
   },
   department: {
     type: String,
-    required: true,
+    required: false,
   },
   semester: {
     type: Number,
-    required: true,
+    required: false,
   },
   courseOutcomes: [
     {
       coNo: {
         type: Number,
-        required: true,
+        required: false,
       },
-      coDescription:{
+      coDescription: {
         type: String,
-        required: true,
+        required: false,
       }
     },
   ],
@@ -66,22 +70,55 @@ const CourseSchema = new mongoose.Schema({
     {
       nameOfPaper: {
         type: String,
-        required: true,
+        required: false,
       },
-      DateOfExamination:{
+      DateOfExamination: {
         type: Date,
-        required: true,
+        required: false,
       },
       questionPaper: {
         type: String,
-        required: true,
+        required: false,
       },
     },
   ],
   syllabus: {
     type: String,
-    required: true,
+    required: false,
   },
 });
 
 module.exports = new mongoose.model('Course', CourseSchema);
+
+/*
+db.courses.insertMany(
+[
+{
+_id:'CST302', courseName:'Compiler Design', courseAbbreviation:'CD', credits: 4, semester:6
+}, 
+{
+_id:'CST308', courseName:'Comprehensive Course Work', courseAbbreviation:'CCW', credits:4, semester:6
+},
+{
+_id:'CST306', courseName:'Algorithm Analysis and Design', courseAbbreviation:'AAD', credits:4, semester:6
+},
+{
+_id:'CST304', courseName:'Computer Graphics and Image Processing', courseAbbreviation:'CGIP', credits:4, semester:6
+},
+{
+_id:'HUT300', courseName:'Industrial Economics and Foreign Trade', courseAbbreviation:'IEFT', credits:3, semester:6
+},
+{
+_id:'CST322', courseName:'Data Analytics', courseAbbreviation:'DA', credits:3, semester:6
+},
+{
+_id:'CST362', courseName:'Programming In Python', courseAbbreviation:'PP', credits:3, semester:6
+},
+])
+
+db.courses.insertMany([{
+
+  _id:''
+
+}])
+*/

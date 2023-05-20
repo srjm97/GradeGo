@@ -3,7 +3,7 @@ Model Name:  StudentCourses
 Usage: The courses taken by a student in a particular semester is mapped in this model. here courses enrolled is set as an array so that values can be pushed into it.
 Author: Harikrishnan V
 */
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const studentCourseSchema = new mongoose.Schema({
   _id: {
@@ -16,7 +16,7 @@ const studentCourseSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      courseCode:{
+      courseCode: {
         type: String,
         required: true,
       }
@@ -24,4 +24,4 @@ const studentCourseSchema = new mongoose.Schema({
   ],
 });
 
-module.exports = new mongoose.model("studentCourse", studentCourseSchema);
+module.exports = new mongoose.model('studentCourse', studentCourseSchema);

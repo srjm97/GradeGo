@@ -8,12 +8,14 @@ const mongoose = require('mongoose');
 const TimeTableSchema = new mongoose.Schema({
   //semester is the _id in the db
   _id: {
-    type: Number,
-    required: true,
-  },
-  batch: {
-    type: Number,
-    required: true,
+    semester:{
+      type:Number,
+      required:true
+    },
+    batch:{
+      type:Number,
+      required:true,
+    }
   },
   days: [{
     _id: {
@@ -22,15 +24,22 @@ const TimeTableSchema = new mongoose.Schema({
     },
     periods: [
       {
+        // here _id represents the period number
         _id: {
           type: Number,
           required: false,
         },
-        courseCode: {
-          type: String,
-          required: false,
+        duration:{
+          startTime:{
+            type:Date,
+            required:false,
+          },
+          endTime:{
+            type:Date,
+            required:false,
+          }
         },
-        abbreviation: {
+        courseAbbreviation: {
           type: String,
           required: false,
         },

@@ -7,8 +7,9 @@ const Faculty = require('../models/Faculty');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const StaffAdvisor = require('../models/StaffAdvisor');
-const CodeToName = require('../models/CodeToName');
+// const CodeToName = require('../models/CodeToName');
 const {authenticateToken} = require('../middlewares/auth');
+const Courses = require('../models/Courses');
 
 router.post('/login', async (req, res) => {
   console.log(req.body);
@@ -43,7 +44,8 @@ router.post('/login', async (req, res) => {
           if (isStaffAdvisor) {
             const staffDetails = await StaffAdvisor.findOne({_id: ktuId });
             //console.log(staffDetails);
-            const courseDetails = await CodeToName.findOne({_id:staffDetails.semesterHandled});
+            // const courseDetails = await CodeToName.findOne({_id:staffDetails.semesterHandled});
+            const courseDetails = await Courses.find({semester:staffDetails.semesterHandled});
             //console.log(courseDetails);
             return res.json({ status: 'ok', user: 'faculty', details: staffDetails,course: courseDetails,accessToken:accessToken });
           }

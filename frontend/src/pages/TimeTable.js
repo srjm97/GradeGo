@@ -10,19 +10,19 @@ const Timetable = () => {
     console.log(hellodata);
     const handleSubmit = async () => {
         try {
-            const response = await fetch('', {
+            const response = await fetch('http://localhost:1337/facdashboard/TimeTable', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    _id: details.semesterHandled,
+                    semester: details.semesterHandled,
                     batch: details.batchHandled,
                     days: days.map((day) => ({
                         day: day,
                         periods: periods.map((period) => ({
-                            periodNumber: period,
-                            abbreviation: getPeriodAbbreviation(day, period),
+                            _id: period,
+                            abbreviation: getPeriodValue(day, period),
                         })),
                     })),
                 }),
@@ -74,7 +74,7 @@ const Timetable = () => {
 
         setTimetable(updatedTimetable);
         setViewTimetable(true);
-        saveTimetable();
+        
     };
 
     const getPeriodValue = (day, period) => periodInputs?.[day]?.[period] || '';
@@ -101,9 +101,9 @@ const Timetable = () => {
                             <Select value={getPeriodValue(selectedDay, period)} onChange={(event) => handlePeriodChange(selectedDay, period, event.target.value)} displayEmpty >
                                 <MenuItem value=''>--Select Subject--</MenuItem>
 
-                                {course.courses.map((c) => (
-                                    <MenuItem key={c.courseName} value={c.courseName}>
-                                        {c.courseName}
+                                {course.map((c) => (
+                                    <MenuItem key={c.courseAbbreviation} value={c.courseAbbreviation}>
+                                        {c.courseAbbreviation}
                                     </MenuItem>
                                 ))}
                             </Select>

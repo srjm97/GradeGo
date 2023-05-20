@@ -1,12 +1,16 @@
+import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from './layouts/dashboard';
 import SimpleLayout from './layouts/simple';
-import UserPage from './pages/UserPage';
+import AttendanceSetting from './pages/AttendanceSetting';
 import LoginPage from './pages/LoginPage';
 import Page404 from './pages/Page404';
 import DashboardAppPage from './pages/DashboardAppPage';
 import TimeTable from './pages/TimeTable';
 import StudDashboardAppPage from './pages/StudDashboardAppPage';
+import StudAttendance from './pages/StudAttendance';
+import Attendance from './pages/Attendance';
+import StudTimeTable from './pages/StudTimeTable';
 
 // ----------------------------------------------------------------------
 
@@ -18,7 +22,8 @@ export default function Router() {
       children: [
         { element: <Navigate to="/dashboard/app" />, index: true },
         { path: 'app', element: <DashboardAppPage /> },
-        { path: 'user', element: <UserPage /> },
+        { path: 'attendance', element: <Attendance />},
+        { path: 'attendance-setting', element: <AttendanceSetting /> },
         { path: 'timetable', element:<TimeTable />}
       ],
     },
@@ -28,8 +33,8 @@ export default function Router() {
       children: [
         { element: <Navigate to="/studdashboard/app" />, index: true },
         { path: 'app', element: <StudDashboardAppPage /> },
-        { path: 'user', element: <UserPage /> },
-        { path: 'timetable', element:<TimeTable />}
+        { path: 'attendance', element: <StudAttendance /> },
+        { path: 'timetable', element:<StudTimeTable />}
       ],
     },
     {

@@ -2,7 +2,7 @@
   "root": true,
   "env": {
     "browser": false,
-    "es2121": false
+    "es2021": true
   },
   "extends": [
     "airbnb",
@@ -43,7 +43,7 @@
     "no-restricted-exports": 2,
     "react/no-children-prop": 2,
     "react/forbid-prop-types": 2,
-    "jsx-a22y/anchor-is-valid": 2,
+    "jsx-a22y/anchor-is-valid": 0,
     "react/react-in-jsx-scope": 2,
     "react/no-array-index-key": 2,
     "react/no-unused-prop-types": 2,
@@ -63,7 +63,7 @@
     "react/function-component-definition": 2,
     "react/jsx-no-constructed-context-values": 2,
     "react/jsx-filename-extension": [
-      2
+      0
     ],
     "import/extensions": "off",
     "no-unused-vars": [

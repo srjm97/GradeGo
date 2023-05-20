@@ -4,7 +4,6 @@ import { DataContext } from '../DataContext';
 
 const Timetable = () => {
 
-
     const { hellodata, setHelloData } = useContext(DataContext);
     const { status, user, details, course } = hellodata;
     console.log(hellodata);

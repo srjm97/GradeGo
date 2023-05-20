@@ -1,43 +1,60 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Select, Typography, TextField } from '@mui/material';
+import { Button, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Select, Typography } from '@mui/material';
 import { DataContext } from '../DataContext';
 
 const Timetable = () => {
-
-    const { hellodata, setHelloData } = useContext(DataContext);
+    const { hellodata } = useContext(DataContext);
     const { status, user, details, course } = hellodata;
     console.log(hellodata);
-    const [timetableData, setTimetableData] = useState({});
-    const getTimetableData = async (semester, batch) => {
-        try {
-            
-            const response = await fetch("http://localhost:1337/facdashboard/DisplayTimeTable", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ semester, batch }),
-            });
 
-            if (response.ok) {
-                const timetableDataback = await response.json();
-                setTimetableData(timetableDataback);
-                // Process the timetable data or update state accordingly
-            } else {
-                console.error('Failed to retrieve timetable data:', response.status);
+    const [timetableData, setTimetableData] = useState({ days: [] });
+    const [availableCourses, setAvailableCourses] = useState([]);
+
+    useEffect(() => {
+        // Fetch timetable data from backend
+        const fetchData = async () => {
+            try {
+                const response = await fetch("http://localhost:1337/facdashboard/DisplayTimeTable", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        semester: details.semesterHandled,
+                        batch: details.batchHandled
+                    }),
+                });
+
+                if (response.ok) {
+                    const timetableDataback = await response.json();
+                    setTimetableData(timetableDataback);
+                } else {
+                    console.error('Failed to retrieve timetable data:', response.status);
+                }
+            } catch (error) {
+                console.error('Error retrieving timetable data:', error);
             }
-        } catch (error) {
-            console.error('Error retrieving timetable data:', error);
-        }
+        };
+
+        fetchData();
+    }, [details]);
+
+    useEffect(() => {
+        setAvailableCourses(course);
+    }, [course]);
+
+    useEffect(() => {
+        console.log(timetableData)
+    }
+        , [timetableData])
+
+
+    const handleTimetableChange = (dayIndex, periodIndex, courseAbbreviation) => {
+        const updatedTimetable = { ...timetableData };
+        updatedTimetable.days[dayIndex].periods[periodIndex].courseAbbreviation = courseAbbreviation;
+        setTimetableData(updatedTimetable);
     };
 
-    useEffect(() => {
-        getTimetableData(details.semesterHandled, details.batchHandled);
-    }, [])
-
-    useEffect(() => {
-        console.log(timetableData);
-    }, [timetableData]);
 
     const handleSubmit = async () => {
         try {
@@ -49,11 +66,12 @@ const Timetable = () => {
                 body: JSON.stringify({
                     semester: details.semesterHandled,
                     batch: details.batchHandled,
-                    days: days.map((day) => ({
-                        day: day,
-                        periods: periods.map((period) => ({
-                            _id: period,
-                            abbreviation: getPeriodValue(day, period),
+                    days: timetableData.days.map((day) => ({
+                        day: day._id,
+                        periods: day.periods.map((period) => ({
+                            _id: period._id,
+                            courseCode: '',
+                            abbreviation: period.courseAbbreviation,
                         })),
                     })),
                 }),
@@ -61,144 +79,114 @@ const Timetable = () => {
 
             if (response.ok) {
                 console.log('Timetable saved successfully');
+                
                 // Do something on success
             } else {
                 console.error('Error saving timetable:', response.status);
             }
+            setEditTimeTableSet(false);
+            setViewTimeTableSet(true);
         } catch (error) {
             console.error('Error saving timetable:', error);
         }
     };
 
+    const [viewTimeTableSet, setViewTimeTableSet] = useState(true);
+    const [editTimeTableSet, setEditTimeTableSet] = useState(false);
 
-
-    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const periods = Array.from(Array(7), (_, index) => index + 1);
-
-    const [timetable, setTimetable] = useState([]);
-    const [viewTimetable, setViewTimetable] = useState(true);
-    const [periodInputs, setPeriodInputs] = useState({});
-    const [selectedDay, setSelectedDay] = useState('');
-
-    const handleDayChange = (event) => {
-        setSelectedDay(event.target.value);
-    };
-
-    const handlePeriodChange = (day, period, value) => {
-        setPeriodInputs((prevInputs) => ({
-            ...prevInputs,
-            [day]: {
-                ...prevInputs[day],
-                [period]: value,
-            },
-        }));
-    };
-    const [viewEdit, setViewEdit] = useState(false);
     const handleEdit = () => {
-        setViewEdit(true);
+
+        setEditTimeTableSet(true);
+        setViewTimeTableSet(false);
     }
-
-    const handleSave = () => {
-        const updatedTimetable = days.map((day) => ({
-            day,
-            periods: periods.map((period) => ({
-                periodNumber: period.toString(),
-                value: periodInputs?.[day]?.[period] || '',
-            })),
-        }));
-
-        setTimetable(updatedTimetable);
-        setViewTimetable(true);
-        setViewEdit(false);
-
-    };
-
-    const getPeriodValue = (day, period) => periodInputs?.[day]?.[period] || '';
-
-
     return (
         <div>
-            {viewTimetable && (
-                <div>
-                    <h2>Timetable View</h2>
-                    <TableContainer component={Paper}>
-                        <Table>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell style={{ border: "1px solid black" }}>Day</TableCell>
-                                    {periods.map((period) => (
-                                        <TableCell style={{ border: "1px solid black" }} key={period}>
-                                            Period {period}
+            {
+                viewTimeTableSet && (
+                    <div>
+                        <TableContainer component={Paper}> 
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell style={{ border: '1px solid black' }}>Day</TableCell>
+                                        {timetableData.days.length > 0 &&
+                                            timetableData.days[0].periods.map((period) => (
+                                                <TableCell style={{ border: '1px solid black' }}>Period {period._id}</TableCell>
+                                            ))}
+                                    </TableRow>
+                                </TableHead>
+
+                                <TableBody>
+                                    {
+                                        timetableData.days.map((day) => (
+                                            <TableRow>
+                                                <TableCell style={{ border: '1px solid black' }}>
+                                                    {day._id}
+                                                </TableCell>
+                                                {day.periods.map((period) => (
+                                                    <TableCell style={{ border: '1px solid black' }}>{period.courseAbbreviation}</TableCell>
+                                                ))}
+                                            </TableRow>
+
+                                        ))
+                                    }
+                                </TableBody>
+
+
+                            </Table>
+                        </TableContainer>
+                        <Button style={{ padding: '10px', marginTop: '10px' }} variant="contained" onClick={handleEdit}>
+                            Edit
+                        </Button>
+                    </div>
+                )
+            }
+            {editTimeTableSet && (
+                <TableContainer>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Day</TableCell>
+                                <TableCell>Period 1</TableCell>
+                                <TableCell>Period 2</TableCell>
+                                <TableCell>Period 3</TableCell>
+                                <TableCell>Period 4</TableCell>
+                                <TableCell>Period 5</TableCell>
+                                <TableCell>Period 6</TableCell>
+                                <TableCell>Period 7</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {timetableData.days.map((day, dayIndex) => (
+                                <TableRow key={day._id}>
+                                    <TableCell>{day._id}</TableCell>
+                                    {day.periods.map((period, periodIndex) => (
+                                        <TableCell key={periodIndex}>
+                                            <Select
+                                                value={period.courseAbbreviation}
+                                                onChange={(e) =>
+                                                    handleTimetableChange(dayIndex, periodIndex, e.target.value)
+                                                }
+                                            >
+                                                <MenuItem value="">Select Course</MenuItem>
+                                                {availableCourses.map((course) => (
+                                                    <MenuItem key={course._id} value={course.courseAbbreviation}>
+                                                        {course.courseAbbreviation}
+                                                    </MenuItem>
+                                                ))}
+                                            </Select>
                                         </TableCell>
                                     ))}
                                 </TableRow>
-                            </TableHead>
-
-                            <TableBody>
-                                {
-                                    timetable.map((entry) => (
-                                        <TableRow key={entry.day}>
-                                            <TableCell style={{ border: "1px solid black" }}>{entry.day}</TableCell>
-                                            {entry.periods.map((period) => (
-                                                <TableCell style={{ border: "1px solid black" }} key={period.periodNumber}>
-                                                    {period.value}
-                                                </TableCell>
-                                            ))}
-                                        </TableRow>
-                                    ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-
-                </div>
-
-            )}
-            <Button style={{ padding: '10px', marginTop: '10px' }} variant="contained" onClick={handleEdit}>
-                Edit
-            </Button>
-            {viewEdit && (
-                <div>
-                    <h2>Timetable Editor</h2>
-                    <Select value={selectedDay} onChange={handleDayChange} displayEmpty fullWidth>
-                        <MenuItem value=''>--Select Day--</MenuItem>
-                        {days.map((day) => (
-                            <MenuItem key={day} value={day}>
-                                {day}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                    {selectedDay && (
-                        <div>
-                            <Typography variant="h3">{selectedDay}</Typography>
-                            {periods.map((period) => (
-                                <div key={period}>
-                                    <Typography variant="subtitle1">Period {period}:</Typography>
-
-                                    <Select value={getPeriodValue(selectedDay, period)} onChange={(event) => handlePeriodChange(selectedDay, period, event.target.value)} displayEmpty >
-                                        <MenuItem value=''>--Select Subject--</MenuItem>
-
-                                        {course.map((c) => (
-                                            <MenuItem key={c.courseAbbreviation} value={c.courseAbbreviation}>
-                                                {c.courseAbbreviation}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </div>
                             ))}
-                        </div>
-                    )}
-                    <Button style={{ padding: '10px', marginTop: '10px' }} variant="contained" onClick={handleSave}>
-                        Save
-                    </Button>
+                        </TableBody>
+                    </Table>
                     <Button style={{ padding: '10px', marginTop: '10px' }} variant="contained" onClick={handleSubmit}>
                         Submit
                     </Button>
-                </div>
-            )}
-
+                </TableContainer>)
+            }
         </div>
-
-
     );
 };
 

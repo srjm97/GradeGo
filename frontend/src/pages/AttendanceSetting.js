@@ -57,7 +57,7 @@ export default function AttendanceSetting() {
       };
 
       try {
-        const response = await fetch('/tutor/attendance', {
+        const response = await fetch('http://localhost:1337/tutor/attendancedata', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -290,7 +290,7 @@ export default function AttendanceSetting() {
               />
             </Card>
           </Container>
-        </div>)}
+        </div>
     </>
   );
 }

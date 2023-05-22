@@ -4,22 +4,27 @@ const InternalMark = require('../models/InternalMark');
 const FacultyCourses = require('../models/FacultyCourses');
 const StudentCourses = require('../models/StudentCourses');
 const Students = require('../models/Student');
+const Student = require('../models/Student');
 
 // return all students of the given semester, course and 
 router.post('/tutor/attendancedata', async(req, res) => {
-  const {semester, batch, courseCode} = req.body;
-  // const semester = 6;
-  // const batch = 1;
-  // const courseCode = 'CST302';
+  //const {semester, batch, courseCode} = req.body;
+  const semester = 6;
+  const batch = 1;
+  const courseCode = 'CST302';
   //returns the list of student id's in the given semester and batch
   const students = await Students.find({semester:semester, batch:batch}, {_id:1});
   console.log(students);
   let studentsList = [];
   for(let i = 0; i < students.length; ++i) {
-    const studentId = await StudentCourses.find({_id:students[i]._id, 'coursesEnrolled.semesterCourses.courseCode':courseCode}, {_id:1});
-    if (studentId) {
-      studentsList.push(studentId);
+    const studentId = await StudentCourses.findOne({_id:students[i]._id, 'coursesEnrolled.semesterCourses.courseCode':courseCode}, {_id:1});
+    const studentNameList = await Student.findOne({_id:studentId},{_id:1,name:1});
+    if(studentNameList) {
+      studentsList.push(studentNameList);
     }
+    // if (studentId) {
+    //   studentsList.push(studentId);
+    // }
   }
   console.log(studentsList);
   return res.json(studentsList);

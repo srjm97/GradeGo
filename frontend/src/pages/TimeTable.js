@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Select, Typography } from '@mui/material';
+import { Button, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Select, Typography, Stack } from '@mui/material';
 import { DataContext } from '../DataContext';
 
 const Timetable = () => {
@@ -104,6 +104,9 @@ const Timetable = () => {
             {
                 viewTimeTableSet && (
                     <div>
+                        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+                            <Typography variant="h4">Timetable</Typography>
+                        </Stack>
                         <TableContainer component={Paper}>
                             <Table>
                                 <TableHead>

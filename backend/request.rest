@@ -13,3 +13,13 @@ content-Type : application/json
     "password": "f375"
  }
 
+###
+
+POST http://localhost:1337/tutor/attendancedata
+Content-Type: application/json
+{
+    "semester" : "6",
+    "batch" : "1",
+    "courseCode" : "CST310"
+}
+

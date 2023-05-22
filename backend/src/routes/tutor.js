@@ -6,14 +6,14 @@ const StudentCourses = require('../models/StudentCourses');
 const Students = require('../models/Student');
 
 // return all students of the given semester, course and 
-router.get('/tutor/attendance', async(req, res) => {
+router.post('/tutor/attendancedata', async(req, res) => {
   const {semester, batch, courseCode} = req.body;
   // const semester = 6;
   // const batch = 1;
-  // const courseCode = 'CST310';
-  // returns the list of student id's in the given semester and batch
+  // const courseCode = 'CST302';
+  //returns the list of student id's in the given semester and batch
   const students = await Students.find({semester:semester, batch:batch}, {_id:1});
-  // console.log(students);
+  console.log(students);
   let studentsList = [];
   for(let i = 0; i < students.length; ++i) {
     const studentId = await StudentCourses.find({_id:students[i]._id, 'coursesEnrolled.semesterCourses.courseCode':courseCode}, {_id:1});
@@ -21,7 +21,7 @@ router.get('/tutor/attendance', async(req, res) => {
       studentsList.push(studentId);
     }
   }
-  // console.log(studentsList);
+  console.log(studentsList);
   return res.json(studentsList);
 });
 

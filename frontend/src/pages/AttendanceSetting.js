@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
+const { hellodata } = useContext(DataContext);
 import {
   Card,
   Table,
@@ -23,20 +24,10 @@ import {
   TablePagination,
 } from '@mui/material';
 import Label from '../components/label';
-import Iconify from '../components/iconify';
 import Scrollbar from '../components/scrollbar';
-import { faker } from '@faker-js/faker';
-import { sample } from 'lodash';
+
 
 // ----------------------------------------------------------------------
-
-const USER_LIST = [...Array(24)].map((_, index) => ({
-  id: faker.datatype.uuid(),
-  avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
-  name: faker.name.fullName(),
-  rollNumber: index + 1,
-  status: 'present',
-}));
 
 const TABLE_HEAD = [
   { id: 'rollNumber', label: 'Roll Number', alignRight: false },
@@ -48,12 +39,20 @@ const TABLE_HEAD = [
 
 export default function AttendanceSetting() {
 
+  const [userList, setUserList] = useState([]);
+  const [page, setPage] = useState(0);
+  const [order, setOrder] = useState('asc');
+  const [selected, setSelected] = useState([]);
+  const [orderBy, setOrderBy] = useState('name');
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [filteredStudents, setFilteredStudents] = useState(userList);
+
   useEffect(() => {
     const fetchData = async () => {
       const requestData = {
         semester: 6,
         batch: 1,
-        courseCode: 'CST310',
+        courseCode: 'CST301',
       };
 
       try {
@@ -70,7 +69,8 @@ export default function AttendanceSetting() {
         }
 
         const data = await response.json();
-        console.log(data); // Handle the received data from the backend
+        setUserList(data);
+        
       } catch (error) {
         console.error(error);
       }
@@ -79,40 +79,29 @@ export default function AttendanceSetting() {
     fetchData();
   }, []);
 
-  const [open, setOpen] = useState(null);
-  const [page, setPage] = useState(0);
-  const [order, setOrder] = useState('asc');
-  const [selected, setSelected] = useState([]);
-  const [orderBy, setOrderBy] = useState('name');
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [filteredStudents, setFilteredStudents] = useState(USER_LIST);
-
-  const handleOpenMenu = (event) => {
-    setOpen(event.currentTarget);
-  };
-
-  const handleCloseMenu = () => {
-    setOpen(null);
-  };
+  useEffect(() => {
+    console.log(userList)
+  }, [userList])
+  
 
   useEffect(() => {
     function initialClick() {
-      const newSelected = USER_LIST.map((n) => n.name);
+      const newSelected = userList.map((n) => n.name.firstName);
       setSelected(newSelected);
-      const updatedStudents = USER_LIST.map((student) => ({
+      const updatedStudents = userList.map((student) => ({
         ...student,
         status: 'present',
       }));
       setFilteredStudents(updatedStudents);
     }
     initialClick();
-  }, []);
+  }, [userList]);
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = USER_LIST.map((n) => n.name);
+      const newSelecteds = userList.map((n) => n.name.firstName);
       setSelected(newSelecteds);
-      const updatedStudents = USER_LIST.map((student) => ({
+      const updatedStudents = userList.map((student) => ({
         ...student,
         status: 'present',
       }));
@@ -121,7 +110,7 @@ export default function AttendanceSetting() {
     }
 
     setSelected([]);
-    const updatedStudents = USER_LIST.map((student) => ({
+    const updatedStudents = userList.map((student) => ({
       ...student,
       status: 'absent',
     }));
@@ -138,8 +127,8 @@ export default function AttendanceSetting() {
       newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
     }
 
-    const updatedStudents = USER_LIST.map((student) => {
-      if (newSelected.includes(student.name)) {
+    const updatedStudents = userList.map((student) => {
+      if (newSelected.includes(student.name.firstName)) {
         return {
           ...student,
           status: 'present',
@@ -165,119 +154,127 @@ export default function AttendanceSetting() {
     setPage(newPage);
   };
 
-  const applySortFilter = (array, comparator, query) => {
-    const stabilizedThis = array.map((el, index) => [el, index]);
-    stabilizedThis.sort((a, b) => {
-      const order = comparator(a[0], b[0]);
-      if (order !== 0) return order;
-      return a[1] - b[1];
-    });
-    if (query) {
-      return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
-    }
-    return stabilizedThis.map((el) => el[0]);
-  };
-
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - filteredStudents.length) : 0;
 
+  let yourDate = new Date();
+  const offset = yourDate.getTimezoneOffset()
+  yourDate = new Date(yourDate.getTime() - (offset*60*1000))
+  console.log(yourDate.toISOString().split('T')[0])
+
+  
+  let hour = new Date.getHours();
+
+  const handleSubmit = async () => {
+  
+    try {
+      const response = await fetch('http://localhost:1337/facdashboard/TimeTable',{
+        method : 'POST',
+        headers : {
+          'Content-Type': 'application/JSON',
+        },
+        body: JSON.stringify({
+            _id: userList._id,
+            courseCode: userList.courseCode;
+            date: yourDate,
+            hour:
+            isPresent: 
+        })
+      })
+    }
+  }
+
   return (
-
     <>
-          <div>
-          <Helmet>
-            <title>Attendance Settings</title>
-          </Helmet>
-          <Container>
-            <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-              <Typography variant="h4">Attendance Settings</Typography>
-            </Stack>
+      <div>
+        <Helmet>
+          <title>Attendance Settings</title>
+        </Helmet>
+        <Container>
+          <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+            <Typography variant="h4">Attendance Settings</Typography>
+          </Stack>
 
-            <Card>
-              <Scrollbar>
-                <TableContainer sx={{ minWidth: 800 }}>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell padding="checkbox">
-                          <Checkbox
-                            color="primary"
-                            indeterminate={selected.length > 0 && selected.length < filteredStudents.length}
-                            checked={filteredStudents.length > 0 && selected.length === filteredStudents.length}
-                            onChange={handleSelectAllClick}
-                            inputProps={{ 'aria-label': 'select all desserts' }}
-                          />
+          <Card>
+            <Scrollbar>
+              <TableContainer sx={{ minWidth: 800 }}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+
+                      {TABLE_HEAD.map((headCell) => (
+                        <TableCell
+                          key={headCell.id}
+                          align={headCell.alignRight ? 'right' : 'left'}
+                          sortDirection={orderBy === headCell.id ? order : false}
+                        >
+                          {headCell.label}
                         </TableCell>
-                        {TABLE_HEAD.map((headCell) => (
-                          <TableCell
-                            key={headCell.id}
-                            align={headCell.alignRight ? 'right' : 'left'}
-                            sortDirection={orderBy === headCell.id ? order : false}
+                      ))}
+
+                      <TableCell padding="checkbox">
+                        <Checkbox
+                          color="primary"
+                          indeterminate={selected.length > 0 && selected.length < filteredStudents.length}
+                          checked={filteredStudents.length > 0 && selected.length === filteredStudents.length}
+                          onChange={handleSelectAllClick}
+                          inputProps={{ 'aria-label': 'select all desserts' }}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {filteredStudents
+                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                      .map((row, index) => {
+                        const { _id, name, rollNumber, status } = row;
+                        const isItemSelected = selected.indexOf(name.firstName) !== -1;
+
+                        return (
+                          <TableRow
+                            hover
+                            key={_id}
+                            tabIndex={-1}
+                            role="checkbox"
+                            selected={isItemSelected}
+                            aria-checked={isItemSelected}
                           >
-                            {headCell.label}
-                          </TableCell>
-                        ))}
+
+                            <TableCell>{index+1}</TableCell>
+                            <TableCell>
+                              <Stack direction="row" alignItems="center" spacing={2}>
+                                <Avatar alt={name.firstName} src={`/assets/images/avatars/avatar_${index + 1}.jpg`} />
+                                <Typography variant="subtitle2" noWrap>
+                                  {`${name.firstName} ${name.lastName}`}
+                                </Typography>
+                              </Stack>
+                            </TableCell>
+                            <TableCell>
+                              <Label
+                                variant={status === 'present' ? 'filled' : 'outlined'}
+                                color={status === 'present' ? 'success' : 'error'}
+                              >
+                                {sentenceCase(status)}
+                              </Label>
+                            </TableCell>
+                            <TableCell padding="checkbox">
+                              <Checkbox
+                                color="primary"
+                                checked={isItemSelected}
+                                onChange={(event) => handleClick(event, name.firstName)}
+                                inputProps={{ 'aria-labelledby': _id }}
+                              />
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                    {emptyRows > 0 && (
+                      <TableRow style={{ height: 53 * emptyRows }}>
+                        <TableCell colSpan={6} />
                       </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {filteredStudents
-                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        .map((row) => {
-                          const { id, avatarUrl, name, rollNumber, status } = row;
-                          const isItemSelected = selected.indexOf(name) !== -1;
-
-                          return (
-                            <TableRow
-                              hover
-                              key={id}
-                              tabIndex={-1}
-                              role="checkbox"
-                              selected={isItemSelected}
-                              aria-checked={isItemSelected}
-                            >
-
-                              <TableCell padding="checkbox">
-                                <Checkbox
-                                  color="primary"
-                                  checked={isItemSelected}
-                                  onChange={(event) => handleClick(event, name)}
-                                  inputProps={{ 'aria-labelledby': id }}
-                                />
-                              </TableCell>
-                              <TableCell >{rollNumber}</TableCell>
-                              <TableCell>
-                                <Stack direction="row" alignItems="center" spacing={2}>
-                                  <Avatar alt={name} src={avatarUrl} />
-                                  <Typography variant="subtitle2" noWrap>
-                                    {name}
-                                  </Typography>
-                                </Stack>
-                              </TableCell>
-                              <TableCell>
-                                <Label
-                                  variant={status === 'present' ? 'ghost' : 'filled'}
-                                  color={status === 'present' ? 'success' : 'error'}
-                                >
-                                  {sentenceCase(status)}
-                                </Label>
-                              </TableCell>
-                              <TableCell align="right">
-                                <IconButton size="small">
-                                  <Iconify icon="eva:more-vertical-2-fill" />
-                                </IconButton>
-                              </TableCell>
-                            </TableRow>
-                          );
-                        })}
-
-                      {emptyRows > 0 && (
-                        <TableRow style={{ height: 53 * emptyRows }}>
-                          <TableCell colSpan={5} />
-                        </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Scrollbar>
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
 
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
@@ -288,9 +285,10 @@ export default function AttendanceSetting() {
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
               />
-            </Card>
-          </Container>
-        </div>
+            </Scrollbar>
+          </Card>
+        </Container>
+      </div>
     </>
   );
 }

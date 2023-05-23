@@ -12,6 +12,8 @@ import StudDashboardAppPage from './pages/StudDashboardAppPage';
 import StudAttendance from './pages/StudAttendance';
 import Attendance from './pages/Attendance';
 import StudTimeTable from './pages/StudTimeTable';
+import AdminDashboardAppPage from './pages/AdminDashboardAppPage';
+import AdminDashboardLayout from './layouts/admindashboard'
 
 // ----------------------------------------------------------------------
 
@@ -36,6 +38,16 @@ export default function Router() {
         { path: 'app', element: <StudDashboardAppPage /> },
         { path: 'attendance', element: <StudAttendance /> },
         { path: 'timetable', element:<StudTimeTable />}
+      ],
+    },
+    {
+      path: '/admindashboard',
+      element: <AdminDashboardLayout />,
+      children: [
+        { element: <Navigate to="/admindashboard/app" />, index: true },
+        { path: 'app', element: <AdminDashboardAppPage /> }
+        // { path: 'attendance', element: <AdminAttendance /> },
+        // { path: 'timetable', element:<AdminTimeTable />}
       ],
     },
     {

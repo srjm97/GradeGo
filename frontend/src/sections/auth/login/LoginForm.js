@@ -36,8 +36,10 @@ export default function LoginForm() {
         navigate('/studdashboard', { replace: true });
       } else if (data.user === 'faculty') {
         navigate('/dashboard', { replace: true });
+      } else if(data.user === 'admin') {
+        navigate('/admindashboard',{ replace : true });
       }
-    } 
+    }
     if(data.status!='ok') {
       setErrMsg(true);
       alert("Incorrect username or password");

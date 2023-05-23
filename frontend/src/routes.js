@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from './layouts/dashboard';
+import StudDashboardLayout from './layouts/studdashboard'
 import SimpleLayout from './layouts/simple';
 import AttendanceSetting from './pages/AttendanceSetting';
 import LoginPage from './pages/LoginPage';
@@ -29,7 +30,7 @@ export default function Router() {
     },
     {
       path: '/studdashboard',
-      element: <DashboardLayout />,
+      element: <StudDashboardLayout />,
       children: [
         { element: <Navigate to="/studdashboard/app" />, index: true },
         { path: 'app', element: <StudDashboardAppPage /> },

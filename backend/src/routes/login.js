@@ -33,6 +33,9 @@ router.post('/login', async (req, res) => {
       // check whether the person is in the student table
       const isStudent = await Student.findOne({ _id: ktuId });
       console.log(isStudent);
+      if (ktuId === 'admin') {
+        return res.json({ status: 'ok', user: 'admin' ,accessToken:accessToken});
+      }
       if (isStudent) {
         return res.json({ status: 'ok', user: 'student' ,accessToken:accessToken});
       } else {

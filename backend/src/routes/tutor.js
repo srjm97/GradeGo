@@ -46,9 +46,11 @@ router.post('/tutor/attendance', async (req, res) => {
   // const hour = 3;
   // const isPresent = true;
   const data = req.body;
+  // console.log(data);
   // data is an array of objects
   for(let i = 0; i < data.length; ++i) {
     const{_id, courseCode, date, hour, isPresent} = data[i];
+    console.log(data[i]);
     const addAttendance = await InternalMark.updateOne({_id:_id, 'courseAssessmentTheory.courseCode': courseCode}, { $push: {'courseAssessmentTheory.$[].attendance': { date: date, hour: hour, isPresent: isPresent }} });
     console.log(addAttendance);
   }

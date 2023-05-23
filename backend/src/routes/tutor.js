@@ -31,7 +31,7 @@ router.post('/tutor/attendancedata', async(req, res) => {
 });
 
 // returns the faculty course and semester details
-router.get('/tutor/data', async(req, res)=>{
+router.post('/tutor/data', async(req, res)=>{
   const {_id} = req.body;
   // const _id = 'ktu-f375';
   const facultyDetails = await FacultyCourses.findOne({_id:_id});

@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
-const { hellodata } = useContext(DataContext);
+import { FacultyDataContext } from '../FacultyDataContext';
+
+
 import {
   Card,
   Table,
@@ -22,6 +24,7 @@ import {
   IconButton,
   TableContainer,
   TablePagination,
+  Select,
 } from '@mui/material';
 import Label from '../components/label';
 import Scrollbar from '../components/scrollbar';
@@ -39,6 +42,10 @@ const TABLE_HEAD = [
 
 export default function AttendanceSetting() {
 
+  const { facsemdata } = useContext(FacultyDataContext);
+  const [semester, setSemester] = useState('');
+  const [batch, setBatch] = useState('');
+  const [courseCode, setCourseCode] = useState('');
   const [userList, setUserList] = useState([]);
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
@@ -50,9 +57,9 @@ export default function AttendanceSetting() {
   useEffect(() => {
     const fetchData = async () => {
       const requestData = {
-        semester: 6,
-        batch: 1,
-        courseCode: 'CST301',
+        semester: semester,
+        batch: batch,
+        courseCode: courseCode,
       };
 
       try {
@@ -70,7 +77,7 @@ export default function AttendanceSetting() {
 
         const data = await response.json();
         setUserList(data);
-        
+
       } catch (error) {
         console.error(error);
       }
@@ -82,7 +89,7 @@ export default function AttendanceSetting() {
   useEffect(() => {
     console.log(userList)
   }, [userList])
-  
+
 
   useEffect(() => {
     function initialClick() {
@@ -156,32 +163,7 @@ export default function AttendanceSetting() {
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - filteredStudents.length) : 0;
 
-  let yourDate = new Date();
-  const offset = yourDate.getTimezoneOffset()
-  yourDate = new Date(yourDate.getTime() - (offset*60*1000))
-  console.log(yourDate.toISOString().split('T')[0])
 
-  
-  let hour = new Date.getHours();
-
-  const handleSubmit = async () => {
-  
-    try {
-      const response = await fetch('http://localhost:1337/facdashboard/TimeTable',{
-        method : 'POST',
-        headers : {
-          'Content-Type': 'application/JSON',
-        },
-        body: JSON.stringify({
-            _id: userList._id,
-            courseCode: userList.courseCode;
-            date: yourDate,
-            hour:
-            isPresent: 
-        })
-      })
-    }
-  }
 
   return (
     <>
@@ -193,6 +175,35 @@ export default function AttendanceSetting() {
           <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
             <Typography variant="h4">Attendance Settings</Typography>
           </Stack>
+          <Stack direction="row" spacing={2}>
+            <Typography variant="subtitle1">Select Semester:</Typography>
+            <Select value={semester} onChange={(e) => setSemester(e.target.value)}>
+              {facsemdata.facultyDetails.coursesHandled.map((course) => (
+                <MenuItem key={course._id} value={course.semester}>
+                  {course.semester}
+                </MenuItem>
+              ))}
+            </Select>
+
+            <Typography variant="subtitle1">Select Batch:</Typography>
+            <Select value={batch} onChange={(e) => setBatch(e.target.value)}>
+              {facsemdata.facultyDetails.coursesHandled.map((course) => (
+                <MenuItem key={course._id} value={course.batch}>
+                  {course.batch}
+                </MenuItem>
+              ))}
+            </Select>
+
+            <Typography variant="subtitle1">Select Course Code:</Typography>
+            <Select value={courseCode} onChange={(e) => setCourseCode(e.target.value)}>
+              {facsemdata.facultyDetails.coursesHandled.map((course) => (
+                <MenuItem key={course._id} value={course.courseCode}>
+                  {course.courseCode}
+                </MenuItem>
+              ))}
+            </Select>
+          </Stack>
+
 
           <Card>
             <Scrollbar>
@@ -239,7 +250,7 @@ export default function AttendanceSetting() {
                             aria-checked={isItemSelected}
                           >
 
-                            <TableCell>{index+1}</TableCell>
+                            <TableCell>{index + 1}</TableCell>
                             <TableCell>
                               <Stack direction="row" alignItems="center" spacing={2}>
                                 <Avatar alt={name.firstName} src={`/assets/images/avatars/avatar_${index + 1}.jpg`} />

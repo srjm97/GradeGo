@@ -1,6 +1,9 @@
 import { Helmet } from 'react-helmet-async';
+import React, { useState, useEffect,useContext } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography } from '@mui/material';
+import { FacultyDataContext } from '../FacultyDataContext';
+import { DataContext } from '../DataContext';
 import {
   AppCurrentVisits,
   AppWebsiteVisits,
@@ -9,8 +12,48 @@ import {
   AppConversionRates,
 } from '../sections/@dashboard/app';
 
+
 export default function DashboardAppPage() {
+  const { facsemdata, setFacSemData } = useContext(FacultyDataContext);
+  const { hellodata } = useContext(DataContext);
   const theme = useTheme();
+  useEffect(() => {
+    const fetchData = async () => {
+
+      try {
+        const response = await fetch('http://localhost:1337/tutor/data', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(
+            {
+              _id: hellodata.details._id
+            }
+          ),
+        });
+
+        if (!response.ok) {
+          throw new Error('Error: Fetch request failed');
+        }
+
+        const data = await response.json();
+        setFacSemData(data);
+        
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    console.log(facsemdata);
+  
+  }, [facsemdata])
+  
+
 
   return (
     <>

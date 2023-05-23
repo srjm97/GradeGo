@@ -43,9 +43,29 @@ const TABLE_HEAD = [
 export default function AttendanceSetting() {
 
   const { facsemdata } = useContext(FacultyDataContext);
-  const [semester, setSemester] = useState('');
-  const [batch, setBatch] = useState('');
-  const [courseCode, setCourseCode] = useState('');
+  const [selectedOpt, setSelectedOpt] = useState("");
+  const [semester, setSemester] = useState(0);
+  const [courseCode, setCourseCode] = useState("");
+  const [batch, setBatch] = useState(0);
+
+  const handleSelectOption = (event) => {
+    
+    const selectedValue = event.target.value;
+    const selectedOption = facsemdata.facultyDetails.coursesHandled.find(
+      (course) => course._id === selectedValue._id
+    );
+
+    if (selectedOption) {
+      setSemester(selectedOption.semester);
+      setCourseCode(selectedOption.courseCode);
+      setBatch(selectedOption.batch);
+    }
+
+    setSelectedOpt(selectedValue);
+
+  };
+
+  
   const [userList, setUserList] = useState([]);
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
@@ -59,7 +79,7 @@ export default function AttendanceSetting() {
       const requestData = {
         semester: semester,
         batch: batch,
-        courseCode: courseCode,
+        courseCode: courseCode
       };
 
       try {
@@ -84,12 +104,7 @@ export default function AttendanceSetting() {
     };
 
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    console.log(userList)
-  }, [userList])
-
+  }, [selectedOpt]);
 
   useEffect(() => {
     function initialClick() {
@@ -176,29 +191,11 @@ export default function AttendanceSetting() {
             <Typography variant="h4">Attendance Settings</Typography>
           </Stack>
           <Stack direction="row" spacing={2}>
-            <Typography variant="subtitle1">Select Semester:</Typography>
-            <Select value={semester} onChange={(e) => setSemester(e.target.value)}>
+            <Typography variant="subtitle1">Select Details:</Typography>
+            <Select value={selectedOpt} onChange={handleSelectOption}>
               {facsemdata.facultyDetails.coursesHandled.map((course) => (
-                <MenuItem key={course._id} value={course.semester}>
-                  {course.semester}
-                </MenuItem>
-              ))}
-            </Select>
-
-            <Typography variant="subtitle1">Select Batch:</Typography>
-            <Select value={batch} onChange={(e) => setBatch(e.target.value)}>
-              {facsemdata.facultyDetails.coursesHandled.map((course) => (
-                <MenuItem key={course._id} value={course.batch}>
-                  {course.batch}
-                </MenuItem>
-              ))}
-            </Select>
-
-            <Typography variant="subtitle1">Select Course Code:</Typography>
-            <Select value={courseCode} onChange={(e) => setCourseCode(e.target.value)}>
-              {facsemdata.facultyDetails.coursesHandled.map((course) => (
-                <MenuItem key={course._id} value={course.courseCode}>
-                  {course.courseCode}
+                <MenuItem key={course._id} value={course}>
+                  Semester: {course.semester} | Batch: {course.batch} | Course Code: {course.courseCode}
                 </MenuItem>
               ))}
             </Select>

@@ -45,9 +45,13 @@ router.post('/tutor/attendance', async (req, res) => {
   // const date = '2023-05-17';
   // const hour = 3;
   // const isPresent = true;
-  const{_id, courseCode, date, hour, isPresent} = req.body;
-  const addAttendance = await InternalMark.updateOne({_id:_id, 'courseAssessmentTheory.courseCode': courseCode}, { $push: {'courseAssessmentTheory.$[].attendance': { date: date, hour: hour, isPresent: isPresent }} });
-  console.log(addAttendance);
+  const data = req.body;
+  // data is an array of objects
+  for(let i = 0; i < data.length; ++i) {
+    const{_id, courseCode, date, hour, isPresent} = data[i];
+    const addAttendance = await InternalMark.updateOne({_id:_id, 'courseAssessmentTheory.courseCode': courseCode}, { $push: {'courseAssessmentTheory.$[].attendance': { date: date, hour: hour, isPresent: isPresent }} });
+    console.log(addAttendance);
+  }
 });
 
 module.exports = router;

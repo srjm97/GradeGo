@@ -32,11 +32,31 @@ router.get('/attendance/student/', async (req, res) => {
 router.post('/student/studentcourses', async (req, res) => {
   // const { _id } = req.body;
   const _id = 'tve20cs001';
-  const sem = await Students.findOne({ _id: _id });
-  console.log(sem.currentSemester);
-  const courses = await StudentCourses.find({ _id: _id, coursesEnrolled:{semester: sem.currentSemester} });
-  console.log(courses);
-  return res.json(courses.semesterCourses);
+
+  try {
+    const student = await Students.findOne({ _id: _id });
+    if (student) {
+      console.log(student.semester);
+      // const courses = await StudentCourses.find({ _id: _id, 'coursesEnrolled.semester': student.semester });
+      // console.log(courses);
+      // return res.json(courses.semesterCourses);
+    } else {
+      // Handle case when student or semester is missing
+      return res.status(404).json({ error: 'Student or semester not found' });
+    }
+  } catch (error) {
+    // Handle any potential errors during database operations
+    console.error(error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+
+
+  // const sem = await Students.findOne({ _id: _id });
+  // console.log(sem);
+  // console.log(sem.semester);
+  // const courses = await StudentCourses.find({ _id: _id, 'coursesEnrolled.semester': semester.semester });
+  // console.log(courses);
+  // return res.json(courses.semesterCourses);
 });
 
 module.exports = router;

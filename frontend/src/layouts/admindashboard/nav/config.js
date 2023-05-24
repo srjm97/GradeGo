@@ -9,11 +9,11 @@ const navConfig = [
     path: '/admindashboard/app',
     icon: icon('ic_analytics'),
   },
-  // {
-  //   title: 'user',
-  //   path: '/admindashboard/attendance',
-  //   icon: icon('ic_user'),
-  // },
+  {
+    title: 'Courses',
+    path: '/admindashboard/courses',
+    icon: icon('ic_user'),
+  },
   // {
   //   title: 'Timetable',
   //   path: '/admindashboard/timetable',

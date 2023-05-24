@@ -127,10 +127,10 @@ export default function DashboardAppPage() {
             <AppCurrentVisits
               title="Current Visits"
               chartData={[
-                { label: 'America', value: 4344 },
-                { label: 'Asia', value: 5435 },
-                { label: 'Europe', value: 1443 },
-                { label: 'Africa', value: 4443 },
+                { label: 'America', value: 410 },
+                { label: 'Asia', value: 123 },
+                { label: 'Europe', value: 34 },
+                { label: 'Africa', value: 323 },
               ]}
               chartColors={[
                 theme.palette.primary.main,

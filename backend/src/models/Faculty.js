@@ -63,3 +63,7 @@ const FacultySchema = new mongoose.Schema({
 });
 
 module.exports = new mongoose.model('Faculty', FacultySchema);
+
+/*
+db.insert()
+*/

@@ -12,7 +12,7 @@ app.use(require('./routes/login'));
 app.use(require('./routes/index'));
 app.use(require('./routes/staffAdvisor'));
 app.use(require('./routes/tutor'));
-
+app.use(require('./routes/student'));
 
 
 app.listen(1337, () => {

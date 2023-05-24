@@ -13,7 +13,7 @@ app.use(require('./routes/index'));
 app.use(require('./routes/staffAdvisor'));
 app.use(require('./routes/tutor'));
 app.use(require('./routes/student'));
-
+app.use(require('./routes/admin'));
 
 app.listen(1337, () => {
   console.log('Server running in http://localhost:1337');

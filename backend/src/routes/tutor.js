@@ -13,7 +13,7 @@ router.post('/tutor/attendancedata', async(req, res) => {
   // const batch = 1;
   // const courseCode = 'CST302';
   //returns the list of student id's in the given semester and batch
-  const students = await Students.find({semester:semester, batch:batch}, {_id:1});
+  const students = await Students.find({currentSemester:semester, batch:batch}, {_id:1});
   console.log(students);
   let studentsList = [];
   for(let i = 0; i < students.length; ++i) {

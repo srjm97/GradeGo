@@ -112,5 +112,5 @@ const StudentSchema = new mongoose.Schema({
 module.exports = new mongoose.model('Student', StudentSchema);
 
 /*
-db.students.insertOne({_id:'tve20cs001', admno:'2001', name:{firstName:Rahul, last_Name:'Geeth'}, semester:6, batch:1});
+db.students.insertOne({_id:'tve20cs002', admno:'2002', name:{firstName:'Raghav', lastName:'Mahendra'}, currentSemester:6, batch:1, department:'Computer Science and Engineering'});
 */

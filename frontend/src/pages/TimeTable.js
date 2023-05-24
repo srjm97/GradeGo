@@ -77,13 +77,14 @@ const Timetable = () => {
 
             if (response.ok) {
                 console.log('Timetable saved successfully');
+                setEditTimeTableSet(false);
+                setViewTimeTableSet(true);
 
                 // Do something on success
             } else {
                 console.error('Error saving timetable:', response.status);
             }
-            setEditTimeTableSet(false);
-            setViewTimeTableSet(true);
+            
         } catch (error) {
             console.error('Error saving timetable:', error);
         }

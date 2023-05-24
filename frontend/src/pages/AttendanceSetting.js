@@ -25,6 +25,7 @@ import {
   TableContainer,
   TablePagination,
   Select,
+  CircularProgress,
 } from '@mui/material';
 import Label from '../components/label';
 import Scrollbar from '../components/scrollbar';
@@ -47,6 +48,7 @@ export default function AttendanceSetting() {
   const [semester, setSemester] = useState(0);
   const [courseCode, setCourseCode] = useState("");
   const [batch, setBatch] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const handleSelectOption = (event) => {
 
@@ -76,6 +78,7 @@ export default function AttendanceSetting() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const requestData = {
         semester: semester,
         batch: batch,
@@ -97,9 +100,11 @@ export default function AttendanceSetting() {
 
         const data = await response.json();
         setUserList(data);
+        setLoading(false);
 
       } catch (error) {
         console.error(error);
+        setLoading(false);
       }
     };
 
@@ -181,16 +186,14 @@ export default function AttendanceSetting() {
   const submitAttendance = async () => {
     let currentDate = new Date().toISOString().slice(0, 10); // Get current date in yyyy-mm-dd format
     let currentHour = new Date().getHours(); // Get current hour
-    if(currentHour<=12)
-    {
-          currentHour = currentHour  -8;      
+    if (currentHour <= 12) {
+      currentHour = currentHour - 8;
     }
-    
-    else if (currentHour>=13)
-    {
-          currentHour = currentHour - 9;
+
+    else if (currentHour >= 13) {
+      currentHour = currentHour - 9;
     }
-  
+
     const attendanceData = filteredStudents.map((student) => {
       const { _id, status } = student;
 
@@ -199,7 +202,7 @@ export default function AttendanceSetting() {
         courseCode,
         date: currentDate,
         hour: currentHour,
-        isPresent: status==='present'
+        isPresent: status === 'present'
       };
     });
 
@@ -225,7 +228,7 @@ export default function AttendanceSetting() {
 
   return (
     <>
-      <div>
+      
         <Helmet>
           <title>Attendance Settings</title>
         </Helmet>
@@ -244,8 +247,18 @@ export default function AttendanceSetting() {
             </Select>
           </Stack>
 
-
-          <Card>
+          {loading ? ( 
+            <div  style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  minHeight: '300px', // Set a minimum height for the container
+                }}>
+              <CircularProgress />
+            </div>
+            
+          ) : (
+            < Card >
             <Scrollbar>
               <TableContainer sx={{ minWidth: 800 }}>
                 <Table>
@@ -340,9 +353,9 @@ export default function AttendanceSetting() {
                 Submit Attendance
               </Button>
             </Scrollbar>
-          </Card>
-        </Container>
-      </div>
+          </Card>)}
+      </Container>
+    
     </>
   );
 }

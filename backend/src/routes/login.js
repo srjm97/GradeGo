@@ -7,6 +7,7 @@ const Faculty = require('../models/Faculty');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const StaffAdvisor = require('../models/StaffAdvisor');
+const StudentCourses = require('../models/StudentCourses');
 // const CodeToName = require('../models/CodeToName');
 const {authenticateToken} = require('../middlewares/auth');
 const Courses = require('../models/Courses');
@@ -36,7 +37,8 @@ router.post('/login', async (req, res) => {
         return res.json({ status: 'ok', user: 'admin' ,accessToken:accessToken});
       }
       if (isStudent) {
-        return res.json({ status: 'ok', user: 'student',_id:ktuId ,accessToken:accessToken});
+        const studentCourses = await StudentCourses.findOne({ _id: ktuId });
+        return res.json({ status: 'ok', user: 'student',details:studentCourses ,accessToken:accessToken});
       } else {
         const isFaculty = await Faculty.findOne({_id: ktuId });
         

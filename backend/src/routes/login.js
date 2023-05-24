@@ -19,7 +19,6 @@ router.post('/login', async (req, res) => {
   //jwt implementation
   const user = {name:ktuId};
   const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
-  //res.json({accessToken:accessToken});
 
   const pass = await Login.findOne({ _id: ktuId }, { password: 1 });
   console.log(pass);
@@ -37,7 +36,7 @@ router.post('/login', async (req, res) => {
         return res.json({ status: 'ok', user: 'admin' ,accessToken:accessToken});
       }
       if (isStudent) {
-        return res.json({ status: 'ok', user: 'student' ,accessToken:accessToken});
+        return res.json({ status: 'ok', user: 'student',_id:ktuId ,accessToken:accessToken});
       } else {
         const isFaculty = await Faculty.findOne({_id: ktuId });
         

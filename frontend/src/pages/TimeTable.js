@@ -6,10 +6,8 @@ const Timetable = () => {
     const { hellodata } = useContext(DataContext);
     const { status, user, details, course } = hellodata;
     console.log(hellodata);
-
     const [timetableData, setTimetableData] = useState({ days: [] });
     const [availableCourses, setAvailableCourses] = useState([]);
-
     useEffect(() => {
         // Fetch timetable data from backend
         const fetchData = async () => {

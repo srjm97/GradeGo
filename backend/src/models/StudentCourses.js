@@ -14,7 +14,7 @@ const studentCourseSchema = new mongoose.Schema({
   coursesEnrolled:[
     {
       semester:{
-        type: String,
+        type: Number,
         required:true,
       },
       semesterCourses:[{

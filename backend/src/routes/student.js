@@ -11,7 +11,6 @@ router.get('/attendance/student/', async (req, res) => {
   const courseCode = 'CST302';
 
   const attendanceDetails = await InternalMark.findOne({ _id: ktuId, 'courseAssessmentTheory.courseCode': courseCode }, { 'courseAssessmentTheory.courseCode': 1, 'courseAssessmentTheory.attendance': 1 });
-
   let presentCount = 0;
   attendanceDetails.courseAssessmentTheory.forEach(course => {
     course.attendance.forEach(entry => {
@@ -35,11 +34,12 @@ router.post('/student/studentcourses', async (req, res) => {
 
   try {
     const student = await Students.findOne({ _id: _id });
+    // console.log(student);
     if (student) {
-      console.log(student.semester);
-      // const courses = await StudentCourses.find({ _id: _id, 'coursesEnrolled.semester': student.semester });
-      // console.log(courses);
-      // return res.json(courses.semesterCourses);
+      // console.log(student.currentSemester);
+      const courses = await StudentCourses.findOne({ _id: _id, 'coursesEnrolled.semester':student.currentSemester }, {'coursesEnrolled.semesterCourses':1});
+      console.log(courses);
+      return res.json(courses.coursesEnrolled);
     } else {
       // Handle case when student or semester is missing
       return res.status(404).json({ error: 'Student or semester not found' });
@@ -50,13 +50,6 @@ router.post('/student/studentcourses', async (req, res) => {
     return res.status(500).json({ error: 'Internal server error' });
   }
 
-
-  // const sem = await Students.findOne({ _id: _id });
-  // console.log(sem);
-  // console.log(sem.semester);
-  // const courses = await StudentCourses.find({ _id: _id, 'coursesEnrolled.semester': semester.semester });
-  // console.log(courses);
-  // return res.json(courses.semesterCourses);
 });
 
 module.exports = router;

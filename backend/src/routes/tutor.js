@@ -8,10 +8,10 @@ const Student = require('../models/Student');
 
 // return all students of the given semester, course and 
 router.post('/tutor/attendancedata', async(req, res) => {
-  //const {semester, batch, courseCode} = req.body;
-  const semester = 6;
-  const batch = 1;
-  const courseCode = 'CST302';
+  const {semester, batch, courseCode} = req.body;
+  // const semester = 6;
+  // const batch = 1;
+  // const courseCode = 'CST302';
   //returns the list of student id's in the given semester and batch
   const students = await Students.find({semester:semester, batch:batch}, {_id:1});
   console.log(students);
@@ -46,9 +46,11 @@ router.post('/tutor/attendance', async (req, res) => {
   // const hour = 3;
   // const isPresent = true;
   const data = req.body;
+  // console.log(data);
   // data is an array of objects
   for(let i = 0; i < data.length; ++i) {
     const{_id, courseCode, date, hour, isPresent} = data[i];
+    console.log(data[i]);
     const addAttendance = await InternalMark.updateOne({_id:_id, 'courseAssessmentTheory.courseCode': courseCode}, { $push: {'courseAssessmentTheory.$[].attendance': { date: date, hour: hour, isPresent: isPresent }} });
     console.log(addAttendance);
   }

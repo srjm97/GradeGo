@@ -43,9 +43,29 @@ const TABLE_HEAD = [
 export default function AttendanceSetting() {
 
   const { facsemdata } = useContext(FacultyDataContext);
-  const [semester, setSemester] = useState('');
-  const [batch, setBatch] = useState('');
-  const [courseCode, setCourseCode] = useState('');
+  const [selectedOpt, setSelectedOpt] = useState("");
+  const [semester, setSemester] = useState(0);
+  const [courseCode, setCourseCode] = useState("");
+  const [batch, setBatch] = useState(0);
+
+  const handleSelectOption = (event) => {
+
+    const selectedValue = event.target.value;
+    const selectedOption = facsemdata.facultyDetails.coursesHandled.find(
+      (course) => course._id === selectedValue._id
+    );
+
+    if (selectedOption) {
+      setSemester(selectedOption.semester);
+      setCourseCode(selectedOption.courseCode);
+      setBatch(selectedOption.batch);
+    }
+
+    setSelectedOpt(selectedValue);
+
+  };
+
+
   const [userList, setUserList] = useState([]);
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
@@ -59,7 +79,7 @@ export default function AttendanceSetting() {
       const requestData = {
         semester: semester,
         batch: batch,
-        courseCode: courseCode,
+        courseCode: courseCode
       };
 
       try {
@@ -84,12 +104,7 @@ export default function AttendanceSetting() {
     };
 
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    console.log(userList)
-  }, [userList])
-
+  }, [selectedOpt]);
 
   useEffect(() => {
     function initialClick() {
@@ -163,7 +178,50 @@ export default function AttendanceSetting() {
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - filteredStudents.length) : 0;
 
+  const submitAttendance = async () => {
+    let currentDate = new Date().toISOString().slice(0, 10); // Get current date in yyyy-mm-dd format
+    let currentHour = new Date().getHours(); // Get current hour
+    if(currentHour<=12)
+    {
+          currentHour = currentHour  -8;      
+    }
+    
+    else if (currentHour>=13)
+    {
+          currentHour = currentHour - 9;
+    }
+  
+    const attendanceData = filteredStudents.map((student) => {
+      const { _id, status } = student;
 
+      return {
+        _id,
+        courseCode,
+        date: currentDate,
+        hour: currentHour,
+        isPresent: status==='present'
+      };
+    });
+
+    try {
+      const response = await fetch('http://localhost:1337/tutor/attendance', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(attendanceData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error: Attendance submission failed');
+      }
+
+      // Handle successful submission (e.g., show a success message, redirect, etc.)
+    } catch (error) {
+      console.error(error);
+      // Handle error (e.g., show an error message)
+    }
+  };
 
   return (
     <>
@@ -176,29 +234,11 @@ export default function AttendanceSetting() {
             <Typography variant="h4">Attendance Settings</Typography>
           </Stack>
           <Stack direction="row" spacing={2}>
-            <Typography variant="subtitle1">Select Semester:</Typography>
-            <Select value={semester} onChange={(e) => setSemester(e.target.value)}>
+            <Typography variant="subtitle1">Select Details:</Typography>
+            <Select value={selectedOpt} onChange={handleSelectOption}>
               {facsemdata.facultyDetails.coursesHandled.map((course) => (
-                <MenuItem key={course._id} value={course.semester}>
-                  {course.semester}
-                </MenuItem>
-              ))}
-            </Select>
-
-            <Typography variant="subtitle1">Select Batch:</Typography>
-            <Select value={batch} onChange={(e) => setBatch(e.target.value)}>
-              {facsemdata.facultyDetails.coursesHandled.map((course) => (
-                <MenuItem key={course._id} value={course.batch}>
-                  {course.batch}
-                </MenuItem>
-              ))}
-            </Select>
-
-            <Typography variant="subtitle1">Select Course Code:</Typography>
-            <Select value={courseCode} onChange={(e) => setCourseCode(e.target.value)}>
-              {facsemdata.facultyDetails.coursesHandled.map((course) => (
-                <MenuItem key={course._id} value={course.courseCode}>
-                  {course.courseCode}
+                <MenuItem key={course._id} value={course}>
+                  Semester: {course.semester} | Batch: {course.batch} | Course Code: {course.courseCode}
                 </MenuItem>
               ))}
             </Select>
@@ -296,6 +336,9 @@ export default function AttendanceSetting() {
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
               />
+              <Button variant="contained" onClick={submitAttendance}>
+                Submit Attendance
+              </Button>
             </Scrollbar>
           </Card>
         </Container>

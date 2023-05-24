@@ -9,7 +9,8 @@ export const DataProvider = (props) => {
             status: '',
             user: '',
             details: {},
-            course: {}
+            course: {},
+            accessToken: ""
         };
     });
 

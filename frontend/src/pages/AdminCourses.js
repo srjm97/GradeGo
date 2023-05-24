@@ -52,7 +52,8 @@ const AdminCourses = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setCourses(data);
+        setCourses(data.semesterCourses);
+        setFaculties(data.faculties);
       } else {
         console.error('Error:', response.statusText);
       }
@@ -60,6 +61,10 @@ const AdminCourses = () => {
       console.error('Error:', error);
     }
   };
+
+  useEffect(() => {
+    console.log(courses);
+  }, [courses]);
 
   const handleCourseClick = (course) => {
     setSelectedCourse(course);
@@ -72,10 +77,10 @@ const AdminCourses = () => {
 
   const fetchFaculties = async (selectedBatch) => {
     try {
-      const response = await fetch(`http://localhost:1337/admin/faculties`);
+      const response = await fetch('http://localhost:1337/admin/semesterCourses');
       if (response.ok) {
         const data = await response.json();
-        setFaculties(data);
+        setFaculties(data.faculties);
       } else {
         console.error('Error:', response.statusText);
       }
@@ -84,9 +89,9 @@ const AdminCourses = () => {
     }
   };
 
-  const handleSearchQueryChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
+  useEffect(() => {
+    console.log(faculties);
+  }, [faculties]);
 
   const handleFacultySelect = (faculty) => {
     setSelectedFaculty(faculty);
@@ -108,9 +113,14 @@ const AdminCourses = () => {
     handleDialogClose();
   };
 
-  const filteredFaculties = faculties.filter((faculty) =>
-    faculty.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const handleSearchQueryChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filterFacultiesByName = (faculty) => {
+    const fullName = `${faculty.name.first_name} ${faculty.name.middle_name} ${faculty.name.last_name}`;
+    return fullName.toLowerCase().includes(searchQuery.toLowerCase());
+  };
 
   return (
     <Container maxWidth="sm" style={{ marginTop: '20px', marginBottom: '20px' }}>
@@ -181,35 +191,46 @@ const AdminCourses = () => {
           </FormControl>
 
           <TextField
-            label="Search Faculty"
+            label="Search Faculties"
             value={searchQuery}
             onChange={handleSearchQueryChange}
             fullWidth
             style={{ marginBottom: '10px' }}
           />
 
-          {filteredFaculties.length > 0 ? (
-            <FormControl fullWidth>
-              <InputLabel id="faculty-label">Faculty</InputLabel>
-              <Select
-                labelId="faculty-label"
-                id="faculty-select"
-                value={selectedFaculty}
-                onChange={(event) => handleFacultySelect(event.target.value)}
-                label="Faculty"
-              >
-                {filteredFaculties.map((faculty) => (
-                  <MenuItem key={faculty.id} value={faculty}>
-                    {faculty.name}
-                  </MenuItem>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {faculties
+                .filter(filterFacultiesByName)
+                .map((faculty) => (
+                  <TableRow key={faculty._id}>
+                    <TableCell>{faculty._id}</TableCell>
+                    <TableCell>{`${faculty.name.first_name} ${faculty.name.middle_name} ${faculty.name.last_name}`}</TableCell>
+                    <TableCell>
+                      <Button variant="outlined" onClick={() => handleFacultySelect(faculty)}>
+                        Select Faculty
+                      </Button>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </Select>
-            </FormControl>
-          ) : (
-            <Typography variant="body1" align="center" style={{ marginTop: '10px' }}>
-              No matching faculties found.
-            </Typography>
-          )}
+              {faculties.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={2}>
+                    <Typography variant="body1" align="center" style={{ marginTop: '10px' }}>
+                      No matching faculties found.
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDialogClose}>Cancel</Button>

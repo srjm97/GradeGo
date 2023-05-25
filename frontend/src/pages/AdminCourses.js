@@ -28,6 +28,8 @@ const AdminCourses = () => {
   const [faculties, setFaculties] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFaculty, setSelectedFaculty] = useState(null);
+  const [selectedFaculties, setSelectedFaculties] = useState([]);
+  const [batchSelected, setBatchSelected] = useState(false); // Track if batch is selected
 
   useEffect(() => {
     // Send GET request to fetch courses when the selected semester changes
@@ -72,12 +74,21 @@ const AdminCourses = () => {
 
   const handleBatchSelect = (event) => {
     setSelectedBatch(event.target.value);
+    setBatchSelected(true); // Set batchSelected to true when a batch is selected
+    setSelectedFaculties([]); // Reset selected faculties when a new batch is selected
     fetchFaculties(event.target.value);
   };
 
   const fetchFaculties = async (selectedBatch) => {
     try {
-      const response = await fetch('http://localhost:1337/admin/semesterCourses');
+      const response = await fetch('http://localhost:1337/admin/semesterCourses', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ semester: selectedSemester, batch: selectedBatch }),
+      });
+
       if (response.ok) {
         const data = await response.json();
         setFaculties(data.faculties);
@@ -94,7 +105,13 @@ const AdminCourses = () => {
   }, [faculties]);
 
   const handleFacultySelect = (faculty) => {
-    setSelectedFaculty(faculty);
+    if (selectedFaculties.includes(faculty)) {
+      setSelectedFaculties((prevSelectedFaculties) =>
+        prevSelectedFaculties.filter((selectedFaculty) => selectedFaculty !== faculty)
+      );
+    } else {
+      setSelectedFaculties((prevSelectedFaculties) => [...prevSelectedFaculties, faculty]);
+    }
   };
 
   const handleDialogClose = () => {
@@ -103,13 +120,15 @@ const AdminCourses = () => {
     setFaculties([]);
     setSearchQuery('');
     setSelectedFaculty(null);
+    setSelectedFaculties([]);
+    setBatchSelected(false); // Reset batchSelected when closing the dialog
   };
 
   const handleSubmit = () => {
-    // Perform any necessary actions with the selected course, batch, and faculty
+    // Perform any necessary actions with the selected course, batch, and faculties
     console.log('Selected Course:', selectedCourse);
     console.log('Selected Batch:', selectedBatch);
-    console.log('Selected Faculty:', selectedFaculty);
+    console.log('Selected Faculties:', selectedFaculties);
     handleDialogClose();
   };
 
@@ -174,7 +193,7 @@ const AdminCourses = () => {
       )}
 
       <Dialog open={selectedCourse !== null} onClose={handleDialogClose}>
-        <DialogTitle>Select Batch</DialogTitle>
+        <DialogTitle>Select Batch and Faculties</DialogTitle>
         <DialogContent>
           <FormControl fullWidth style={{ marginBottom: '10px', minWidth: '120px' }}>
             <InputLabel id="batch-label">Batch</InputLabel>
@@ -184,57 +203,75 @@ const AdminCourses = () => {
               value={selectedBatch}
               onChange={handleBatchSelect}
               label="Batch"
+              //disabled={batchSelected}
             >
               <MenuItem value={1}>Batch 1</MenuItem>
               <MenuItem value={2}>Batch 2</MenuItem>
             </Select>
+
           </FormControl>
 
-          <TextField
-            label="Search Faculties"
-            value={searchQuery}
-            onChange={handleSearchQueryChange}
-            fullWidth
-            style={{ marginBottom: '10px' }}
-          />
+          {batchSelected && (
+            <>
+              <TextField
+                label="Search Faculties"
+                value={searchQuery}
+                onChange={handleSearchQueryChange}
+                fullWidth
+                style={{ marginBottom: '10px' }}
+              />
 
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>ID</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Action</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {faculties
-                .filter(filterFacultiesByName)
-                .map((faculty) => (
-                  <TableRow key={faculty._id}>
-                    <TableCell>{faculty._id}</TableCell>
-                    <TableCell>{`${faculty.name.first_name} ${faculty.name.middle_name} ${faculty.name.last_name}`}</TableCell>
-                    <TableCell>
-                      <Button variant="outlined" onClick={() => handleFacultySelect(faculty)}>
-                        Select Faculty
-                      </Button>
-                    </TableCell>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>ID</TableCell>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Action</TableCell>
                   </TableRow>
-                ))}
-              {faculties.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={2}>
-                    <Typography variant="body1" align="center" style={{ marginTop: '10px' }}>
-                      No matching faculties found.
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
+                </TableHead>
+                <TableBody>
+                  {faculties
+                    .filter(filterFacultiesByName)
+                    .map((faculty) => (
+                      <TableRow key={faculty._id}>
+                        <TableCell>{faculty._id}</TableCell>
+                        <TableCell>{`${faculty.name.first_name} ${faculty.name.middle_name} ${faculty.name.last_name}`}</TableCell>
+                        <TableCell>
+                          <Button
+                            variant="outlined"
+                            onClick={() => handleFacultySelect(faculty)}
+                            style={{
+                              backgroundColor: selectedFaculties.includes(faculty) ? 'green' : '',
+                              color: selectedFaculties.includes(faculty) ? 'white' : '',
+                            }}
+                          >
+                            {selectedFaculties.includes(faculty) ? 'Selected' : 'Select Faculty'}
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  {faculties.length === 0 && (
+                    <TableRow>
+                      <TableCell colSpan={2}>
+                        <Typography variant="body1" align="center" style={{ marginTop: '10px' }}>
+                          No matching faculties found.
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </>
+          )}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDialogClose}>Cancel</Button>
-          <Button onClick={handleSubmit} variant="contained" color="primary">
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            color="primary"
+            disabled={selectedFaculties.length === 0 || !batchSelected}
+          >
             Submit
           </Button>
         </DialogActions>

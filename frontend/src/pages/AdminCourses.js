@@ -30,6 +30,9 @@ const AdminCourses = () => {
   const [selectedFaculty, setSelectedFaculty] = useState(null);
   const [selectedFaculties, setSelectedFaculties] = useState([]);
   const [batchSelected, setBatchSelected] = useState(false); // Track if batch is selected
+  const [submissionStatus, setSubmissionStatus] = useState(''); // Possible values: '', 'ok', 'error'
+const [submissionMessage, setSubmissionMessage] = useState('');
+
 
   useEffect(() => {
     // Send GET request to fetch courses when the selected semester changes
@@ -129,7 +132,12 @@ const AdminCourses = () => {
     setSelectedFaculty(null);
     setSelectedFaculties([]);
     setBatchSelected(false); // Reset batchSelected when closing the dialog
+    // Reset the selected semester to allow selecting a new semester
+    setSelectedSemester('');
+    // Reset the courses data
+    setCourses([]);
   };
+  
 
   const handleSubmit = async () => {
     // Create an array of faculty details
@@ -152,14 +160,14 @@ const AdminCourses = () => {
   
       if (response.ok) {
         console.log('Data saved successfully');
+        handleDialogClose();
       } else {
         console.error('Error:', response.statusText);
       }
     } catch (error) {
       console.error('Error:', error);
     }
-  
-    handleDialogClose();
+    
   };
 
   const handleSearchQueryChange = (event) => {

@@ -42,6 +42,7 @@ router.post('/admin/facultyCourseAssignment', async (req, res) => {
     );
     console.log(addFacultyCourse);
   }
+  return res.json({status:'ok'});
 });
 
 

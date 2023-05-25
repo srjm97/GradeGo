@@ -5,11 +5,11 @@ const StudentCourses = require('../models/StudentCourses');
 const Students = require('../models/Student');
 //This route sends attendance details of student for a particular couse
 //Author: Harikrishnan V
-router.get('/attendance/student/', async (req, res) => {
-  //const {ktuId,courseCode} = req.body;
-  const ktuId = 'tve20cs000';
-  const courseCode = 'CST302';
-
+router.post('/attendance/student/', async (req, res) => {
+  const {ktuId,courseCode} = req.body;
+  // const ktuId = 'tve20cs000';
+  // const courseCode = 'CST302';
+  console.log(ktuId);
   const attendanceDetails = await InternalMark.findOne({ _id: ktuId, 'courseAssessmentTheory.courseCode': courseCode }, { 'courseAssessmentTheory.courseCode': 1, 'courseAssessmentTheory.attendance': 1 });
   let presentCount = 0;
   attendanceDetails.courseAssessmentTheory.forEach(course => {

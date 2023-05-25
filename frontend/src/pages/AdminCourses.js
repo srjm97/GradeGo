@@ -132,6 +132,14 @@ const AdminCourses = () => {
   };
 
   const handleSubmit = async () => {
+    // Create an array of faculty details
+    const facultyDetails = selectedFaculties.map((faculty) => ({
+      _id: faculty._id,
+      semester: selectedSemester,
+      batch: selectedBatch,
+      courseCode: selectedCourse._id,
+    }));
+  
     // Perform the POST request to save the data
     try {
       const response = await fetch('http://localhost:1337/admin/facultyCourseAssignment', {
@@ -139,14 +147,9 @@ const AdminCourses = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          _id: selectedFaculty._id,
-          semester: selectedSemester,
-          batch: selectedBatch,
-          courseCode: selectedCourse._id,
-        }),
+        body: JSON.stringify(facultyDetails), // Send the array of faculty details
       });
-
+  
       if (response.ok) {
         console.log('Data saved successfully');
       } else {
@@ -155,7 +158,7 @@ const AdminCourses = () => {
     } catch (error) {
       console.error('Error:', error);
     }
-
+  
     handleDialogClose();
   };
 

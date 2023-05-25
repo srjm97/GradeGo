@@ -38,7 +38,6 @@ export default function LoginForm() {
     setHelloData(data); 
     if (data.status === 'ok') {
       console.log(hellodata);
-      alert(" ");
       if (data.user === 'student' ) {
         navigate('/studdashboard', { replace: true });
       } else if (data.user === 'faculty') {

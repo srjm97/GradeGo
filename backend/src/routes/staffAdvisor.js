@@ -99,6 +99,7 @@ router.post('/facdashboard/TimeTable', async (req, res) => {
     TimeTable.findOneAndUpdate(filter, update)
       .then(() => {
         console.log('TimeTable data updated successfully');
+        return res.json({status:'ok'});
       })
       .catch(error => {
         console.error('Error updating TimeTable data:', error);

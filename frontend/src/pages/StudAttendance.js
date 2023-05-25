@@ -34,7 +34,7 @@ export default function StudAttendance() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          ktuId: hellodata.details._id,
+          ktuId: hellodata.details.batchDetails._id,
           courseCode: selectedCourse
         })
       });
@@ -69,7 +69,7 @@ export default function StudAttendance() {
             <MenuItem value="" disabled>
               Select a Course
             </MenuItem>
-            {hellodata.details.coursesEnrolled[0].semesterCourses.map((course) => (
+            {hellodata.details.studentCourses.coursesEnrolled[0].semesterCourses.map((course) => (
               <MenuItem key={course._id} value={course.courseCode}>
                 {course.courseCode}
               </MenuItem>

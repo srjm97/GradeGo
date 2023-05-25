@@ -75,16 +75,16 @@ const Timetable = () => {
                 }),
             });
 
-            if (response.ok) {
-                console.log('Timetable saved successfully');
-                setEditTimeTableSet(false);
-                setViewTimeTableSet(true);
 
+            if (response.ok) {
+                
+                console.log('Timetable saved successfully');
+                window.location.reload();
                 // Do something on success
             } else {
                 console.error('Error saving timetable:', response.status);
             }
-            
+
         } catch (error) {
             console.error('Error saving timetable:', error);
         }
@@ -112,21 +112,21 @@ const Timetable = () => {
                                     <TableRow>
                                         <TableCell style={{ border: '1px solid black' }}>Day</TableCell>
                                         {timetableData.days.length > 0 &&
-                                            timetableData.days[0].periods.map((period) => (
-                                                <TableCell style={{ border: '1px solid black' }}>Period {period._id}</TableCell>
+                                            timetableData.days[0].periods.map((period, index) => (
+                                                <TableCell key={index} style={{ border: '1px solid black' }}>Period {period._id}</TableCell>
                                             ))}
                                     </TableRow>
                                 </TableHead>
 
                                 <TableBody>
                                     {
-                                        timetableData.days.map((day) => (
-                                            <TableRow>
-                                                <TableCell style={{ border: '1px solid black' }}>
+                                        timetableData.days.map((day, i) => (
+                                            <TableRow key={i}>
+                                                <TableCell key={day._id} style={{ border: '1px solid black' }}>
                                                     {day._id}
                                                 </TableCell>
-                                                {day.periods.map((period) => (
-                                                    <TableCell style={{ border: '1px solid black' }}>{period.courseAbbreviation}</TableCell>
+                                                {day.periods.map((period, index) => (
+                                                    <TableCell key={index} style={{ border: '1px solid black' }}>{period.courseAbbreviation}</TableCell>
                                                 ))}
                                             </TableRow>
 
@@ -150,8 +150,8 @@ const Timetable = () => {
                             <TableRow>
                                 <TableCell >Day</TableCell>
                                 {timetableData.days.length > 0 &&
-                                    timetableData.days[0].periods.map((period) => (
-                                        <TableCell >Period {period._id}</TableCell>
+                                    timetableData.days[0].periods.map((period, index) => (
+                                        <TableCell key={index}>Period {period._id}</TableCell>
                                     ))}
                             </TableRow>
                         </TableHead>

@@ -1,31 +1,34 @@
-import { useState,useContext,useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {DataContext} from '../../../DataContext';
+import { DataContext } from '../../../DataContext';
 // @mui
 import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import Iconify from '../../../components/iconify';
 
 
+
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
   const { hellodata, setHelloData } = useContext(DataContext);
-  const [ktuId, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [ktuId, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [errMsg, setErrMsg] = useState(false);
-    useEffect(() => {
+  useEffect(() => {
     // Clear the hellodata in local storage when the component mounts
     localStorage.removeItem('hellodata');
     // setHelloData({ accessToken: '', course: [], details: null, status: '', user: '' });
   }, []);
-  let data={};
+  let data = {};
+  const navigate = useNavigate();
+
   const validateUser = async (event) => {
     event.preventDefault();
-    const response = await fetch("http://localhost:1337/login", {
-      method: "POST",
+    const response = await fetch('http://localhost:1337/login', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         ktuId,
@@ -34,41 +37,38 @@ export default function LoginForm() {
     });
 
     data = await response.json();
-    
-    setHelloData(data); 
+
+    setHelloData(data);
     if (data.status === 'ok') {
       console.log(hellodata);
-      if (data.user === 'student' ) {
+      if (data.user === 'student') {
         navigate('/studdashboard', { replace: true });
       } else if (data.user === 'faculty') {
         navigate('/dashboard', { replace: true });
-      } else if(data.user === 'admin') {
-        navigate('/admindashboard',{ replace : true });
+      } else if (data.user === 'admin') {
+        navigate('/admindashboard', { replace: true });
       }
     }
-    if(data.status!='ok') {
+    if (data.status !== 'ok') {
       setErrMsg(true);
-      alert("Incorrect username or password");
+      alert('Incorrect username or password');
     }
-    
-  }
-    
-  const navigate = useNavigate();
-
-
-  
+  };
 
   const [showPassword, setShowPassword] = useState(false);
 
-  // const handleClick = () => {
-  //   navigate('/dashboard', { replace: true });
-  // };
-  
-  
   return (
     <>
       <Stack spacing={3}>
-        <TextField value={ktuId} name="email" onChange={(e) => setUsername(e.target.value)} label="Username" />
+        <TextField
+          value={ktuId}
+          name="email"
+          onChange={(e) => setUsername(e.target.value)}
+          label="Username"
+          variant="outlined"
+          fullWidth
+          size="small"
+        />
 
         <TextField
           name="password"
@@ -76,6 +76,9 @@ export default function LoginForm() {
           label="Password"
           onChange={(e) => setPassword(e.target.value)}
           type={showPassword ? 'text' : 'password'}
+          variant="outlined"
+          fullWidth
+          size="small"
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -97,5 +100,4 @@ export default function LoginForm() {
       </LoadingButton>
     </>
   );
-  
 }

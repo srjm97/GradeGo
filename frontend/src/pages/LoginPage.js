@@ -6,9 +6,10 @@ import { Link, Container, Typography, Divider, Stack, Button } from '@mui/materi
 import useResponsive from '../hooks/useResponsive';
 // components
 import Logo from '../components/logo';
-import Iconify from '../components/iconify';
 // sections
 import { LoginForm } from '../sections/auth/login';
+import { TextField } from '@mui/material';
+
 
 // ----------------------------------------------------------------------
 
@@ -26,6 +27,10 @@ const StyledSection = styled('div')(({ theme }) => ({
   justifyContent: 'center',
   boxShadow: theme.customShadows.card,
   backgroundColor: theme.palette.background.default,
+  padding: theme.spacing(4),
+  [theme.breakpoints.up('md')]: {
+    padding: theme.spacing(6),
+  },
 }));
 
 const StyledContent = styled('div')(({ theme }) => ({
@@ -35,8 +40,12 @@ const StyledContent = styled('div')(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   flexDirection: 'column',
-  padding: theme.spacing(12, 0),
+  padding: theme.spacing(4),
+  [theme.breakpoints.up('md')]: {
+    padding: theme.spacing(8),
+  },
 }));
+
 
 
 // ----------------------------------------------------------------------
@@ -73,26 +82,6 @@ export default function LoginPage() {
             <Typography variant="h4" gutterBottom>
               GradeGo Login
             </Typography>
-
-            {/* <Typography variant="body2" sx={{ mb: 5 }}>
-              Don’t have an account? {''}
-              <Link variant="subtitle2">Get started</Link>
-            </Typography> */}
-
-              {/* <Stack direction="row" spacing={2}>
-                <Button fullWidth size="large" color="inherit" variant="outlined">
-                  <Iconify icon="eva:google-fill" color="#DF3E30" width={22} height={22} />
-                </Button>
-
-                <Button fullWidth size="large" color="inherit" variant="outlined">
-                  <Iconify icon="eva:facebook-fill" color="#1877F2" width={22} height={22} />
-                </Button>
-
-                <Button fullWidth size="large" color="inherit" variant="outlined">
-                  <Iconify icon="eva:twitter-fill" color="#1C9CEA" width={22} height={22} />
-                </Button>
-              </Stack> */}
-
             <Divider sx={{ my: 3 }}>
             </Divider>
             <LoginForm />

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { DataContext } from './DataContext';
 import { Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from './layouts/dashboard';
-import StudDashboardLayout from './layouts/studdashboard'
+import StudDashboardLayout from './layouts/studdashboard';
 import SimpleLayout from './layouts/simple';
 import AttendanceSetting from './pages/AttendanceSetting';
 import LoginPage from './pages/LoginPage';
@@ -13,39 +14,47 @@ import StudAttendance from './pages/StudAttendance';
 import Attendance from './pages/Attendance';
 import StudTimeTable from './pages/StudTimeTable';
 import AdminDashboardAppPage from './pages/AdminDashboardAppPage';
-import AdminDashboardLayout from './layouts/admindashboard'
-import AdminCourses from './pages/AdminCourses'
+import AdminDashboardLayout from './layouts/admindashboard';
+import AdminCourses from './pages/AdminCourses';
 
 // ----------------------------------------------------------------------
 
 export default function Router() {
+  const { hellodata } = useContext(DataContext);
+
+  const isAuthenticated = hellodata.accessToken !== "";
+
   const routes = useRoutes([
     {
+      path: '/',
+      element: isAuthenticated ? <Navigate to="/dashboard/app" replace /> : <Navigate to="/login" replace />,
+    },
+    {
       path: '/dashboard',
-      element: <DashboardLayout />,
+      element: isAuthenticated ? <DashboardLayout /> : <Navigate to="/login" replace />,
       children: [
-        { element: <Navigate to="/dashboard/app" />, index: true },
+        { element: <Navigate to="/dashboard/app" replace />, index: true },
         { path: 'app', element: <DashboardAppPage /> },
-        { path: 'attendance', element: <Attendance />},
+        { path: 'attendance', element: <Attendance /> },
         { path: 'attendance-setting', element: <AttendanceSetting /> },
-        { path: 'timetable', element:<TimeTable />}
+        { path: 'timetable', element: <TimeTable /> },
       ],
     },
     {
       path: '/studdashboard',
-      element: <StudDashboardLayout />,
+      element: isAuthenticated ? <StudDashboardLayout /> : <Navigate to="/login" replace />,
       children: [
-        { element: <Navigate to="/studdashboard/app" />, index: true },
+        { element: <Navigate to="/studdashboard/app" replace />, index: true },
         { path: 'app', element: <StudDashboardAppPage /> },
         { path: 'attendance', element: <StudAttendance /> },
-        { path: 'timetable', element:<StudTimeTable />}
+        { path: 'timetable', element: <StudTimeTable /> },
       ],
     },
     {
       path: '/admindashboard',
-      element: <AdminDashboardLayout />,
+      element: isAuthenticated ? <AdminDashboardLayout /> : <Navigate to="/login" replace />,
       children: [
-        { element: <Navigate to="/admindashboard/app" />, index: true },
+        { element: <Navigate to="/admindashboard/app" replace />, index: true },
         { path: 'app', element: <AdminDashboardAppPage /> },
         { path: 'courses', element: <AdminCourses /> },
         // { path: 'timetable', element:<AdminTimeTable />}

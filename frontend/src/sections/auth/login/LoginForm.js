@@ -14,6 +14,11 @@ export default function LoginForm() {
   const [ktuId, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState(false);
+    useEffect(() => {
+    // Clear the hellodata in local storage when the component mounts
+    localStorage.removeItem('hellodata');
+    // setHelloData({ accessToken: '', course: [], details: null, status: '', user: '' });
+  }, []);
   let data={};
   const validateUser = async (event) => {
     event.preventDefault();
@@ -34,7 +39,7 @@ export default function LoginForm() {
     if (data.status === 'ok') {
       console.log(hellodata);
       alert(" ");
-      if (data.user === 'student') {
+      if (data.user === 'student' ) {
         navigate('/studdashboard', { replace: true });
       } else if (data.user === 'faculty') {
         navigate('/dashboard', { replace: true });

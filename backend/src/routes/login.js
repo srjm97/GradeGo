@@ -38,7 +38,8 @@ router.post('/login', async (req, res) => {
       }
       if (isStudent) {
         const studentCourses = await StudentCourses.findOne({ _id: ktuId });
-        return res.json({ status: 'ok', user: 'student',details:studentCourses ,accessToken:accessToken});
+        const batchDetails = await Student.findOne({ _id: ktuId },{batch:1});
+        return res.json({ status: 'ok', user: 'student',details:{studentCourses,batchDetails},accessToken:accessToken});
       } else {
         const isFaculty = await Faculty.findOne({_id: ktuId });
         

@@ -16,17 +16,34 @@ router.post('/admin/semesterCourses', async (req, res) => {
 
 router.post('/admin/facultyCourseAssignment', async (req, res) => {
   const input = req.body;
-  
+
   for (let i = 0; i < input.length; ++i) {
     const { _id, semester, batch, courseCode } = input[i];
-    // const _id = 'ktu-f375';
-    // const semester = 6;
-    // const batch = 1;
-    // const courseCode = 'CST302';
-    const addFacultyCourse = await FacultyCourses.updateOne({ _id: _id }, { $push: { coursesHandled: { semester: semester, batch: batch, courseCode: courseCode } } });
+
+    // Check if the faculty course assignment already exists in the database
+    const existingAssignment = await FacultyCourses.findOne({
+      _id: _id,
+      'coursesHandled.semester': semester,
+      'coursesHandled.batch': batch,
+      'coursesHandled.courseCode': courseCode,
+    });
+
+    if (existingAssignment) {
+      console.log('Duplicate data found. Skipping:', input[i]);
+      continue; // Skip the current iteration and move to the next iteration
+    }
+
+    // Add the faculty course assignment to the database if it doesn't already exist
+    const addFacultyCourse = await FacultyCourses.updateOne(
+      { _id: _id },
+      {
+        $push: { coursesHandled: { semester: semester, batch: batch, courseCode: courseCode } },
+      }
+    );
     console.log(addFacultyCourse);
   }
 });
+
 
 
 module.exports = router;

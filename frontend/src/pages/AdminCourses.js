@@ -111,8 +111,15 @@ const AdminCourses = () => {
       );
     } else {
       setSelectedFaculties((prevSelectedFaculties) => [...prevSelectedFaculties, faculty]);
+
     }
+    setSelectedFaculty(faculty);
   };
+
+  useEffect(() => {
+    console.log(selectedCourse);
+  }, [selectedCourse])
+  
 
   const handleDialogClose = () => {
     setSelectedCourse(null);
@@ -124,11 +131,31 @@ const AdminCourses = () => {
     setBatchSelected(false); // Reset batchSelected when closing the dialog
   };
 
-  const handleSubmit = () => {
-    // Perform any necessary actions with the selected course, batch, and faculties
-    console.log('Selected Course:', selectedCourse);
-    console.log('Selected Batch:', selectedBatch);
-    console.log('Selected Faculties:', selectedFaculties);
+  const handleSubmit = async () => {
+    // Perform the POST request to save the data
+    try {
+      const response = await fetch('http://localhost:1337/admin/facultyCourseAssignment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          _id: selectedFaculty._id,
+          semester: selectedSemester,
+          batch: selectedBatch,
+          courseCode: selectedCourse._id,
+        }),
+      });
+
+      if (response.ok) {
+        console.log('Data saved successfully');
+      } else {
+        console.error('Error:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+
     handleDialogClose();
   };
 
@@ -208,7 +235,6 @@ const AdminCourses = () => {
               <MenuItem value={1}>Batch 1</MenuItem>
               <MenuItem value={2}>Batch 2</MenuItem>
             </Select>
-
           </FormControl>
 
           {batchSelected && (

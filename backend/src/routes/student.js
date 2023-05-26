@@ -6,10 +6,10 @@ const Students = require('../models/Student');
 //This route sends attendance details of student for a particular couse
 //Author: Harikrishnan V
 router.post('/attendance/student/', async (req, res) => {
-  const { ktuId, courseCode } = req.body;
   // const ktuId = 'tve20cs000';
   // const courseCode = 'CST302';
   try {
+    const { ktuId, courseCode } = req.body;
     console.log(ktuId);
     const attendanceDetails = await InternalMark.findOne({ _id: ktuId, 'courseAssessmentTheory.courseCode': courseCode }, { 'courseAssessmentTheory.courseCode': 1, 'courseAssessmentTheory.attendance': 1 });
     let presentCount = 0;
@@ -35,10 +35,10 @@ router.post('/attendance/student/', async (req, res) => {
 });
 
 router.post('/student/studentcourses', async (req, res) => {
-  // const { _id } = req.body;
-  const _id = 'tve20cs001';
-
+  // const _id = 'tve20cs001';
+  
   try {
+    const { _id } = req.body;
     const student = await Students.findOne({ _id: _id });
     // console.log(student);
     if (student) {

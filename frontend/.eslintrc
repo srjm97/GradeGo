@@ -36,7 +36,7 @@
     "no-param-reassign": 2,
     "no-nested-ternary": 2,
     "default-param-last": 2,
-    "no-use-before-define": 2,
+    "no-use-before-define": 0,
     "no-underscore-dangle": 2,
     "no-extra-boolean-cast": 2,
     "react/button-has-type": 2,

@@ -16,6 +16,8 @@ import StudTimeTable from './pages/StudTimeTable';
 import AdminDashboardAppPage from './pages/AdminDashboardAppPage';
 import AdminDashboardLayout from './layouts/admindashboard';
 import AdminCourses from './pages/AdminCourses';
+import Home from './pages/home';
+import Contact from './pages/contact';
 
 // ----------------------------------------------------------------------
 
@@ -27,7 +29,10 @@ export default function Router() {
   const routes = useRoutes([
     {
       path: '/',
-      element: isAuthenticated ? <Navigate to="/dashboard/app" replace /> : <Navigate to="/login" replace />,
+      element: <Home />,
+      children: [
+        {element: <Navigate to="/" replace/>, index: true },
+      ], 
     },
     {
       path: '/dashboard',
@@ -63,6 +68,10 @@ export default function Router() {
     {
       path: 'login',
       element: <LoginPage />,
+    },
+    {
+      path: 'contact',
+      element: <Contact />,
     },
     {
       element: <SimpleLayout />,

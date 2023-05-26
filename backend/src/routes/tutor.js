@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-const InternalMark = require('../models/InternalMark');
-const FacultyCourses = require('../models/FacultyCourses');
-const StudentCourses = require('../models/StudentCourses');
-const Students = require('../models/Student');
-const Student = require('../models/Student');
+const InternalMark = require(__dirname+'/../models/InternalMark');
+const FacultyCourses = require(__dirname+'/../models/FacultyCourses');
+const StudentCourses = require(__dirname+'/../models/StudentCourses');
+const Students = require(__dirname+'/../models/Student');
+const Student = require(__dirname+'/../models/Student');
 
 // return all students of the given semester, course and 
 router.post('/tutor/attendancedata', async (req, res) => {

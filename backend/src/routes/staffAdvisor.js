@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const TimeTable = require('../models/TimeTable');
+const TimeTable = require(__dirname+'/../models/TimeTable');
 // const CodeToName = require('../models/CodeToName');
-const Courses = require('../models/Courses');
+const Courses = require(__dirname+'/../models/Courses');
 
 // returns the time table on request from the staffadvisor dashboard for display
 router.post('/facdashboard/DisplayTimeTable', async (req, res) => {

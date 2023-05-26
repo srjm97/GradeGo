@@ -1,16 +1,16 @@
 var express = require('express');
 require('dotenv').config();
 var router = express.Router();
-const Login = require('../models/Login');
-const Student = require('../models/Student');
-const Faculty = require('../models/Faculty');
+const Login = require(__dirname + '/../models/Login');
+const Student = require(__dirname + '/../models/Student');
+const Faculty = require(__dirname + '/../models/Faculty');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const StaffAdvisor = require('../models/StaffAdvisor');
-const StudentCourses = require('../models/StudentCourses');
+const StaffAdvisor = require(__dirname + '/../models/StaffAdvisor');
+const StudentCourses = require(__dirname + '/../models/StudentCourses');
 // const CodeToName = require('../models/CodeToName');
-const { authenticateToken, generateAccessToken } = require('../middlewares/auth');
-const Courses = require('../models/Courses');
+const { authenticateToken, generateAccessToken } = require(__dirname + '/../middlewares/auth');
+const Courses = require(__dirname + '/../models/Courses');
 
 let refreshTokens = [];
 

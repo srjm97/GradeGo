@@ -1,8 +1,8 @@
 var express = require('express');
-const InternalMark = require('../models/InternalMark');
+const InternalMark = require(__dirname+'/../models/InternalMark');
 var router = express.Router();
-const StudentCourses = require('../models/StudentCourses');
-const Students = require('../models/Student');
+const StudentCourses = require(__dirname+'/../models/StudentCourses');
+const Students = require(__dirname+'/../models/Student');
 //This route sends attendance details of student for a particular couse
 //Author: Harikrishnan V
 router.post('/attendance/student/', async (req, res) => {

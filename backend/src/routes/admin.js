@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const Courses = require('../models/Courses');
-const Faculty = require('../models/Faculty');
-const FacultyCourses = require('../models/FacultyCourses');
+const Courses = require(__dirname+'/../models/Courses');
+const Faculty = require(__dirname+'/../models/Faculty');
+const FacultyCourses = require(__dirname+'/../models/FacultyCourses');
 
 router.post('/admin/semesterCourses', async (req, res) => {
   // const semester = 6;

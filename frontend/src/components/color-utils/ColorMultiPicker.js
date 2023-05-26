@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Checkbox } from '@mui/material';
 import Icon from './Icon';

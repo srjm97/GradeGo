@@ -1,25 +1,22 @@
 GET http://localhost:1337/facdashboard
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoia3R1LWYzNzUiLCJpYXQiOjE2ODQ0Nzg0NTV9.sCfSd8dclt9lc5U7WC1CObWkbK9U7nmSUIijuR9yhc8
-                
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHZlMjBjczAwMCIsImlhdCI6MTY4NTA4MjAyNywiZXhwIjoxNjg1MDgyMDY3fQ.sL9y5tMe2Jr0kQVd-XfTGRCwEuchKY6DkhGhGQZFjsY
 
 ###
+POST http://localhost:1337/tokens 
+content-Type : application/json
 
+  {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHZlMjBjczAwMCIsImlhdCI6MTY4NTA4MTk4MX0.qB-NNn2256sqoYd7pswwbGbM9jahdOzVJAqaCJHa1aA"
+  }
+
+###
 POST http://localhost:1337/login
 content-Type : application/json
  
  {
-    "ktuId": "ktu-f375",
-    "password": "f375"
+   "ktuId": "tve20cs000",
+   "password": "0000"
  }
 
 ###
-
-POST http://localhost:1337/tutor/attendancedata
-Content-Type: application/json
-{
-    "semester" : "6",
-    "batch" : "1",
-    "courseCode" : "CST310"
-}
 

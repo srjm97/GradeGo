@@ -9,8 +9,10 @@ const jwt = require('jsonwebtoken');
 const StaffAdvisor = require('../models/StaffAdvisor');
 const StudentCourses = require('../models/StudentCourses');
 // const CodeToName = require('../models/CodeToName');
-const {authenticateToken} = require('../middlewares/auth');
+const {authenticateToken,generateAccessToken} = require('../middlewares/auth');
 const Courses = require('../models/Courses');
+
+let refreshTokens = [];
 
 router.post('/login', async (req, res) => {
   console.log(req.body);
@@ -19,7 +21,10 @@ router.post('/login', async (req, res) => {
   console.log(ktuId, password);
   //jwt implementation
   const user = {name:ktuId};
-  const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
+  //const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET,{expiresIn:'20s'});
+  const accessToken = generateAccessToken(user);
+  const refreshToken = jwt.sign(user,process.env.REFRESH_TOKEN_SECRET);
+  refreshTokens.push(refreshToken);
 
   const pass = await Login.findOne({ _id: ktuId }, { password: 1 });
   console.log(pass);
@@ -34,12 +39,12 @@ router.post('/login', async (req, res) => {
       const isStudent = await Student.findOne({ _id: ktuId });
       console.log(isStudent);
       if (ktuId === 'admin') {
-        return res.json({ status: 'ok', user: 'admin' ,accessToken:accessToken});
+        return res.json({ status: 'ok', user: 'admin' ,accessToken:accessToken,refreshToken:refreshToken });
       }
       if (isStudent) {
         const studentCourses = await StudentCourses.findOne({ _id: ktuId });
         const batchDetails = await Student.findOne({ _id: ktuId },{batch:1});
-        return res.json({ status: 'ok', user: 'student',details:{studentCourses,batchDetails},accessToken:accessToken});
+        return res.json({ status: 'ok', user: 'student',details:{studentCourses,batchDetails},accessToken:accessToken,refreshToken:refreshToken});
       } else {
         const isFaculty = await Faculty.findOne({_id: ktuId });
         
@@ -52,7 +57,7 @@ router.post('/login', async (req, res) => {
             // const courseDetails = await CodeToName.findOne({_id:staffDetails.semesterHandled});
             const courseDetails = await Courses.find({semester:staffDetails.semesterHandled});
             //console.log(courseDetails);
-            return res.json({ status: 'ok', user: 'faculty', details: staffDetails,course: courseDetails,accessToken:accessToken });
+            return res.json({ status: 'ok', user: 'faculty', details: staffDetails,course: courseDetails,accessToken:accessToken});
           }
           else {
             return res.json({ status: 'ok', user: 'faculty',accessToken:accessToken });
@@ -78,5 +83,24 @@ router.get('/facdashboard',authenticateToken,async(req,res) =>{
   res.json(logins.filter(login=>login._id === req.user.name));
   
 });
+
+router.post('/tokens',(req,res) =>{
+  const refreshToken = req.body.token;
+  if(refreshToken === null) {
+    return res.sendStatus(401);
+  }
+  if(!refreshTokens.includes(refreshToken)) {
+    return res.sendStatus(403);
+  }
+  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET,(err,user) =>{
+    if(err) {
+      return res.sendStatus(403);
+    }
+    const accessToken = generateAccessToken({name:user.name});
+    return res.json({ status: 'ok', accessToken: accessToken });
+  });
+});
+
+
 
 module.exports = router;

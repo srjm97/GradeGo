@@ -57,10 +57,10 @@ router.post('/login', async (req, res) => {
             // const courseDetails = await CodeToName.findOne({_id:staffDetails.semesterHandled});
             const courseDetails = await Courses.find({semester:staffDetails.semesterHandled});
             //console.log(courseDetails);
-            return res.json({ status: 'ok', user: 'faculty', details: staffDetails,course: courseDetails,accessToken:accessToken});
+            return res.json({ status: 'ok', user: 'faculty', details: staffDetails,course: courseDetails,accessToken:accessToken,refreshToken:refreshToken});
           }
           else {
-            return res.json({ status: 'ok', user: 'faculty',accessToken:accessToken });
+            return res.json({ status: 'ok', user: 'faculty',accessToken:accessToken,refreshToken:refreshToken });
           }
         }
         else{
@@ -101,6 +101,11 @@ router.post('/tokens',(req,res) =>{
   });
 });
 
+
+router.delete('/logout', (req, res) => {
+  refreshTokens = refreshTokens.filter(token => token !== req.body.token);
+  res.sendStatus(204);
+});
 
 
 module.exports = router;

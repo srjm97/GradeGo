@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node src/app.js",
-    "build": "npm src/app.js",
-    "dev": "nodemon src/app.js"
+    "build": "npm i",
+    "dev": "nodemon indesx.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",

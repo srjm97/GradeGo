@@ -1,27 +1,37 @@
-import React, { createContext, useState,useEffect } from 'react';
+import React, { createContext, useState, useEffect, useMemo } from 'react';
+import PropTypes from 'prop-types';
 
 export const DataContext = createContext();
 
-export const DataProvider = (props) => {
-    const [hellodata, setHelloData] = useState(() => {
-        const storedData = localStorage.getItem('hellodata');
-        return storedData ? JSON.parse(storedData) : {
-            status: '',
-            user: '',
-            details: {},
-            course: {},
-            accessToken: ""
+const { localStorage } = window;
+
+ function DataProvider ({ children })  {
+  const [hellodata, setHelloData] = useState(() => {
+    const storedData = localStorage.getItem('hellodata');
+    return storedData
+      ? JSON.parse(storedData)
+      : {
+          status: '',
+          user: '',
+          details: {},
+          course: {},
+          accessToken: '',
         };
-    });
+  });
 
-    useEffect(() => {
-        localStorage.setItem('hellodata', JSON.stringify(hellodata));
-    }, [hellodata]);
+  useEffect(() => {
+    localStorage.setItem('hellodata', JSON.stringify(hellodata));
+  }, [hellodata]);
 
-    return (
-        <DataContext.Provider value={{ hellodata, setHelloData }}>
-            {props.children}
-        </DataContext.Provider>
-    );
+  return (
+    <DataContext.Provider value={useMemo(() => ({ hellodata, setHelloData }), [hellodata, setHelloData])}>
+      {children}
+    </DataContext.Provider>
+  );
 };
 
+DataProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export {DataProvider};

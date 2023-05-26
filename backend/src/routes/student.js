@@ -28,8 +28,8 @@ router.post('/attendance/student/', async (req, res) => {
     res.json({ totalAttendanceLength, presentCount });
   }
   catch (error) {
-    res.json({status:'error'});
-    console.log('Error', error);
+    console.error(error);
+    return res.status(500).json({ error: 'Internal server error' });
   }
 
 });

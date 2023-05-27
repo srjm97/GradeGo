@@ -3,15 +3,12 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 
 import Header from '../components/landingpage/header'
-import PrimaryPinkButton from '../components/landingpage/primary-pink-button'
 import OutlineGrayButton from '../components/landingpage/outline-gray-button'
 import FeatureCard from '../components/landingpage/feature-card'
-import OutlineBlackButton from '../components/landingpage/outline-black-button'
-import ListItem from '../components/landingpage/list-item'
 import Footer from '../components/landingpage/footer'
 import './home.css'
 
-const Home = (props) => {
+const Home = () => {
   return (
     <div className="home-container">
       <Helmet>

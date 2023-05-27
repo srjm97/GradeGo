@@ -27,11 +27,11 @@ const AdminCourses = () => {
   const [selectedBatch, setSelectedBatch] = useState('');
   const [faculties, setFaculties] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedFaculty, setSelectedFaculty] = useState(null);
+  // const [selectedFaculty, setSelectedFaculty] = useState(null);
   const [selectedFaculties, setSelectedFaculties] = useState([]);
   const [batchSelected, setBatchSelected] = useState(false); // Track if batch is selected
-  const [submissionStatus, setSubmissionStatus] = useState(''); // Possible values: '', 'ok', 'error'
-const [submissionMessage, setSubmissionMessage] = useState('');
+  // const [submissionStatus, setSubmissionStatus] = useState(''); // Possible values: '', 'ok', 'error'
+  // const [submissionMessage, setSubmissionMessage] = useState('');
 
 
   useEffect(() => {
@@ -116,7 +116,7 @@ const [submissionMessage, setSubmissionMessage] = useState('');
       setSelectedFaculties((prevSelectedFaculties) => [...prevSelectedFaculties, faculty]);
 
     }
-    setSelectedFaculty(faculty);
+    // setSelectedFaculty(faculty);
   };
 
   useEffect(() => {
@@ -129,7 +129,7 @@ const [submissionMessage, setSubmissionMessage] = useState('');
     setSelectedBatch('');
     setFaculties([]);
     setSearchQuery('');
-    setSelectedFaculty(null);
+    // setSelectedFaculty(null);
     setSelectedFaculties([]);
     setBatchSelected(false); // Reset batchSelected when closing the dialog
     // Reset the selected semester to allow selecting a new semester

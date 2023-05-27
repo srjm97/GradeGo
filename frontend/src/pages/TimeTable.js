@@ -4,7 +4,7 @@ import { DataContext } from '../DataContext';
 
 const Timetable = () => {
     const { hellodata } = useContext(DataContext);
-    const { status, user, details, course } = hellodata;
+    const { details, course } = hellodata;
     console.log(hellodata);
     const [timetableData, setTimetableData] = useState({ days: [] });
     const [availableCourses, setAvailableCourses] = useState([]);

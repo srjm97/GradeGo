@@ -28,7 +28,7 @@ const { localStorage } = window;
       {children}
     </DataContext.Provider>
   );
-};
+}
 
 DataProvider.propTypes = {
   children: PropTypes.node.isRequired,

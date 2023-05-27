@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Grid, Container, Typography, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
-import { FacultyDataContext } from '../FacultyDataContext';
+import { Grid, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import { DataContext } from '../DataContext';
 
 import {

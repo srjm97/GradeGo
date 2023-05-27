@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import React, { useState, useEffect,useContext } from 'react';
+import React, { useEffect,useContext } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography } from '@mui/material';
 import { FacultyDataContext } from '../FacultyDataContext';

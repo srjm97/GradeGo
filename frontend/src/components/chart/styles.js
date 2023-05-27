@@ -1,3 +1,4 @@
+import React from 'react';
 import { alpha, useTheme } from '@mui/material/styles';
 import { GlobalStyles } from '@mui/material';
 import { bgBlur } from '../../utils/cssStyles';

@@ -1,8 +1,9 @@
+import React from 'react';
 import { useState,useContext,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {DataContext} from '../../../DataContext';
 // @mui
-import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox } from '@mui/material';
+import { Link, Stack, IconButton, InputAdornment, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import Iconify from '../../../components/iconify';
 
@@ -13,7 +14,6 @@ export default function LoginForm() {
   const { hellodata, setHelloData } = useContext(DataContext);
   const [ktuId, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errMsg, setErrMsg] = useState(false);
     useEffect(() => {
     // Clear the hellodata in local storage when the component mounts
     localStorage.removeItem('hellodata');
@@ -47,7 +47,6 @@ export default function LoginForm() {
       }
     }
     if(data.status!='ok') {
-      setErrMsg(true);
       alert("Incorrect username or password");
     }
     

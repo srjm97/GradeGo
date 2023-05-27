@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Select, Typography, Stack } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Stack } from '@mui/material';
 import { DataContext } from '../DataContext';
 
 const Timetable = () => {
     const { hellodata } = useContext(DataContext);
-    const { status, user, details} = hellodata;
+    const { details} = hellodata;
     console.log(hellodata);
     const [timetableData, setTimetableData] = useState({ days: [] });
 

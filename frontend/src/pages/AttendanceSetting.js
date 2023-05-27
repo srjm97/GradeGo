@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { filter } from 'lodash';
+// import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
 import { FacultyDataContext } from '../FacultyDataContext';
 
@@ -9,10 +9,8 @@ import {
   Card,
   Table,
   Stack,
-  Paper,
   Avatar,
   Button,
-  Popover,
   Checkbox,
   TableRow,
   MenuItem,
@@ -21,7 +19,6 @@ import {
   TableCell,
   Container,
   Typography,
-  IconButton,
   TableContainer,
   TablePagination,
   Select,
@@ -70,9 +67,9 @@ export default function AttendanceSetting() {
 
   const [userList, setUserList] = useState([]);
   const [page, setPage] = useState(0);
-  const [order, setOrder] = useState('asc');
+  // const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
-  const [orderBy, setOrderBy] = useState('name');
+  // const [orderBy, setOrderBy] = useState('name');
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [filteredStudents, setFilteredStudents] = useState(userList);
 
@@ -269,7 +266,7 @@ export default function AttendanceSetting() {
                         <TableCell
                           key={headCell.id}
                           align={headCell.alignRight ? 'right' : 'left'}
-                          sortDirection={orderBy === headCell.id ? order : false}
+                          // sortDirection={orderBy === headCell.id ? order : false}
                         >
                           {headCell.label}
                         </TableCell>
@@ -290,7 +287,7 @@ export default function AttendanceSetting() {
                     {filteredStudents
                       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                       .map((row, index) => {
-                        const { _id, name, rollNumber, status } = row;
+                        const { _id, name, status } = row;
                         const isItemSelected = selected.indexOf(name.firstName) !== -1;
 
                         return (

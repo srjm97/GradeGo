@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 // import SocialMedia from './social-media'
 import './footer.css'
 
-const Footer = (props) => {
+const Footer = () => {
   const today= new Date();
   const year = today.getFullYear();
   return (

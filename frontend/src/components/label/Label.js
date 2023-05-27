@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import { StyledLabel } from './styles';
 
-const Label = forwardRef(({ children, color = 'default', variant = 'soft', startIcon, endIcon, sx, ...other }, ref) => {
+const Label = forwardRef(function Label({ children, color = 'default', variant = 'soft', startIcon, endIcon, sx, ...other }, ref) {
   const theme = useTheme();
 
   const iconStyle = {
@@ -35,6 +35,8 @@ const Label = forwardRef(({ children, color = 'default', variant = 'soft', start
     </StyledLabel>
   );
 });
+
+Label.displayName = 'Label';
 
 Label.propTypes = {
   sx: PropTypes.object,

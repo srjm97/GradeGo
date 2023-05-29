@@ -12,7 +12,7 @@ const Timetable = () => {
         // Fetch timetable data from backend
         const fetchData = async () => {
             try {
-                const response = await fetch("http://localhost:1337/facdashboard/DisplayTimeTable", {
+                const response = await fetch("https://gradego-rtib.onrender.com/facdashboard/DisplayTimeTable", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

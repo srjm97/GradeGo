@@ -21,7 +21,7 @@ export default function DashboardAppPage() {
     const fetchData = async () => {
 
       try {
-        const response = await fetch('http://localhost:1337/tutor/data', {
+        const response = await fetch('https://gradego-rtib.onrender.com/tutor/data', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -47,7 +47,7 @@ const AdminCourses = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await fetch('http://localhost:1337/admin/semesterCourses', {
+      const response = await fetch('https://gradego-rtib.onrender.com/admin/semesterCourses', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ const AdminCourses = () => {
 
   const fetchFaculties = async (selectedBatch) => {
     try {
-      const response = await fetch('http://localhost:1337/admin/semesterCourses', {
+      const response = await fetch('https://gradego-rtib.onrender.com/admin/semesterCourses', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -150,7 +150,7 @@ const AdminCourses = () => {
   
     // Perform the POST request to save the data
     try {
-      const response = await fetch('http://localhost:1337/admin/facultyCourseAssignment', {
+      const response = await fetch('https://gradego-rtib.onrender.com/admin/facultyCourseAssignment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

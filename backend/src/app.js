@@ -17,6 +17,6 @@ app.use(require('./routes/tutor'));
 app.use(require('./routes/student'));
 app.use(require('./routes/admin'));
 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, () => {
   console.log(`Server Started at Port ${PORT}`);
 });

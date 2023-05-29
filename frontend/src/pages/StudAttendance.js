@@ -27,7 +27,7 @@ export default function StudAttendance() {
 
   const fetchAttendanceData = async () => {
     try {
-      const response = await fetch('http://localhost:1337/attendance/student', {
+      const response = await fetch('https://gradego-rtib.onrender.com/attendance/student', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

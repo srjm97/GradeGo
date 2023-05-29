@@ -22,7 +22,7 @@ export default function LoginForm() {
   let data={};
   const validateUser = async (event) => {
     event.preventDefault();
-    const response = await fetch("http://localhost:1337/login", {
+    const response = await fetch("https://gradego-rtib.onrender.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

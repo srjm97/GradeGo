@@ -83,7 +83,7 @@ export default function AttendanceSetting() {
       };
 
       try {
-        const response = await fetch('http://localhost:1337/tutor/attendancedata', {
+        const response = await fetch('https://gradego-rtib.onrender.com/tutor/attendancedata', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -204,7 +204,7 @@ export default function AttendanceSetting() {
     });
 
     try {
-      const response = await fetch('http://localhost:1337/tutor/attendance', {
+      const response = await fetch('https://gradego-rtib.onrender.com/tutor/attendance', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
